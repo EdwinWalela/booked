@@ -3,6 +3,10 @@ $('document').ready(function(){
     let searchbar = $('#nav-form');
     let title = $('.navbar-brand');
     let cartRmbtn = $('.fa-times');
+    let cartAdd = $('#add-to-cart');
+    let bookId = $('#book-id');
+
+
     $(window).scroll(function() {
         let height = $(window).scrollTop();
          
@@ -21,6 +25,20 @@ $('document').ready(function(){
         setTimeout(function(){
             dangerAlert.addClass('d-none');
         },1000);
+        $.ajax({
+            url: '/cart/'+bookId.val(),
+            type: 'DELETE',
+            success: function(result) {
+                // Do something with the result
+            }
+        });
+    })
+    cartAdd.on('click',function(){
+        
+        $.post('/cart',{item:bookId.val()},function(){
+            cartAdd.html('View in Cart')
+        })
+       
     })
 
 })

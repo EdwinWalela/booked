@@ -153,9 +153,9 @@ a{
 .cat-list span{
     transition: all linear .2s;
     border:solid 2px #3066BE;
-    font-size: 0.8em;
+    font-size: 0.7em;
     padding:5px 10px;
-    margin: 2em 0.5px;
+    margin: 2em 1.5px;
     border-radius: 20px;
 }
 .cat-list span:hover{
@@ -207,10 +207,16 @@ a{
         width: 60%;
     }
     .book-card h4{
+        text-transform: capitalize;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        height: 1.1em;
         font-size: 1.1em;
         color:rgba(0,0,0,0.6);
     }
     .book-card h6{
+        text-transform: capitalize;
         font-size: 0.8em;
         color:grey;
     }
@@ -314,6 +320,7 @@ margin: auto;
 }
 
 .book-price h3{
+    text-transform: capitalize;
     font-weight: 300;
     padding: 5px;
     display: inline-block;
@@ -333,6 +340,10 @@ margin: auto;
     margin:auto;
     width: 85%;
     text-align: left;
+}
+.synopsis span{
+    font-size:0.9em;
+    color:rgba(0,0,0,0.5);
 }
 .synopsis p{
     font-size: 0.9em;
@@ -404,8 +415,9 @@ margin: auto;
     background: #fff;
 }
 .alert-danger{
+    z-index: 100;
     margin: 0 5%;
-    bottom:10px;
+    top:90px;
     position: fixed;;
     z-index: 100;
     width: 90%;

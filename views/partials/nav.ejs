@@ -1,0 +1,32 @@
+<nav class="navbar sticky-top  navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+    </button>	
+    <a class="navbar-brand" href="#">boooked</a>
+    <form id="nav-form" class="form d-none " method="GET" action="/search">
+        <input id="searchbar" class="search-bar-input-nav" name="q" type="text" placeholder="Search"/>
+    </form>
+    <div class="btn">
+        <a class="float-right nav-link" href="/cart">
+            <span id="cart-label">Cart</span> 
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-item-count">3</span>
+        </a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-1">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                    <a class="nav-link" href="/">Login <span class="sr-only">(current)</span></a>
+                </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">Register <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">About <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+</div>
+</nav>
