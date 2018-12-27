@@ -10,68 +10,76 @@
 		<link rel="stylesheet" type="text/css" media="screen" href="/assets/styles/style.css" />
 </head>
 <body>
-
-<!-- PARTIAL -->
-<% include partials/nav.ejs %>
-<!-- PARTIAL -->
-
-<div class="cart-head text-center">
-<h4>My Shopping Cart</h4>
-</div>
-<%if(books.length > 0){%>
-	<%if(books.length > 3){%>
-	<div class="cart-summary text-center mb-3">
-			<h6 class="text-left">Total ( <%books.length%> items )</h6>
-			<h6 class="text-right">Ksh. 750</h6>
-			<button class="btn btn-block mt-2">Procced To Checkout</button>
-	</div>
-	<%}%>
-	<div class="alert alert-danger text-center" role="alert">
-		Item removed from cart
-	</div>
-	<%books.forEach(function(book){%>
-		<div class="result-grid">
-				<div class="book-card">
-				<a href="/cart"><i class="fas fa-times"></i></a>
-				<input type="text" id="book-id" value="<%=book._id%>"class="d-none">
-					<a href="/book">
-						<img src="https://picsum.photos/300/500/?random"/>
-						<div>
-							<h4><%=book.title%></h4>
-							<h6><%=book.author%></h6>
-							<p>Action | Drama | True-Story</p>
-							<h3>Ksh.<%=book.price%></h3>
-						</div>
-					</a>
-				</div>
+	<!-- PARTIAL -->
+	<%- include('partials/nav',{cartCount:user.cart.length}); %>
+	<!-- PARTIAL -->
+	<%Array.prototype.sum = function (prop) {%>
+		<%let total = 0%>
+		<%for ( let i = 0, _len = this.length; i < _len; i++ ) {%>
+			<%total += this[i][prop]%>
+			<%}%>
+			<%return total%>
+			<%}%>
+	<div class="container">
+		<div class="cart-head text-center">
+		<h4>My Shopping Cart</h4>
 		</div>
-	<%})%>
-	<div class="cart-summary text-center mb-3">
+		<%if(books.length > 0){%>
+			<%if(books.length > 3){%>
+			<div class="cart-summary text-center mb-3">
 					<h6 class="text-left">Total ( <%=books.length%> items )</h6>
-					<h6 class="text-right">Ksh. 750</h6>
+					<h6 class="text-right">Ksh. <%=books.sum("price")%></h6>
 					<button class="btn btn-block mt-2">Procced To Checkout</button>
+			</div>
+			<%}%>
+			<div class="alert alert-danger text-center" role="alert">
+				Item removed from cart
+			</div>
+			<%books.forEach(function(book){%>
+				<div class="result-grid">
+						<div class="book-card">
+						<a href="/cart"><i class="fas fa-times"></i></a>
+						<input type="text" id="book-id" value="<%=book._id%>"class="d-none">
+							<a href="/book">
+								<img src="https://picsum.photos/300/500/?random"/>
+								<div>
+									<h4><%=book.title%></h4>
+									<h6><%=book.author%></h6>
+									<p class="text-capitalize">
+										<%book.cat.forEach(function(cat){%>
+											<%=cat%> |
+										<%})%>
+									</p>
+									<h3>Ksh.<%=book.price%></h3>
+								</div>
+							</a>
+						</div>
+				</div>
+			<%})%>
+			<div class="cart-summary text-center mb-3">
+					<h6 class="text-left">Total ( <%=books.length%> items )</h6>
+					<h6 class="text-right">Ksh. <%=books.sum("price")%></h6>
+					<button class="btn btn-block mt-2">Procced To Checkout</button>
+			</div>
+		<%}else{%>
+			<div class="cart-summary text-center mb-3">
+					<p>Your cart is empty.</p>
+					<a href="/search"><button class="btn btn-block mt-">Continue Shopping</button></a>
+			</div>
+		<%}%>
+
+			<div class="alert alert-danger text-center" role="alert">
+				Item removed from cart
+			</div>
 	</div>
-<%}else{%>
-	<div class="cart-summary text-center mb-3">
-			<p>Your cart is empty.</p>
-			<a href="/search"><button class="btn btn-block mt-">Continue Shopping</button></a>
-		</div>
-<%}%>
-
-	<div class="alert alert-danger text-center" role="alert">
-		Item removed from cart
-	</div>
-
-
-
-    <!-- FOOTER-->	
-    <% include partials/footer.ejs%>
-
-		<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<!-- FOOTER-->	
+	<% include partials/footer.ejs%>
+	<script
+		src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 	<script src="/assets/scripts/app.js"></script>
 </body>

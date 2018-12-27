@@ -11,18 +11,26 @@
 </head>
 <body>
 	<!-- NavBar -->
-	<% include partials/nav.ejs %>
+	<%- include('partials/nav',{cartCount:user.cart.length}); %>
 
 
 	<!-- Search BAr-->
 	<div class="search-bar">
 			<form method="GET" action="/search">
 				<input class="search-bar-input" name="q" type="text" placeholder="Find a book"/>
-				<i class="fas fa-search"></i>
+				<i id='fa-search' class="fas fa-search"></i>
 			</form>
 	</div>
-
-	<a href="#"><p class="landing-desc text-center mt-5 mb-3">Reading made Cheap</p></a>
+	<p class="text-center mt-3 text-capitalize steps-landing">
+		3 simple steps
+	</p>
+	<div class="text-center mb-3 steps-icons">
+		<span ><i class="fas fa-search"></i></span>
+		<span ><i class="fas fa-cart-plus"></i></span>
+		<span ><i class="fas fa-truck"></i></span>
+	</div>
+	
+	<a href="/search"><p class="landing-desc text-center mt-2 mb-3">Get Started</p></a>
 	<p class="text-center mb-2">Choose a category.</p>
 	<hr class="m-4">
 

@@ -12,7 +12,7 @@
 <body>
 
 <!-- PARTIAL -->
-<% include partials/nav.ejs %>
+<%- include('partials/nav',{cartCount:user.cart.length}); %>
 <!-- PARTIAL -->
  <div class="book-detail-head text-center mt-2 mb-2">
 	 <img class="mt-3 mb-3" src="https://picsum.photos/300/500/?random"/>
@@ -23,48 +23,25 @@
 	 <div class="book-price">
 		 <h3>Ksh.<%=book.price%></h3>
 		 <input type="text" id="book-id" value="<%=book._id%>"class="d-none">
-		 <button id="add-to-cart" class="btn btn-primary">Add to Cart</button>
+		 <%if(user.cart.includes(book._id.toString())){%>
+			<a href="/cart"><button  class="btn view-in-cart">View in Cart</button></a>
+		 <%}else{%>
+			<button id="add-to-cart" class="btn btn-primary">Add to Cart</button>
+		 <%}%>   
+		 
 	 </div>
 	 <div class="synopsis mt-4">
-		 <span>Action | Drama | True-Story</span>
+		 <%book.cat.forEach(function(cat){%>
+			<span class="text-capitalize"><%=cat%> |</span>
+		 <%})%>
 		 <br>
-		 <span>Pages Count: <%=book.pages%></span>
+		 <span>Page Count: <%=book.pages%></span>
 		 <br>
 		 <span>Condition (<%=book.condition%>)</span>
-		 <i class="fas fa-info-circle"></i>
+		<i  data-toggle="modal" data-target="#exampleModalCenter" class="fas fa-info-circle"></i>
+		 <%-include('partials/modal')%>
 		 <h6 class="mt-3">Synopsis</h6>
 		 <p><%=book.synopsis%></p>
-	 </div>
-	 <h6 class="mt-5 mb-3">You may also like</h6>
-	 <div class="related-titles">
-		<div class="related-card">
-			<a href='/book'>
-				<img class="mb-2" src="https://picsum.photos/300/500/?image=121"/>
-				<h6>The New Invention</h6>
-				<h4>Ksh.100</h4>
-			</a>
-		</div>
-		<div class="related-card">
-			<a href='/book'>
-				<img class="mb-2" src="https://picsum.photos/300/500/?image=181"/>
-				<h6>Space Landing</h6>
-				<h4>Ksh.200</h4>
-			</a>
-		</div>
-		<div class="related-card">
-			<a href='/book'>
-				<img class="mb-2" src="https://picsum.photos/300/500/?image=321"/>
-				<h6>The Ferrari Inception</h6>
-				<h4>Ksh.180</h4>
-			</a>
-		</div>
-		<div class="related-card">
-			<a href='/book'>
-				<img class="mb-2" src="https://picsum.photos/300/500/?image=421"/>
-				<h6>Stranger Things Movie</h6>
-				<h4>Ksh.300</h4>
-			</a>
-		</div>
 	 </div>
  </div>
 	<!-- FOOTER-->	

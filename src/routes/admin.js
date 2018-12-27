@@ -16,7 +16,7 @@ Router.post('/book',(req,res)=>{
                 synopsis:book.synopsis,
                 price:book.price,
                 condition:book.condition,
-                cat:book.cat,
+                cat:book.cat.split(' '),
                 pages:book.pages,
             }).save().then(doc=>{
                 res.status(200).send('OK')

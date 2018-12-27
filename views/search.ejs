@@ -12,14 +12,14 @@
 <body>
 
   <!-- NavBar -->
-	<% include partials/nav.ejs %>
+	<%- include('partials/nav',{cartCount:user.cart.length}); %>
 
 
 <!-- Search Bar-->
 	<div class="text-center">
 		<form class="text-center" method="GET" action="/search">
 			<input class="search-bar-input" name="q" type="text" placeholder="Find a book"/>
-			<i class="fas fa-search"></i>
+			<i id="fa-search" class="fas fa-search"></i>
 		</form>
   </div>
   <hr class="m-3">
@@ -59,7 +59,11 @@
              
               <h4><%=book.title%></h4>
               <h6><%=book.author%></h6>
-              <p>Action | Drama | True-Story</p>
+              <p class="text-capitalize">
+                <%book.cat.forEach(function(cat){%>
+                  <%=cat%> |
+                <%})%>
+              </p>
               <h3>Ksh.<%=book.price%></h3>
             </div>
           </a>

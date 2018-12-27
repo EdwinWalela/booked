@@ -20,33 +20,70 @@ app.use('/admin',adminRoutes);
 
 
 app.get('/',(req,res)=>{
-    res.render('index');
+	if(true){
+		User.findById('5c23dddc2e735f025cc4cef3').then(user=>{
+			res.render('index',{user:user});
+		})
+	}else{
+		res.render('index',{user:false})
+	}
 })
 
 app.get('/search',(req,res)=>{
-	let queryString = req.query.q;
-    if(queryString){
-			Book.find({name:queryString}).limit(6).then((books)=>{
-				res.render('search',{books:books});
-			})
-    }else{
-        Book.find({}).limit(6).then((books)=>{
-        	res.render('search',{books:books});
-        })
-    }
-    
+	if(true){
+		User.findById('5c23dddc2e735f025cc4cef3').then(user=>{
+			let queryString = req.query.q;
+			if(queryString){
+					Book.find({name:queryString}).limit(6).then((books)=>{
+						res.render('search',{
+							user:user,
+							books:books
+							
+						});
+					})
+			}else{
+				Book.find({}).limit(6).then((books)=>{
+					res.render('search',{
+						books:books,
+						user:user
+					});
+				})
+			}
+		})
+	}else{
+		// not logged in
+	}
 })
 
+
 app.get('/cat/:catname',(req,res)=>{
-	Book.find({}).then(books=>{
-		res.render('search',{books:books})
-	});
+	if(true){
+		User.findById('5c23dddc2e735f025cc4cef3').then(user=>{
+				Book.find({}).limit(6).then((books)=>{
+					res.render('search',{
+						books:books,
+						user:user
+					});
+				})
+			});
+	}else{
+		// not logged in
+	}
 })
 
 app.get('/book/:id',(req,res)=>{
-		Book.findById(req.params.id).then(book=>{
-			res.render('book',{book:book})
+	if(true){
+		User.findById('5c23dddc2e735f025cc4cef3').then(user=>{
+			Book.findById(req.params.id).then(book=>{
+				res.render('book',{
+					book:book,
+					user:user
+				});
+			})
 		});
+	}else{
+		// not logged in
+	}
 })
 
 app.get('/cart',(req,res)=>{
@@ -54,7 +91,10 @@ app.get('/cart',(req,res)=>{
 		Book.find({
 			'_id': { $in: user.cart}
 		}).then(books=>{
-			res.render('cart',{books:books})
+			res.render('cart',{
+				books:books,
+				user:user
+			})
 		})
 	})
 })

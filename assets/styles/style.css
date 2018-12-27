@@ -1,6 +1,8 @@
-body{
+html{
     margin: 0;
     padding: 0;
+    height:100%;
+    min-height: 100%;
 }
 *{
     -webkit-tap-highlight-color: rgba(0,0,0,0)  !important;
@@ -12,7 +14,6 @@ a{
     text-decoration: none  !important;
     text-decoration-style: none  !important;
 }
-
 
 .navbar-brand{
     display: inline-block;
@@ -64,7 +65,7 @@ a{
     background: #3066BE;
     color:#fff;
 }
-.fa-search{
+#fa-search{
     font-size: 1.2em;
     position: relative;
     right: 6%;
@@ -103,7 +104,19 @@ a{
     border:solid 2px rgba(0,0,0,0.2);
     border-radius: 20px;
 }
-
+.steps-landing{
+    font-size: 1.3em;
+    color:rgba(0,0,0,0.7);
+}
+.steps-icons{
+    padding-right: 5px;
+}
+.steps-icons i{
+    display: inline-block;
+    width:40px;
+    color:#3066BE;
+    font-size: 1.2em;
+}
 .landing-desc{
     transition:all linear .4s;
     display: block;
@@ -216,6 +229,9 @@ a{
         color:rgba(0,0,0,0.6);
     }
     .book-card h6{
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
         text-transform: capitalize;
         font-size: 0.8em;
         color:grey;
@@ -306,7 +322,7 @@ a{
 }
 
 .book-detail-head{
-
+    padding:0px 2.5px;
 }
     .book-detail-head img{
        height: 200px;
@@ -326,8 +342,19 @@ margin: auto;
     display: inline-block;
     margin-right: 23%;
 }
-.book-price button{
+#add-to-cart{
     background: #3066BE;
+    width: 40%;
+    position: relative;
+    height: 2.5em;
+    bottom: 5px;;
+    border:solid 1px;
+    display: inline-block;
+}
+
+.view-in-cart{
+    color: #3066BE;
+    background: #fff;
     width: 40%;
     position: relative;
     height: 2.5em;
@@ -424,14 +451,22 @@ margin: auto;
 }
 
 .footer{
-    background:lightgrey;
-    margin-top:50px;
     height:100px;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.4);
+    color: white;
+    text-align: center;
 }
 
+.footer-copyright{
+    font-size: 0.8em;
+    color: rgba(0,0,0,0.5);
+}
 
 @media screen and (max-width:500px){
-    .fa-search{
+    #fa-search{
         font-size: 1.2em;
         position: relative;
         right: 11%;

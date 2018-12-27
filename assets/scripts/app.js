@@ -36,8 +36,9 @@ $('document').ready(function(){
     cartAdd.on('click',function(){
         
         $.post('/cart',{item:bookId.val()},function(){
-            cartAdd.html('View in Cart')
+
         })
+        location.reload();
        
     })
 
