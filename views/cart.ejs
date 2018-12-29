@@ -38,7 +38,7 @@
 				<div class="result-grid">
 						<div class="book-card">
 						<a href="/cart/<%=book._id%>"><i class="fas fa-times"></i></a>
-							<a href="/book">
+							<a href="/book/<%=book._id%>">
 								<img src="https://picsum.photos/300/500/?random"/>
 								<div>
 									<h4><%=book.title%></h4>
@@ -66,7 +66,7 @@
 			</div>
 		<%}%>
 	<!-- FOOTER-->	
-	<% include partials/footer.ejs%>
+	<%- include('partials/footer',{titles:relatedTitles});%>
 	<script
 		src="https://code.jquery.com/jquery-3.3.1.min.js"
 		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="

@@ -33,7 +33,7 @@
     <span>True-Story</span>
     </a>
     <a href="/cat/romance">
-    <span>Romance</span>
+    <span>Mystery</span>
     </a>
     <a href="/cat/motivation">
     <span>Motivation</span>
@@ -56,7 +56,6 @@
           <a href="/book/<%=book._id%>">
             <img src="https://picsum.photos/300/500/?random"/>
             <div>
-             
               <h4><%=book.title%></h4>
               <h6><%=book.author%></h6>
               <p class="text-capitalize">
@@ -85,7 +84,7 @@
     </a>
   </div>
   <!-- FOOTER-->	
-  <% include partials/footer.ejs%>
+  <%- include('partials/footer',{titles:relatedTitles});%>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

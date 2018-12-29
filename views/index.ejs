@@ -16,11 +16,29 @@
 
 	<!-- Search BAr-->
 	<div class="search-bar">
-			<form method="GET" action="/search">
-				<input class="search-bar-input" name="q" type="text" placeholder="Find a book"/>
-				<i id='fa-search' class="fas fa-search"></i>
-			</form>
+		<form method="GET" action="/search">
+			<input class="search-bar-input" name="q" type="text" placeholder="Find a book"/>
+			<i id='fa-search' class="fas fa-search"></i>
+		</form>
 	</div>
+	<!-- Category Grid -->
+	<div class="cat-list text-center mb-4 mt-4">
+		<a href="/cat/romance">
+			<span>Romance</span>
+		</a>
+		<a href="/cat/personal-growth">
+		<span>Personal Growth</span>
+		</a>
+		<a href="/cat/fiction">
+		<span>Fiction</span>
+		</a>
+		<a href="/cat/motivation">
+		<span>Motivation</span>
+		</a>
+	</div>
+	<!-- Category Grid -->
+	<hr class="m-4">
+	<div class="mt-2"></div>
 	<p class="text-center mt-3 text-capitalize steps-landing">
 		3 simple steps
 	</p>
@@ -30,46 +48,13 @@
 		<span ><i class="fas fa-truck"></i></span>
 	</div>
 	
-	<a href="/search"><p class="landing-desc text-center mt-2 mb-3">Get Started</p></a>
-	<p class="text-center mb-2">Choose a category.</p>
-	<hr class="m-4">
+	<a href="/search"><p class="landing-desc text-center mt-2 mb-4">Get Started</p></a>
 
-	<!-- Category Grid -->
-	<div class="text-center mt-5">
-		<div class="card text-center cat-cards">
-				<a href="/cat/fiction" class="mt-5 btn">
-					<div class="card-body">
-						Fiction
-					</div>
-				</a>
-			</div>
-			<div class="card text-center cat-cards">
-				<a href="/cat/cuisine" class="mt-5 btn">
-					<div class="card-body">
-						Cuisine
-					</div>
-				</a>
-			</div>
-			<div class="card text-center cat-cards">
-				<a href="/cat/motivational" class="mt-5 btn">
-					<div class="card-body">
-						Motivational
-					</div>
-				</a>
-			</div>
-			<div class="card text-center cat-cards">
-				<a href="/cat/education" class="mt-5 btn">
-					<div class="card-body">
-						Education
-					</div>
-				</a>
-			</div>
-	</div>
-	<!-- Category Grid -->
+	
 
 
 	<!-- FOOTER-->	
-	<% include partials/footer.ejs%>
+	<%- include('partials/footer',{titles:relatedTitles});%>
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

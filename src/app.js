@@ -20,9 +20,16 @@ app.use('/admin',adminRoutes);
 
 
 app.get('/',(req,res)=>{
+	let relatedTitles = Book.find({}).limit(4);
 	if(true){
 		User.findById('5c23dddc2e735f025cc4cef3').then(user=>{
-			res.render('index',{user:user});
+			Promise.all([relatedTitles]).then(values=>{
+				res.render('index',{
+					user:user,
+					relatedTitles:values[0]
+				});
+			})
+			
 		})
 	}else{
 		res.render('index',{user:false})
@@ -30,6 +37,7 @@ app.get('/',(req,res)=>{
 })
 
 app.get('/search',(req,res)=>{
+	let relatedTitles = Book.find({}).limit(4);
 	if(true){
 		let filter = req.query.filter;
 		let sort = {};
@@ -46,20 +54,26 @@ app.get('/search',(req,res)=>{
 		User.findById('5c23dddc2e735f025cc4cef3').then(user=>{
 			let queryString = req.query.q;
 			if(queryString){
-					Book.find({name:queryString})
+				Book.find({name:queryString})
 					.limit(6)
 					.sort(sort)
 					.then((books)=>{
-						res.render('search',{
-							user:user,
-							books:books
-						});
-					})
+						Promise.all([relatedTitles]).then(values=>{
+							res.render('search',{
+								user:user,
+								books:books,
+								relatedTitles:values[0]
+							});
+						})
+					});
 			}else{
 				Book.find({}).limit(60).then((books)=>{
-					res.render('search',{
-						books:books,
-						user:user
+					Promise.all([relatedTitles]).then(values=>{
+						res.render('search',{
+							books:books,
+							user:user,
+							relatedTitles:values[0]
+						});
 					});
 				})
 			}
@@ -69,14 +83,18 @@ app.get('/search',(req,res)=>{
 	}
 })
 
-
 app.get('/cat/:catname',(req,res)=>{
+	let relatedTitles = Book.find({}).limit(4);
+
 	if(true){
 		User.findById('5c23dddc2e735f025cc4cef3').then(user=>{
-				Book.find({}).limit(6).then((books)=>{
-					res.render('search',{
-						books:books,
-						user:user
+				Book.find({}).limit(60).then((books)=>{
+					Promise.all([relatedTitles]).then(values=>{
+						res.render('search',{
+							books:books,
+							user:user,
+							relatedTitles:values[0]
+						});
 					});
 				})
 			});
@@ -86,12 +104,16 @@ app.get('/cat/:catname',(req,res)=>{
 })
 
 app.get('/book/:id',(req,res)=>{
+	let relatedTitles = Book.find({}).limit(4);
 	if(true){
 		User.findById('5c23dddc2e735f025cc4cef3').then(user=>{
 			Book.findById(req.params.id).then(book=>{
-				res.render('book',{
-					book:book,
-					user:user
+				Promise.all([relatedTitles]).then(values=>{
+					res.render('book',{
+						book:book,
+						user:user,
+						relatedTitles:values[0]
+					});
 				});
 			})
 		});
@@ -101,14 +123,19 @@ app.get('/book/:id',(req,res)=>{
 })
 
 app.get('/cart',(req,res)=>{
+	let relatedTitles = Book.find({}).limit(4);
+	
 	User.findById('5c23dddc2e735f025cc4cef3').then(user=>{
 		Book.find({
 			'_id': { $in: user.cart}
 		}).then(books=>{
-			res.render('cart',{
-				books:books,
-				user:user
-			})
+			Promise.all([relatedTitles]).then(values=>{
+				res.render('cart',{
+					books:books,
+					user:user,
+					relatedTitles:values[0]
+				})
+			});
 		})
 	})
 })
