@@ -20,7 +20,6 @@
 			<%}%>
 			<%return total%>
 			<%}%>
-	<div class="container">
 		<div class="cart-head text-center">
 		<h4>My Shopping Cart</h4>
 		</div>
@@ -32,14 +31,13 @@
 					<button class="btn btn-block mt-2">Procced To Checkout</button>
 			</div>
 			<%}%>
-			<div class="alert alert-danger text-center" role="alert">
-				Item removed from cart
-			</div>
 			<%books.forEach(function(book){%>
+				<div class="alert alert-danger text-center" role="alert">
+					<%=book.title%> removed from cart
+				</div>
 				<div class="result-grid">
 						<div class="book-card">
-						<a href="/cart"><i class="fas fa-times"></i></a>
-						<input type="text" id="book-id" value="<%=book._id%>"class="d-none">
+						<a href="/cart/<%=book._id%>"><i class="fas fa-times"></i></a>
 							<a href="/book">
 								<img src="https://picsum.photos/300/500/?random"/>
 								<div>
@@ -67,11 +65,6 @@
 					<a href="/search"><button class="btn btn-block mt-">Continue Shopping</button></a>
 			</div>
 		<%}%>
-
-			<div class="alert alert-danger text-center" role="alert">
-				Item removed from cart
-			</div>
-	</div>
 	<!-- FOOTER-->	
 	<% include partials/footer.ejs%>
 	<script

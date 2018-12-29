@@ -5,12 +5,12 @@ $('document').ready(function(){
     let cartRmbtn = $('.fa-times');
     let cartAdd = $('#add-to-cart');
     let bookId = $('#book-id');
-
+    let filterSelector = $('#inputGroupSelect02');
 
     $(window).scroll(function() {
         let height = $(window).scrollTop();
          
-        if(height  > 165 && $(window).width() < 760) {
+        if(height  > 40 && $(window).width() < 760) {
             console.log(height)
             searchbar.removeClass('d-none');
             title.addClass('d-none');
@@ -36,10 +36,18 @@ $('document').ready(function(){
     cartAdd.on('click',function(){
         
         $.post('/cart',{item:bookId.val()},function(){
-
+            location.reload(true);
         })
-        location.reload();
+        
        
     })
 
+    filterSelector.on('change',function(){
+        if(this.value !== 'sort'){
+            // let current = window.location.href;
+            // let queryString = location.search;
+            // console.log(queryString)
+            //window.location.href = current+'&filter='+this.value;
+        }
+    })
 })

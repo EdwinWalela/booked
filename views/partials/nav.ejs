@@ -2,7 +2,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
     </button>	
-    <a class="navbar-brand" href="#">boooked</a>
+    <a class="navbar-brand" href="/">boooked</a>
     <form id="nav-form" class="form d-none " method="GET" action="/search">
         <input id="searchbar" class="search-bar-input-nav" name="q" type="text" placeholder="Search"/>
     </form>
@@ -10,7 +10,10 @@
         <a class="float-right nav-link" href="/cart">
             <span id="cart-label">Cart</span> 
             <i class="fas fa-shopping-cart"></i>
-            <span id="cart-item-count"><%=cartCount%></span>
+            <%if(cartCount > 0){%>
+                <span id="cart-item-count"><%=cartCount%></span>
+            <%}%>
+           
         </a>
     </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
