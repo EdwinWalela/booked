@@ -14,7 +14,6 @@
   <!-- NavBar -->
 	<%- include('partials/nav',{cartCount:user.cart.length}); %>
 
-
 <!-- Search Bar-->
 	<div class="text-center">
 		<form class="text-center" method="GET" action="/search">
@@ -22,8 +21,8 @@
 			<i id="fa-search" class="fas fa-search"></i>
 		</form>
   </div>
-  <hr class="m-3">
 
+  <hr class="m-3">
 
   <div class="cat-list text-center mb-4 mt-4">
     <a href="/cat/fiction">
@@ -55,12 +54,16 @@
       <div class="book-card">
           <a href="/book/<%=book._id%>">
             <img src="https://picsum.photos/300/500/?random"/>
-            <div>
+            <div class='book-card-div'>
               <h4><%=book.title%></h4>
               <h6><%=book.author%></h6>
+              <div class="rating" data-rate-value="<%=book.condition%>"></div>
               <p class="text-capitalize">
-                <%book.cat.forEach(function(cat){%>
-                  <%=cat%> |
+                <%book.cat.forEach(function(cat,i){%>
+                  <%if(i < 2){%>
+                    <%=cat%> |
+                  <%}%>
+                 
                 <%})%>
               </p>
               <h3>Ksh.<%=book.price%></h3>
@@ -78,7 +81,7 @@
         </div>
     </div>
     <a href="#">
-      <div class="load-more text-center">
+      <div class="load-more text-center d-none">
         Load More
       </div>
     </a>
@@ -89,6 +92,7 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-	<script src="/assets/scripts/app.js"></script>
+  <script src='/assets/scripts/rater.js'></script>
+  <script src="/assets/scripts/app.js"></script>
 </body>
 </html>

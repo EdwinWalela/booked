@@ -50,12 +50,12 @@ app.get('/search',(req,res)=>{
 				condition:1
 			};
 		}
-
+		console.log(sort)
 		User.findById('5c23dddc2e735f025cc4cef3').then(user=>{
 			let queryString = req.query.q;
 			if(queryString){
 				Book.find({name:queryString})
-					.limit(6)
+					.limit(16)
 					.sort(sort)
 					.then((books)=>{
 						Promise.all([relatedTitles]).then(values=>{
@@ -67,7 +67,10 @@ app.get('/search',(req,res)=>{
 						})
 					});
 			}else{
-				Book.find({}).limit(60).then((books)=>{
+				Book.find({})
+				.limit(60)
+				.sort(sort)
+				.then((books)=>{
 					Promise.all([relatedTitles]).then(values=>{
 						res.render('search',{
 							books:books,

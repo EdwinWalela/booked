@@ -44,10 +44,39 @@ $('document').ready(function(){
 
     filterSelector.on('change',function(){
         if(this.value !== 'sort'){
-            // let current = window.location.href;
-            // let queryString = location.search;
-            // console.log(queryString)
-            //window.location.href = current+'&filter='+this.value;
+            let updateQueryStringParam = function (key, value) {
+                let baseUrl = [location.protocol, '//', location.host, location.pathname].join(''),
+                    urlQueryString = document.location.search,
+                    newParam = key + '=' + value,
+                    params = '?' + newParam;
+            
+                // If the "search" string exists, then build params from it
+                if (urlQueryString) {
+                    keyRegex = new RegExp('([\?&])' + key + '[^&]*');
+            
+                    // If param exists already, update it
+                    if (urlQueryString.match(keyRegex) !== null) {
+                        params = urlQueryString.replace(keyRegex, "$1" + newParam);
+                    } else { // Otherwise, add it to end of query string
+                        params = urlQueryString + '&' + newParam;
+                    }
+                }
+                window.location.replace(baseUrl + params);
+            };
+            updateQueryStringParam('filter',this.value)
         }
     })
+
+        // Options
+    let options = {
+        max_value: 5,
+        step_size: 1,
+        initial_value: 0,
+        selected_symbol_type: 'utf8_star', // Must be a key from symbols
+        cursor: 'default',
+        readonly: true,
+        change_once: true, // Determines if the rating can only be set once
+    }
+
+    $(".rating").rate(options);
 })
