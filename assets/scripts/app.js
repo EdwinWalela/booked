@@ -8,6 +8,7 @@ $('document').ready(function(){
     let filterSelector = $('#inputGroupSelect02');
     let formSearch = $('#searchbar');
     let searchSuggestion = $('#search-suggestion');
+    let sugClose = $('#sug-close');
 
     $(window).scroll(function() {
         let height = $(window).scrollTop();
@@ -43,7 +44,6 @@ $('document').ready(function(){
         
        
     })
-
     filterSelector.on('change',function(){
         if(this.value !== 'sort'){
             let updateQueryStringParam = function (key, value) {
@@ -71,9 +71,10 @@ $('document').ready(function(){
     formSearch.on('focus',function(){
         searchSuggestion.removeClass('d-none');
     })
-
-
-        // Options
+    sugClose.on('click',function(){
+      searchSuggestion.addClass('d-none');
+    })
+    // Options
     let options = {
         max_value: 5,
         step_size: 1,
@@ -83,6 +84,5 @@ $('document').ready(function(){
         readonly: true,
         change_once: true, // Determines if the rating can only be set once
     }
-
     $(".rating").rate(options);
 })

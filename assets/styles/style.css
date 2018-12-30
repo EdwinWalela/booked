@@ -15,7 +15,10 @@ a{
 }
 
 .navbar-brand{
+    font-family: 'Cabin Sketch', cursive;
     display: inline-block;
+    font-size: 1.5em;
+    letter-spacing: 1.4px;
     padding-left: 48px;
     text-align: center;
 }
@@ -189,11 +192,12 @@ a{
     border:solid 0px;
 }
 .cat-list span{
+    display: inline-block;
     transition: all linear .2s;
     border:solid 2px #3066BE;
     font-size: 0.7em;
     padding:5px 10px;
-    margin: 2em 1.5px;
+    margin: 0.3em 1.5px;
     border-radius: 20px;
 }
 .cat-list span:hover{
@@ -287,9 +291,16 @@ a{
     }
 
     #sug-tip{
-        font-size: 0.8em;
-        color: rgba(0,0,0,0.5);
-    }
+			display: inline-block;
+			font-size: 0.8em;
+			color: rgba(0,0,0,0.5);
+		}
+		#sug-close{
+			color:#3066BE;
+			font-weight: 700;
+			float: right;
+			font-size: 1em;
+		}
     .book-card-sug i{
         position: absolute;
         left:84%;
