@@ -68,7 +68,6 @@ app.get('/search',(req,res)=>{
 				condition:-1
 			};
 		}
-		console.log(sort)
 		User.findById('5c23dddc2e735f025cc4cef3').then(user=>{
 			let queryString = req.query.q;
 			if(queryString){
@@ -110,10 +109,27 @@ app.get('/search',(req,res)=>{
 
 app.get('/cat/:catname',(req,res)=>{
 	let relatedTitles = Book.find({}).limit(4);
-
+	let filter = req.query.filter;
+	let sort = {};
+	if(filter === 'price (lowest)'){
+		sort = {
+			price:1
+		};
+	}else if(filter === 'price (highest)'){
+		sort = {
+			price:-1
+		}; 
+	}else if(filter === 'condition'){
+		sort = {
+			condition:-1
+		};
+	}
 	if(true){
 		User.findById('5c23dddc2e735f025cc4cef3').then(user=>{
-				Book.find({}).limit(60).then((books)=>{
+				Book.find({cat:req.params.catname})
+				.limit(60)
+				.sort(sort)
+				.then((books)=>{
 					Promise.all([relatedTitles]).then(values=>{
 						res.render('search',{
 							books:books,
@@ -136,6 +152,7 @@ app.get('/book/:id',(req,res)=>{
 		User.findById('5c23dddc2e735f025cc4cef3').then(user=>{
 			Book.findById(req.params.id).then(book=>{
 				Promise.all([relatedTitles]).then(values=>{
+					book.title = book.title.charAt(0).toUpperCase() + book.title.slice(1);
 					res.render('book',{
 						book:book,
 						user:user,
@@ -170,11 +187,15 @@ app.get('/cart',(req,res)=>{
 })
 
 app.post('/cart',(req,res)=>{
-	User.update(
-		{ _id: '5c23dddc2e735f025cc4cef3' }, 
-		{ $push: { cart: req.body.item } },
-	).then(doc=>{
-		res.send('OK')
+	User.findById('5c23dddc2e735f025cc4cef3').then(user=>{
+		if(!user.cart.includes(req.body.item)){
+			User.update(
+				{ _id: '5c23dddc2e735f025cc4cef3' }, 
+				{ $push: { cart: req.body.item } },
+			).then(doc=>{
+				res.send('OK')
+			}) 
+		}
 	})
 })
 
