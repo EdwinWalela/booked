@@ -41,13 +41,17 @@ app.get('/search',(req,res)=>{
 	if(true){
 		let filter = req.query.filter;
 		let sort = {};
-		if(filter === 'price'){
+		if(filter === 'price (lowest)'){
 			sort = {
 				price:1
 			};
+		}else if(filter === 'price (highest)'){
+			sort = {
+				price:-1
+			}; 
 		}else if(filter === 'condition'){
 			sort = {
-				condition:1
+				condition:-1
 			};
 		}
 		console.log(sort)
@@ -62,7 +66,8 @@ app.get('/search',(req,res)=>{
 							res.render('search',{
 								user:user,
 								books:books,
-								relatedTitles:values[0]
+								relatedTitles:values[0],
+								filter:req.query.filter
 							});
 						})
 					});
@@ -75,7 +80,8 @@ app.get('/search',(req,res)=>{
 						res.render('search',{
 							books:books,
 							user:user,
-							relatedTitles:values[0]
+							relatedTitles:values[0],
+							filter:req.query.filter
 						});
 					});
 				})
@@ -96,7 +102,8 @@ app.get('/cat/:catname',(req,res)=>{
 						res.render('search',{
 							books:books,
 							user:user,
-							relatedTitles:values[0]
+							relatedTitles:values[0],
+							filter:req.query.filter
 						});
 					});
 				})

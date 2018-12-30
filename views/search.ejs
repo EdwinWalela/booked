@@ -41,9 +41,11 @@
 
   <div class="filter-dropdown input-group mb-3">
       <select class="custom-select" id="inputGroupSelect02">
-        <option selected>Sort</option>
-        <option value="price">Price</option>
-        <option value="condition">Condition</option>
+          <% let options=["price (lowest)","price (highest)","condition"] %>
+          <% options.forEach(function(option,i){ %>
+            <% let selected = (filter == option ) ? "selected" : ""; %>
+            <option value="<%=option%>" <%=selected%> ><%=option%> </option>
+          <% }) %>
       </select>
   </div>
 

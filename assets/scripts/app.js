@@ -6,6 +6,8 @@ $('document').ready(function(){
     let cartAdd = $('#add-to-cart');
     let bookId = $('#book-id');
     let filterSelector = $('#inputGroupSelect02');
+    let formSearch = $('#searchbar');
+    let searchSuggestion = $('#search-suggestion');
 
     $(window).scroll(function() {
         let height = $(window).scrollTop();
@@ -66,6 +68,10 @@ $('document').ready(function(){
             updateQueryStringParam('filter',this.value)
         }
     })
+    formSearch.on('focus',function(){
+        searchSuggestion.removeClass('d-none');
+    })
+
 
         // Options
     let options = {

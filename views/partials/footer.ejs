@@ -1,15 +1,14 @@
 <hr>
 <footer class="page-footer font-small blue pt-4">
-    <p class="text-center">You may also like</p>
+    <p class="text-center">Featured titles</p>
     <div class="related-titles">
 		<%titles.forEach(function(book){%>
 			<div class="related-card">
 				<a href='/book/<%=book._id%>'>
 					<img class="mb-2" src="https://picsum.photos/300/500/?image=121"/>
 					<h6><%=book.title%></h6>
-					<h6 style="color:rgba(0,0,0,0.4);"><%=book.author%></h6>
+					<h5 style="color:rgba(0,0,0,0.4);"><%=book.author%></h5>
 					<h4 class="mt-2">Ksh.<%=book.price%></h4>
-					
 				</a>
 			</div>
 		<%})%>
