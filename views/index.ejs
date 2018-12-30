@@ -13,8 +13,7 @@
 </head>
 <body>
 	<!-- NavBar -->
-	<%- include('partials/nav',{cartCount:user.cart.length}); %>
-
+	<%- include('partials/nav',{cartCount:user.cart.length,suggestions:searchSuggestions}); %>
 
 	<!-- Search BAr-->
 	<div class="search-bar">
@@ -52,7 +51,7 @@
 	
 	<a href="/search"><p class="landing-desc text-center mt-2 mb-4">Get Started</p></a>
 
-	
+
 
 
 	<!-- FOOTER-->	
@@ -64,3 +63,15 @@
 	<script src="/assets/scripts/app.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+

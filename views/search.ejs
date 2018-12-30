@@ -13,7 +13,7 @@
 <body>
 
   <!-- NavBar -->
-	<%- include('partials/nav',{cartCount:user.cart.length}); %>
+	<%- include('partials/nav',{cartCount:user.cart.length,suggestions:searchSuggestions}); %>
 
 <!-- Search Bar-->
 	<div class="text-center">

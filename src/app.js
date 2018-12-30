@@ -18,6 +18,19 @@ app.use('/assets',express.static('assets'));
 app.use(express.urlencoded({extended:false}));
 app.use('/admin',adminRoutes);
 
+app.use((req,res,next)=>{
+	let sort;
+	if(Math.random() == 1){
+		sort = 1;
+	}else{
+		sort = -1;
+	}
+	Book.find({}).skip(3).limit(4).sort({price:sort}).then(titles=>{
+		res.locals = titles;
+		next();
+	})
+})
+
 
 app.get('/',(req,res)=>{
 	let relatedTitles = Book.find({}).limit(4);
@@ -26,7 +39,8 @@ app.get('/',(req,res)=>{
 			Promise.all([relatedTitles]).then(values=>{
 				res.render('index',{
 					user:user,
-					relatedTitles:values[0]
+					relatedTitles:values[0],
+					searchSuggestions:res.locals
 				});
 			})
 			
@@ -67,7 +81,8 @@ app.get('/search',(req,res)=>{
 								user:user,
 								books:books,
 								relatedTitles:values[0],
-								filter:req.query.filter
+								filter:req.query.filter,
+								searchSuggestions:res.locals
 							});
 						})
 					});
@@ -81,7 +96,8 @@ app.get('/search',(req,res)=>{
 							books:books,
 							user:user,
 							relatedTitles:values[0],
-							filter:req.query.filter
+							filter:req.query.filter,
+							searchSuggestions:res.locals
 						});
 					});
 				})
@@ -103,7 +119,8 @@ app.get('/cat/:catname',(req,res)=>{
 							books:books,
 							user:user,
 							relatedTitles:values[0],
-							filter:req.query.filter
+							filter:req.query.filter,
+							searchSuggestions:res.locals
 						});
 					});
 				})
@@ -122,7 +139,8 @@ app.get('/book/:id',(req,res)=>{
 					res.render('book',{
 						book:book,
 						user:user,
-						relatedTitles:values[0]
+						relatedTitles:values[0],
+						searchSuggestions:res.locals
 					});
 				});
 			})
@@ -143,7 +161,8 @@ app.get('/cart',(req,res)=>{
 				res.render('cart',{
 					books:books,
 					user:user,
-					relatedTitles:values[0]
+					relatedTitles:values[0],
+					searchSuggestions:res.locals
 				})
 			});
 		})

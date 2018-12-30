@@ -13,7 +13,7 @@
 <body>
 	
 	<!-- PARTIAL -->
-	<%- include('partials/nav',{cartCount:user.cart.length}); %>
+	<%- include('partials/nav',{cartCount:user.cart.length,suggestions:searchSuggestions}); %>
 	<!-- PARTIAL -->
 	<%Array.prototype.sum = function (prop) {%>
 		<%let total = 0%>

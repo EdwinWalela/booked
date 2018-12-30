@@ -36,31 +36,17 @@
 <div class="d-none" id="search-suggestion">
 		<p id="sug-tip" class="ml-3 mt-2"> Suggested titles:</p>
 		<p class="mr-4 mt-2" id="sug-close">close</p>
-        <div class="book-card-sug">
-            <a href="/search">
-                <div class='book-card-div-sug'>
-                <h4>title</h4>
-                <h6>author</h6>
-                <h3>Ksh.200</h3>
-                </div>
-            </a>
-        </div>
-        <div class="book-card-sug">
-            <a href="/search">
-                <div class='book-card-div-sug'>
-                <h4>title</h4>
-                <h6>author</h6>
-                <h3>Ksh.200</h3>
-                </div>
-            </a>
-        </div>
-        <div class="book-card-sug">
-            <a href="/search">
-                <div class='book-card-div-sug'>
-                <h4>title</h4>
-                <h6>author</h6>
-                <h3>Ksh.200</h3>
-                </div>
-            </a>
-        </div>
+
+				<%suggestions.forEach(function(book){%>
+					<div class="book-card-sug">
+					<a href="/book/<%=book._id%>">
+						<div class='book-card-div-sug'>
+							<h4><%=book.title%></h4>
+							<h6><%=book.author%></h6>
+							<h3>Ksh.<%=book.price%></h3>
+						</div>
+					</a>
+				</div>
+				<%})%>
+
 </div>
