@@ -33,7 +33,7 @@ app.use((req,res,next)=>{
 
 
 app.get('/',(req,res)=>{
-	let relatedTitles = Book.find({}).limit(4);
+	let relatedTitles = Book.find({}).skip(13).limit(4);
 	if(true){
 		User.findById('5c23dddc2e735f025cc4cef3').then(user=>{
 			Promise.all([relatedTitles]).then(values=>{
@@ -51,7 +51,7 @@ app.get('/',(req,res)=>{
 })
 
 app.get('/search',(req,res)=>{
-	let relatedTitles = Book.find({}).limit(4);
+	let relatedTitles = Book.find({}).skip(7).limit(4);
 	if(true){
 		let filter = req.query.filter;
 		let sort = {};
@@ -131,7 +131,7 @@ app.get('/cat/:catname',(req,res)=>{
 })
 
 app.get('/book/:id',(req,res)=>{
-	let relatedTitles = Book.find({}).limit(4);
+	let relatedTitles = Book.find({}).skip(8).limit(4);
 	if(true){
 		User.findById('5c23dddc2e735f025cc4cef3').then(user=>{
 			Book.findById(req.params.id).then(book=>{
@@ -151,7 +151,7 @@ app.get('/book/:id',(req,res)=>{
 })
 
 app.get('/cart',(req,res)=>{
-	let relatedTitles = Book.find({}).limit(4);
+	let relatedTitles = Book.find({}).skip(10).limit(4);
 	
 	User.findById('5c23dddc2e735f025cc4cef3').then(user=>{
 		Book.find({
