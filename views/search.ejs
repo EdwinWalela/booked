@@ -46,10 +46,10 @@
   <p class="result-count text-center"><%=books.length%> results</p>
 
   <div class="result-grid">
-    <%books.forEach(function(book){%>
+    <%books.forEach(function(book,i){%>
       <div class="book-card">
           <a href="/book/<%=book._id%>">
-            <img src="https://picsum.photos/300/500/?random"/>
+            <img src="https://picsum.photos/300/500/?image=<%=i*11%>"/>
             <div class='book-card-div'>
               <h4><%=book.title%></h4>
               <h6><%=book.author%></h6>

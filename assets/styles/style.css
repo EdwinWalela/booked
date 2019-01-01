@@ -609,12 +609,16 @@ margin: auto;
     width: 90%;
 }
 
+footer{
+    background:rgba(0,0,0,0.1);
+    color:rgba(0,0,0,0.7);
+}
 .footer{
     height:100px;
     position: absolute;
     left: 0;
     width: 100%;
-    background-color: rgba(0,0,0,0.4);
+    background-color: gray;
     color: white;
     text-align: center;
 }
