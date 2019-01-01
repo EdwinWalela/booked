@@ -13,11 +13,9 @@ $('document').ready(function(){
     $(window).scroll(function() {
         let height = $(window).scrollTop();
          
-        if(height  > 40 && $(window).width() < 760) {
-            console.log(height)
+        if(height  > 150 && $(window).width() < 760) {
             searchbar.removeClass('d-none');
             title.addClass('d-none');
-            
         }else{
             searchbar.addClass('d-none');
             title.removeClass('d-none');
