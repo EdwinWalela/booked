@@ -7,9 +7,15 @@
         <input id="searchbar" class="search-bar-input-nav" name="q" type="text" placeholder="Search"/>
     </form>
     <div class="btn">
-        <a class="float-right nav-link" href="/cart">
+        <div class="float-right nav-link" href="/cart">
             <span id="cart-label">Cart</span> 
-            <i class="fas fa-shopping-cart"></i>
+            <a href="/auth/login">
+                <i class="fas fa-user-alt nav-icon"></i>
+            </a>
+            <a href="/cart">
+                <i class="fas fa-shopping-cart nav-icon"></i>
+            </a>
+        </div>
             <%if(cartCount > 0){%>
                 <span id="cart-item-count"><%=cartCount%></span>
             <%}%>

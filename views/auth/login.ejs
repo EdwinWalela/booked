@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <%- include('../partials/header',{pageTitle:'Login'}); %>
+</head>
+<body>
+	<div class="text-center login-header">
+		<%let hour = new Date().getHours()%>
+		<%if(hour < 12){%>
+			<h1>Good Morning.</h1>
+		<%} else if(hour < 16){%>
+			<h1>Good Afternoon.</h1>
+		<%}else if(hour > 18){%>
+			<h1>Good Evening.</h1>
+		<%}%>
+		<p>Continue using <strong style="color:#3066BE;text-decoration: underline;"><em>Bookworm</em></strong>  with your social account.</p>
+	</div>
+	<div class="auth-strategies text-center">
+		<div class="fb-strategy">
+			<a href="">
+				<img src="https://www.kmetija-ramsak.si/wp-content/uploads/2017/12/white-facebook.png" alt="">
+				<p>Sign in with Facebook</p>
+			</a>
+		</div>
+		<div class="gg-strategy">
+			<a href="">
+				<img src="https://www.androidpolice.com/wp-content/cache/wp-appbox/080fa0042dbc8367611501cd5069e82f/ai-ce2e9683756736c58388718296c4d274" alt="">
+				<p>Sign in with Google</p>
+			</a>
+		</div>
+		<p id="login-tip">We do not store your passwords. <strong style="text-decoration:underline;"><em><a href="">Learn more.</a></em></strong></p>
+	</div>
+</body>
+</html>

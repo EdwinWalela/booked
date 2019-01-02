@@ -3,7 +3,8 @@ const mongoose =require('mongoose');
 const Book = require('./models/book');
 const User =require('./models/user');
 const adminRoutes =require('./routes/admin');
-
+const authRoutes =require('./routes/auth');
+const profileRoutes = require('./routes/profile');
 const app = express();
 
 mongoose.connect(process.env.DB_URI,{useNewUrlParser:true},()=>{
@@ -17,6 +18,8 @@ app.set('view engine', 'ejs');
 app.use('/assets',express.static('assets'));
 app.use(express.urlencoded({extended:false}));
 app.use('/admin',adminRoutes);
+app.use('/auth',authRoutes);
+app.use('/profile',profileRoutes);
 
 app.use((req,res,next)=>{
 	let sort;
