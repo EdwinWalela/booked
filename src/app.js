@@ -25,7 +25,7 @@ app.use((req,res,next)=>{
 	}else{
 		sort = -1;
 	}
-	Book.find({}).skip(17).limit(4).sort({price:sort}).then(titles=>{
+	Book.find({}).skip(27).limit(5).sort({price:sort}).then(titles=>{
 		res.locals = titles;
 		next();
 	})

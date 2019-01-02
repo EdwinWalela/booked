@@ -14,10 +14,12 @@ a{
     text-decoration-style: none  !important;
 }
 
+
 .navbar-brand{
     font-style: italic;
     margin: 0 28.6%;
     width:40%;
+    max-width: 200px;
     position: absolute;
     font-family: 'Cabin Sketch', cursive;
     display: inline-block;
@@ -29,11 +31,32 @@ a{
     letter-spacing: 1.3px;
     text-align: center;
 }
+@media screen and (min-width:850px){
+    .navbar-brand{
+        font-style: italic;
+        margin: 0 40%;
+        width:40%;
+        max-width: 200px;
+        position: absolute;
+        font-family: 'Cabin Sketch', cursive;
+        display: inline-block;
+        font-size: 1.4em;
+        line-height: 1.5em;
+        padding: 0 !important;
+        height: 1.5em;;
+        border:double  2px;
+        letter-spacing: 1.3px;
+        text-align: center;
+    }
+    .fa-shopping-cart{
+        display: none;
+    }
+}
 
 .search-bar{
     text-align: center;
     width:100%;
-    height: 150px;
+    height: 200px;
     line-height: 170px;
     background-attachment: fixed;
     background-size: cover;
@@ -184,6 +207,7 @@ a{
 .collection-count-grid{
     margin: auto;
     width:100%;
+    max-width: 500px;
     text-align: center;
 }
 .collection-count-grid div:hover{
@@ -528,6 +552,17 @@ margin: auto;
     height: 255px;
 }
 
+@media screen and (min-width:700px){
+    .related-titles{
+        text-align: center;
+        padding:5px 0 5px 15px;
+        white-space: nowrap;
+        text-overflow: clip;
+        overflow:hidden;
+        height: 255px;
+    }
+}
+
 .related-titles div{
     overflow: hidden;
     display: inline-block;
@@ -608,6 +643,90 @@ margin: auto;
     position: fixed;;
     z-index: 100;
     width: 90%;
+}
+
+.quote-slide{
+    margin: 3em 0;
+    padding:10px;
+    height: 16rem;
+}
+
+blockquote {
+    height: 15rem;;
+    text-align: center;
+    margin:0 20%; 
+    width:60%;
+    border-width: 2px 0;
+    border-style: solid;
+    border-color: #eee;
+    padding: 2em 0;
+    position: relative;
+    font-size: 1.1em;
+  }
+  blockquote:before {
+    content: '\201C';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    width: 3rem;
+    height: 2rem;
+    font: 6em/1.08em 'PT Sans', sans-serif;
+    color: #3066BE;
+    text-align: center;
+  }
+  blockquote:after {
+    content: "\2013 \2003" attr(cite);
+    display: block;
+    margin-top:20px;
+    text-align: right;
+    font-size: 0.875em;
+    color: #3066BE;
+  }
+
+
+@media screen and (min-width:800px){
+    .quote-slide{
+        margin: 3em 0;
+        padding:10px;
+        height: 10rem;
+    }
+    
+    blockquote {
+        height: 10rem;;
+        text-align: center;
+        margin:0 20%; 
+        width:60%;
+        border-width: 2px 0;
+        border-style: solid;
+        border-color: #eee;
+        padding: 2em 0;
+        position: relative;
+        font-size: 1.1em;
+      }
+      blockquote:before {
+        content: '\201C';
+        position: absolute;
+        top: -5px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        width: 3rem;
+        height: 2rem;
+        font: 6em/1.08em 'PT Sans', sans-serif;
+        color: #3066BE;
+        text-align: center;
+      }
+      blockquote:after {
+        content: "\2013 \2003" attr(cite);
+        display: block;
+        margin-top:20px;
+        text-align: right;
+        font-size: 0.875em;
+        color: #3066BE;
+      }
+    
 }
 
 footer{

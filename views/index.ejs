@@ -30,20 +30,9 @@
 		</a>
 	</div>
 	<!-- Category Grid -->
-	<hr class="m-4">
+
+	<%- include('partials/landingQuoteSlider',{})%>
 	
-	<p class="text-center mt-3 text-capitalize steps-landing">
-		3 simple steps
-	</p>
-	<div class="text-center mb-3 steps-icons">
-		<span ><i class="fas fa-search"></i></span>
-		<span ><i class="fas fa-cart-plus"></i></span>
-		<span ><i class="fas fa-truck"></i></span>
-	</div>
-	
-	<a href="/search"><p class="landing-desc text-center mt-2 mb-4">Get Started</p></a>
-	
-	<hr class="m-4">
 	<p class="text-center mt-3 text-capitalize steps-landing">
 		our collection
 	</p>
@@ -86,7 +75,18 @@
 		</a>
 
 	</div>
-
+	<hr class="m-4">
+	<p class="text-center text-capitalize steps-landing">
+		3 simple steps
+	</p>
+	<div class="text-center mb-3 steps-icons">
+		<span ><i class="fas fa-search"></i></span>
+		<span ><i class="fas fa-cart-plus"></i></span>
+		<span ><i class="fas fa-truck"></i></span>
+	</div>
+	<a href="/search"><p class="landing-desc text-center mt-2 mb-4">Get Started</p></a>
+	
+	  
 	<!-- FOOTER-->	
 	<%- include('partials/footer',{titles:relatedTitles});%>
 </body>
