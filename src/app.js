@@ -25,7 +25,7 @@ app.use((req,res,next)=>{
 	}else{
 		sort = -1;
 	}
-	Book.find({}).skip(27).limit(5).sort({price:sort}).then(titles=>{
+	Book.find({}).skip(23).limit(5).sort({price:sort}).then(titles=>{
 		res.locals = titles;
 		next();
 	})
@@ -40,9 +40,10 @@ app.get('/',(req,res)=>{
 	let crime = Book.find({cat:'crime'}).count();
 	let religon = Book.find({cat:'religion'}).count();
 	let truestory = Book.find({cat:'true-story'}).count();
+	let latestArrivals = Book.find({}).sort({'_id':-1});
 	if(true){
 		User.findById('5c23dddc2e735f025cc4cef3').then(user=>{
-			Promise.all([relatedTitles,romance,fiction,motivational,crime,religon,truestory]).then(values=>{
+			Promise.all([relatedTitles,romance,fiction,motivational,crime,religon,truestory,latestArrivals]).then(values=>{
 				res.render('index',{
 					user:user,
 					searchSuggestions:res.locals,
@@ -53,6 +54,7 @@ app.get('/',(req,res)=>{
 					crime:values[4],
 					religon:values[5],
 					truestory:values[6],
+					latestArrivals:values[7]
 				});
 			})
 			

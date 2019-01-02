@@ -210,11 +210,10 @@ a{
     max-width: 500px;
     text-align: center;
 }
-.collection-count-grid div:hover{
+.collection-count-grid div:active{
     transition:all linear .1s;
-    transform: scale(0.9);
     border-radius: 15px;
-    border:solid 2px;
+    border:solid 0.5px;
 }
 .collection-count-grid div{
     text-align: center;
@@ -646,22 +645,32 @@ margin: auto;
 }
 
 .quote-slide{
-    margin: 3em 0;
-    padding:10px;
-    height: 16rem;
+    padding:5px;
+    height: 15rem;
+    width: 90%;
+    margin: 2em 5%;
+}
+@media screen and (min-width:700px){
+    .quote-slide{
+        padding:5px;
+        height: 15rem;
+        width: 60%;
+        margin: 2em 20%;
+    }
 }
 
 blockquote {
-    height: 15rem;;
+    margin-top:8%;
+    height: 100%;
     text-align: center;
-    margin:0 20%; 
-    width:60%;
+    width:100%;
     border-width: 2px 0;
     border-style: solid;
     border-color: #eee;
     padding: 2em 0;
     position: relative;
     font-size: 1.1em;
+    border-bottom: 0;
   }
   blockquote:before {
     content: '\201C';
@@ -688,18 +697,16 @@ blockquote {
 
 @media screen and (min-width:800px){
     .quote-slide{
-        margin: 3em 0;
         padding:10px;
-        height: 10rem;
     }
     
     blockquote {
-        height: 10rem;;
-        text-align: center;
-        margin:0 20%; 
-        width:60%;
+        height: 100%;
+        text-align: center; 
+        width:100%;
         border-width: 2px 0;
         border-style: solid;
+        border-bottom: 0;
         border-color: #eee;
         padding: 2em 0;
         position: relative;
@@ -729,7 +736,83 @@ blockquote {
     
 }
 
+.col-sm{
+    margin-top:2em;
+}
+
+.latest-title{
+    margin-top: 3rem;
+    height:10rem;
+}
+.latest-title div{
+    width:50%;
+    margin-right: 0%;
+    text-align: center;
+    float: right;
+}
+@media screen and (min-width:800px){
+    .arr-titles{
+        border-right: solid 3px #3066BE;
+    }
+    
+    .latest-title div{
+        width:50%;
+        margin-right: 10%;
+        text-align: center;
+        float: right;
+    }
+}
+.latest-title img{
+    margin-left: 2.5%;
+    float: left;
+    height:10rem;
+    width:40%;
+    max-width: 150px;
+}
+
+.latest-title h4{
+    text-transform: capitalize;
+    text-align: center;
+    width:100%;
+    background: #fff;
+    font-size: 1em;
+    margin-top:0em;
+}
+.latest-title h6{ 
+    color: rgba(0,0,0,0.5);
+    text-transform: capitalize;
+    font-size: 0.9em;
+    text-align: center;
+    width:100%;
+}
+
+.latest-title p { 
+    text-transform: capitalize;
+    text-align: center;
+    width:100%;
+    background: #fff;
+    font-size: 0.8em;
+    color:#3066BE;
+}
+
+
+.latest-title span{
+    display: block;
+    text-transform: capitalize;
+    text-align: center;
+    margin: auto;
+    width:100%;
+    max-width: 250px;
+    font-size: 1em;
+    padding:10px 10px;
+    border-radius: 20px;
+    transition: all linear .2s;
+    background: #3066BE;
+    color:#fff;
+}
+
 footer{
+    margin-top: 3em;
     background:rgba(0,0,0,0.1);
     color:rgba(0,0,0,0.7);
 }

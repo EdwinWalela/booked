@@ -1,0 +1,24 @@
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner latest-slider">
+      <%titles.forEach(function(book,i){%>
+        <%if(i == 0){%>
+          <div class="carousel-item active">
+        <%}else{%>
+          <div class="carousel-item">
+        <%}%>
+            <div class="latest-title">
+                <img src="https://picsum.photos/300/500/?image=<%=i*15%>" alt="">
+                <div>
+                  <h4><%=book.title%></h4>
+                  <h6><%=book.author%></h6>
+                  <p><%book.cat.forEach(function(category){%>
+                    <%=category%> |
+                  <%})%>
+                  </p>
+                  <a href="/book/<%=book._id%>"><span>view book</span></a> 
+                </div>
+              </div>
+      </div>
+      <%})%>
+    </div>
+  </div>

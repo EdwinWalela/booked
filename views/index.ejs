@@ -30,63 +30,73 @@
 		</a>
 	</div>
 	<!-- Category Grid -->
-
+	<div class="container quote-grid">
+		<div class="row">
+		<div class="col-sm arr-titles">
+				<p class="text-center mt-4 text-capitalize steps-landing">
+					Latest Arrivals
+				</p>
+			<%- include('partials/latestTitles',{titles:latestArrivals})%>
+			</div>
+		  <div class="col-sm">
+				<p class="text-center  mt-4 text-capitalize steps-landing">
+					our collection
+				</p>
+				<div class="collection-count-grid text-center">
+					<a href="/cat/romance">
+						<div class="coll-cat">
+							<span><%=romance%></span>
+							<p>romance</p>
+						</div>
+					</a>
+					<a href="/cat/fiction">
+						<div class="coll-cat">
+							<span><%=fiction%></span>
+							<p>fiction</p>
+						</div>
+					</a>
+					<a href="/cat/motivational">
+						<div class="coll-cat">
+							<span><%=motivational%></span>
+							<p>motivational</p>
+						</div>
+					</a>
+					<a href="/cat/crime">
+						<div class="coll-cat">
+							<span><%=crime%></span>
+							<p>crime</p>
+						</div>
+					</a>
+					<a href="/cat/religion">
+						<div class="coll-cat">
+							<span><%=religon%></span>
+							<p>religon</p>
+						</div>
+					</a>
+					<a href="/cat/true-story">
+						<div class="coll-cat">
+							<span><%=truestory%></span>
+							<p>true-story</p>
+						</div>
+					</a>
+			
+				</div>
+		  </div>
+		</div>
+	  </div>
+	
+		<hr class="m-4">
+		<p class="text-center text-capitalize steps-landing">
+				3 simple steps
+			</p>
+			<div class="text-center mb-3 steps-icons">
+				<span ><i class="fas fa-search"></i></span>
+				<span ><i class="fas fa-cart-plus"></i></span>
+				<span ><i class="fas fa-truck"></i></span>
+			</div>
+			<a href="/search"><p class="landing-desc text-center mb-4">Get Started</p></a>
+		
 	<%- include('partials/landingQuoteSlider',{})%>
-	
-	<p class="text-center mt-3 text-capitalize steps-landing">
-		our collection
-	</p>
-	<div class="collection-count-grid text-center">
-		<a href="/cat/romance">
-			<div class="coll-cat">
-				<span><%=romance%></span>
-				<p>romance</p>
-			</div>
-		</a>
-		<a href="/cat/fiction">
-			<div class="coll-cat">
-				<span><%=fiction%></span>
-				<p>fiction</p>
-			</div>
-		</a>
-		<a href="/cat/motivational">
-			<div class="coll-cat">
-				<span><%=motivational%></span>
-				<p>motivational</p>
-			</div>
-		</a>
-		<a href="/cat/crime">
-			<div class="coll-cat">
-				<span><%=crime%></span>
-				<p>crime</p>
-			</div>
-		</a>
-		<a href="/cat/religion">
-			<div class="coll-cat">
-				<span><%=religon%></span>
-				<p>religon</p>
-			</div>
-		</a>
-		<a href="/cat/true-story">
-			<div class="coll-cat">
-				<span><%=truestory%></span>
-				<p>true-story</p>
-			</div>
-		</a>
-
-	</div>
-	<hr class="m-4">
-	<p class="text-center text-capitalize steps-landing">
-		3 simple steps
-	</p>
-	<div class="text-center mb-3 steps-icons">
-		<span ><i class="fas fa-search"></i></span>
-		<span ><i class="fas fa-cart-plus"></i></span>
-		<span ><i class="fas fa-truck"></i></span>
-	</div>
-	<a href="/search"><p class="landing-desc text-center mt-2 mb-4">Get Started</p></a>
-	
-	  
 	<!-- FOOTER-->	
 	<%- include('partials/footer',{titles:relatedTitles});%>
 </body>
