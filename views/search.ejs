@@ -6,7 +6,12 @@
 <body>
 
   <!-- NavBar -->
-	<%- include('partials/nav',{cartCount:user.cart.length,suggestions:searchSuggestions}); %>
+  <%if(user){%>
+    <%- include('partials/nav',{cartCount:user.cart.length,suggestions:searchSuggestions}); %>
+  <%}else{%>
+    <%- include('partials/nav',{cartCount:0,suggestions:searchSuggestions}); %>
+  <%}%>
+	
 
 <!-- Search Bar-->
 	<div class="text-center">
@@ -85,6 +90,6 @@
     </a>
   </div>
   <!-- FOOTER-->	
-  <%- include('partials/footer',{titles:relatedTitles});%>
+  <%- include('partials/footer',{titles:relatedTitles,user:user});%>
 </body>
 </html>

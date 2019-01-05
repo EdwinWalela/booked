@@ -6,7 +6,11 @@
 <body>
 	
 	<!-- PARTIAL -->
-	<%- include('partials/nav',{cartCount:user.cart.length,suggestions:searchSuggestions}); %>
+	<%if(user){%>
+		<%- include('partials/nav',{cartCount:user.cart.length,suggestions:searchSuggestions}); %>
+	  <%}else{%>
+		<%- include('partials/nav',{cartCount:0,suggestions:searchSuggestions}); %>
+	  <%}%>
 	<!-- PARTIAL -->
 	<%Array.prototype.sum = function (prop) {%>
 		<%let total = 0%>
@@ -15,7 +19,8 @@
 			<%}%>
 			<%return total%>
 			<%}%>
-			<div class="text-center">
+
+		<div class="text-center">
 		<div class="cart-head text-center">
 		<h4>My Shopping Cart</h4>
 		</div>
@@ -28,7 +33,7 @@
 			</div>
 			<%}%>
 			<%books.forEach(function(book){%>
-				<div class="alert alert-danger text-center" role="alert">
+				<div id="item-removed-alert" class="alert alert-danger text-center" role="alert">
 					item removed from cart
 				</div>
 				<div class="result-grid">
@@ -50,19 +55,41 @@
 					</div>
 				</div>
 			<%})%>
-			<div class="cart-summary text-center mb-3">
+			<%if(user.address.length===0){%>
+				<div class="order-summary cart-summary text-center">
+					<p style='color:rgba(0,0,0,0.5)'> Delivered on: Fri 13 Dec 2018</p>
+					<a href="/profile"><button class="button btn-block btn mt-2 ">Set delivery address</button></a>
+				</div>
+				<div class="cart-summary text-center mb-3">
+						<h6 class="text-left">Total ( <%=books.length%> items )</h6>
+						<h6 class="text-right">Ksh. <%=books.sum("price")%></h6>
+						<button class="btn btn-block mt-2 d-none">Place Order</button>
+				</div>
+			<%}else{%>
+				<div class="order-summary">
+					
+					<p style='color:rgba(0,0,0,0.5);text-transform: capitalize'><em>Deliver to:</em><br><strong><%=user.name%>,
+						<%user.address.forEach(function(part,i){%>
+							<%let flag = (i < 3) ? "," : ""%>
+							<%=part%><%=flag%>
+						<%})%>.
+					</strong>
+					</p>
+					<p style='color:rgba(0,0,0,0.5)'> <em> Delivered by:</em><br><strong>Sat 12 Jan 2019</strong></p>
+				</div>
+				<div class="cart-summary text-center mb-3">
 					<h6 class="text-left">Total ( <%=books.length%> items )</h6>
 					<h6 class="text-right">Ksh. <%=books.sum("price")%></h6>
-					<button class="btn btn-block mt-2">Place Order</button>
-			</div>
-		
+					<button class="btn btn-block mt-2" >Place Order</button>
+				</div>
+			<%}%>
 		<%}else{%>
-		
 			<div class="cart-summary text-center mb-3">
+					<i class="fas fa-book-open"></i>
 					<p>Your cart is empty.</p>
+					
 					<a href="/search"><button class="btn btn-block mt-">Continue Shopping</button></a>
 			</div>
-		
 		<%}%>
 		</div>
 	</div>

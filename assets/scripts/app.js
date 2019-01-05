@@ -34,14 +34,6 @@ $('document').ready(function(){
             }
         });
     })
-    cartAdd.on('click',function(){
-        
-        $.post('/cart',{item:bookId.val()},function(){
-            location.reload(true);
-        })
-        
-       
-    })
     filterSelector.on('change',function(){
         if(this.value !== 'sort'){
             let updateQueryStringParam = function (key, value) {

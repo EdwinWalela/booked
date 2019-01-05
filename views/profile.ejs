@@ -5,93 +5,56 @@
 </head>
 <body>
 	<!-- NavBar -->
-	<%- include('partials/nav',{cartCount:0,suggestions:[]}); %>
+	<%if(user){%>
+		<%- include('partials/nav',{cartCount:user.cart.length,suggestions:searchSuggestions}); %>
+	  <%}else{%>
+		<%- include('partials/nav',{cartCount:0,suggestions:searchSuggestions}); %>
+	  <%}%>
 	<div id="tabs">
-    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <ul class="nav nav-pills mb-3 prof-pills" id="pills-tab" role="tablist">
 			<li class="nav-item">
-					<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Pending Orders</a>
+					<a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-home" aria-selected="false">Pending Orders</a>
 			</li>
 			<li class="nav-item">
-					<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Order history</a>
+					<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-history" role="tab" aria-controls="pills-profile" aria-selected="false">Order history</a>
 			</li>
 			<li class="nav-item">
+					<a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-profile" aria-selected="true">Update Address</a>
 			</li>
     </ul>
 		<div class="tab-content" id="pills-tabContent">
-			<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-				<!-- pending orders -->
-				<div class="result-grid">
-					<div class="book-card-pending">
-							<div class="order-head">
-									<span>2019-01-01</span>
-									<h6>301928391</h6>
+				<div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-profile-tab">
+						<!-- update profile -->
+						<form action="/profile" style="border:none;" class="login-form" method='POST'>
+							<div class="form-group">
+								<select name="area" id="" class="custom-select">
+										<option value='cbd'>Select an Area</option>
+										<%areas.forEach(function(area){%>
+											<% let selected = (area == user.address[3] ) ? "selected" : ""; %>
+											<option value="<%=area%>" <%=selected%> > <%=area%> </option>
+										<%})%>
+								</select>
 							</div>
-							<div class='pending-details'>
-								<h4>title</h4>
-								<h6>author</h6>
-								<p class="text-capitalize">
-								fiction | mystery | crime |
-								</p>
-								<h3>Ksh.300</h3>
-								<hr >
-								<h4>title</h4>
-								<h6>author</h6>
-								<p class="text-capitalize">
-								fiction | mystery | crime |
-								</p>
-								<h3>Ksh.300</h3>
-								<hr>
-								<h4>title</h4>
-								<h6>author</h6>
-								<p class="text-capitalize">
-								fiction | mystery | crime |
-								</p>
-								<h3>Ksh.300</h3>
+							<div class="form-group">
+									<label for="street">Street / Road</label>
+									<input name="street" type="text" value="<%=user.address[0]%>" class="form-control" id="street"placeholder="Street or road">
 							</div>
-							<div class="order-summary">
-									<h3>Total:<strong>Ksh.450</strong></h3>
-									<strong><p>Est. Delivery Date: Wed 15 Jan</p></strong>
-									<p>Edwin Walela.<br>Kitengela Rd. Ngei 2 estate, Hse.37. Langata</p>
-									<p>Delivery contact: <a style="color:blue;" href="tel:0706496885"><em>0706496885</em></a> </p>
+							<div class="form-group">
+									<label for="estate">Estate / Building</label>
+									<input name="estate" type="text" value="<%=user.address[1]%>" class="form-control" id="estate"placeholder="Estate or building">
 							</div>
-					</div>
-					<div class="book-card-pending">
-							<div class="order-head">
-									<span>2019-01-01</span>
-									<h6>301928391</h6>
+							<div class="form-group">
+									<label for="numb">Hse./Apartment No.</label>
+									<input aria-describedby="hse-help" name="numb" type="text" value="<%=user.address[2]%>" class="form-control" id="numb"placeholder="Hse./Apartment No.">
+									<small id="hse-help" class="form-text text-muted">(Optional)</small>
 							</div>
-							<div class='pending-details'>
-								<h4>title</h4>
-								<h6>author</h6>
-								<p class="text-capitalize">
-								fiction | mystery | crime |
-								</p>
-								<h3>Ksh.300</h3>
-								<hr >
-								<h4>title</h4>
-								<h6>author</h6>
-								<p class="text-capitalize">
-								fiction | mystery | crime |
-								</p>
-								<h3>Ksh.300</h3>
-								<hr>
-								<h4>title</h4>
-								<h6>author</h6>
-								<p class="text-capitalize">
-								fiction | mystery | crime |
-								</p>
-								<h3>Ksh.300</h3>
+							<div class="form-group">
+									<input name="mobile" type="text" value="<%=user.mobile%>" class="form-control" id="mobile"placeholder="0700000001">
 							</div>
-							<div class="order-summary">
-									<h3>Total:<strong>Ksh.450</strong></h3>
-									<strong><p>Est. Delivery Date: Wed 15 Jan</p></strong>
-									<p>Edwin Walela.<br>Kitengela Rd. Ngei 2 estate, Hse.37. Langata</p>
-									<p>Delivery contact: <a style="color:blue;" href="tel:0706496885"><em>0706496885</em></a></p>
-							</div>
-					</div>
+							<button type="submit" class="button btn btn-primary auth-submit-btn btn-block">Update</button>
+						</form>
 				</div>
-			</div>
-			<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+			<div class="tab-pane fade" id="pills-history" role="tabpanel" aria-labelledby="pills-profile-tab">
 					<!-- order history -->
 					<div class="result-grid">
 							<div class="book-card-pending">
@@ -146,12 +109,51 @@
 											<p>Edwin Walela.<br>Kitengela Rd. Ngei 2 estate, Hse.37. Langata</p>
 									</div>
 							</div>
-						</div>
+					</div>
+			</div>
+			<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-home-tab">
+				<!-- pending orders -->
+				<div class="result-grid">
+					<div class="book-card-pending">
+							<div class="order-head">
+									<span>2019-01-01</span>
+									<h6>301928391</h6>
+							</div>
+							<div class='pending-details'>
+								<h4>title</h4>
+								<h6>author</h6>
+								<p class="text-capitalize">
+								fiction | mystery | crime |
+								</p>
+								<h3>Ksh.300</h3>
+								<hr >
+								<h4>title</h4>
+								<h6>author</h6>
+								<p class="text-capitalize">
+								fiction | mystery | crime |
+								</p>
+								<h3>Ksh.300</h3>
+								<hr>
+								<h4>title</h4>
+								<h6>author</h6>
+								<p class="text-capitalize">
+								fiction | mystery | crime |
+								</p>
+								<h3>Ksh.300</h3>
+							</div>
+							<div class="order-summary">
+									<h3>Total:<strong>Ksh.450</strong></h3>
+									<strong><p>Est. Delivery Date: Wed 15 Jan</p></strong>
+									<p>Edwin Walela.<br>Kitengela Rd. Ngei 2 estate, Hse.37. Langata</p>
+									<p>Delivery contact: <a style="color:blue;" href="tel:0706496885"><em>0706496885</em></a> </p>
+							</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
     <!-- FOOTER-->	
-	<%- include('partials/footer',{titles:[]});%>
+	<%- include('partials/footer',{titles:searchSuggestions,user:user});%>
 </body>
 </html>
 

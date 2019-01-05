@@ -5,7 +5,11 @@
 </head>
 <body>
 	<!-- NavBar -->
-	<%- include('partials/nav',{cartCount:user.cart.length,suggestions:searchSuggestions}); %>
+	<%if(user){%>
+		<%- include('partials/nav',{cartCount:user.cart.length,suggestions:searchSuggestions}); %>
+	  <%}else{%>
+		<%- include('partials/nav',{cartCount:0,suggestions:searchSuggestions}); %>
+	  <%}%>
 
 	<!-- Search BAr-->
 	<div class="search-bar">
