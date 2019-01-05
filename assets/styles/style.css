@@ -338,7 +338,6 @@ a, a:hover, a:focus{
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
-        height: 1em;
         font-size: 1em;
         color:rgba(0,0,0,0.6);
     }
@@ -638,6 +637,8 @@ margin: auto;
     max-width: 450px;
 }
 .cart-summary h6{
+    color:rgba(0,0,0,0.7);
+    font-size: 0.9em;
     padding:5px;
     width:45%;
     display: inline-block;
@@ -943,7 +944,6 @@ blockquote {
         text-align: center;
         background:rgba(0,0,0,0.05);
         padding:10px;
-        height:7.5rem;
     }
     .order-summary h3{
         bottom:0 !important ;

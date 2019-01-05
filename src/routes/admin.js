@@ -18,6 +18,7 @@ Router.post('/book',(req,res)=>{
                 condition:book.condition,
                 cat:book.cat.split(' '),
                 pages:book.pages,
+                available:true
             }).save().then(doc=>{
                 res.status(200).send('OK')
             }).catch(err=>{
@@ -27,14 +28,4 @@ Router.post('/book',(req,res)=>{
     })
 })
 
-Router.post('/user',(req,res)=>{
-	new User({
-		username:req.body.username,
-		cart:[]
-	}).save().then(user=>{
-		res.status(200).send({msg:'OK'});
-	}).catch(err=>{
-		res.status(500).send({err:err});
-	})
-})
 module.exports = Router;

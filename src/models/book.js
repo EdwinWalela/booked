@@ -11,6 +11,7 @@ const BookSchema = Schema({
     condition:Number,
     cat:[String],
     pages:Number,
+    available:Boolean
 })
 
 const Book = mongoose.model('books',BookSchema);

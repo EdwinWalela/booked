@@ -8,7 +8,7 @@ const OrderSchema = Schema({
   address:String,
   date:Date,
   contact:String,
-  flag:Boolean,
+  complete:Boolean,
   Delivered:Date
 })
 

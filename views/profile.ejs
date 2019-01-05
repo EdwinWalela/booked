@@ -23,37 +23,33 @@
 			</li>
     </ul>
 		<div class="tab-content" id="pills-tabContent">
-				<div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-profile-tab">
-						<!-- update profile -->
-						<form action="/profile" style="border:none;" class="login-form" method='POST'>
-							<div class="form-group">
-								<select name="area" id="" class="custom-select">
-										<option value='cbd'>Select an Area</option>
-										<%areas.forEach(function(area){%>
-											<% let selected = (area == user.address[3] ) ? "selected" : ""; %>
-											<option value="<%=area%>" <%=selected%> > <%=area%> </option>
-										<%})%>
-								</select>
+			<div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-profile-tab">
+					<!-- update profile -->
+					<form action="/profile" style="border:none;" class="login-form" method='POST'>
+						<div class="form-group">
+							<select name="area" id="" class="custom-select">
+									<option value='cbd'>Select an Area</option>
+									<%areas.forEach(function(area){%>
+										<% let selected = (area == user.address[2] ) ? "selected" : ""; %>
+										<option value="<%=area%>" <%=selected%> > <%=area%> </option>
+									<%})%>
+							</select>
+						</div>
+						<div class="form-group">
+							<input name="estate" type="text" value="<%=user.address[0]%>" class="form-control" id="estate"placeholder="Estate or building" required>
+						</div>
+						<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="inputGroup-sizing-default">No.</span>
+								</div>
+								<input name="numb" id="numb" value="<%=user.address[1]%>" type="text" class="form-control" placeholder="Hse.No (optional)">
 							</div>
-							<div class="form-group">
-									<label for="street">Street / Road</label>
-									<input name="street" type="text" value="<%=user.address[0]%>" class="form-control" id="street"placeholder="Street or road">
-							</div>
-							<div class="form-group">
-									<label for="estate">Estate / Building</label>
-									<input name="estate" type="text" value="<%=user.address[1]%>" class="form-control" id="estate"placeholder="Estate or building">
-							</div>
-							<div class="form-group">
-									<label for="numb">Hse./Apartment No.</label>
-									<input aria-describedby="hse-help" name="numb" type="text" value="<%=user.address[2]%>" class="form-control" id="numb"placeholder="Hse./Apartment No.">
-									<small id="hse-help" class="form-text text-muted">(Optional)</small>
-							</div>
-							<div class="form-group">
-									<input name="mobile" type="text" value="<%=user.mobile%>" class="form-control" id="mobile"placeholder="0700000001">
-							</div>
-							<button type="submit" class="button btn btn-primary auth-submit-btn btn-block">Update</button>
-						</form>
-				</div>
+						<div class="form-group">
+								<input name="mobile" type="text" value="<%=user.mobile%>" class="form-control" id="mobile"placeholder="0700000001" required>
+						</div>
+						<button type="submit" class="button btn btn-primary auth-submit-btn btn-block">Update</button>
+					</form>
+			</div>
 			<div class="tab-pane fade" id="pills-history" role="tabpanel" aria-labelledby="pills-profile-tab">
 					<!-- order history -->
 					<div class="result-grid">

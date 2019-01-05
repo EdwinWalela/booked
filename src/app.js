@@ -48,7 +48,9 @@ app.use((req,res,next)=>{
 	}else{
 		sort = -1;
 	}
-	Book.find({}).skip(23).limit(5).sort({price:sort}).then(titles=>{
+	Book.find({
+		available:true
+	}).skip(23).limit(5).sort({price:sort}).then(titles=>{
 		res.locals = titles;
 		next();
 	})
@@ -103,14 +105,34 @@ app.get('/auth/logout',(req,res)=>{
 })
 
 app.get('/',(req,res)=>{
-	let relatedTitles = Book.find({}).skip(13).limit(4);
-	let romance = Book.find({cat:'romance'}).count();
-	let fiction = Book.find({cat:'fiction'}).count();
-	let motivational = Book.find({cat:'motivational'}).count();
-	let crime = Book.find({cat:'crime'}).count();
-	let religon = Book.find({cat:'religion'}).count();
-	let truestory = Book.find({cat:'true-story'}).count();
-	let latestArrivals = Book.find({}).sort({'_id':-1});
+	let relatedTitles = Book.find({available:true}).skip(13).limit(4);
+	let romance = Book.find({$and:[
+		{cat:'romance'},
+		{available:true}
+	]}).count();
+	let fiction = Book.find({$and:[
+		{cat:'fiction'},
+		{available:true}
+	]}).count();
+	let motivational =  Book.find({$and:[
+		{cat:'motivational'},
+		{available:true}
+	]}).count();
+	let crime =  Book.find({$and:[
+		{cat:'crime'},
+		{available:true}
+	]}).count();
+	let religon =  Book.find({$and:[
+		{cat:'religon'},
+		{available:true}
+	]}).count();
+	let truestory =  Book.find({$and:[
+		{cat:'truestory'},
+		{available:true}
+	]}).count();
+
+	let latestArrivals = Book.find({available:true}).sort({'_id':-1});
+
 		Promise.all([relatedTitles,romance,fiction,motivational,crime,religon,truestory,latestArrivals]).then(values=>{
 			res.render('index',{
 				user:req.user,
@@ -128,9 +150,10 @@ app.get('/',(req,res)=>{
 })
 
 app.get('/search',(req,res)=>{
-	let relatedTitles = Book.find({}).skip(7).limit(4);
+	let relatedTitles = Book.find({available:true}).skip(7).limit(4);
 	let filter = req.query.filter;
 	let sort = {};
+
 	if(filter === 'price (lowest)'){
 		sort = {
 			price:1
@@ -147,7 +170,10 @@ app.get('/search',(req,res)=>{
 	
 	let queryString = req.query.q;
 	if(queryString){
-		Book.find({name:queryString})
+		Book.find({$and:[
+			{name:queryString},
+			{available:true}
+		]})
 			.limit(16)
 			.sort(sort)
 			.then((books)=>{
@@ -162,7 +188,7 @@ app.get('/search',(req,res)=>{
 				})
 			});
 	}else{
-		Book.find({})
+		Book.find({available:true})
 		.limit(60)
 		.sort(sort)
 		.then((books)=>{
@@ -198,7 +224,10 @@ app.get('/cat/:catname',(req,res)=>{
 			condition:-1
 		};
 	}
-		Book.find({cat:req.params.catname})
+		Book.find({$and:[
+			{cat:req.params.catname},
+			{available:true}
+		]})
 			.limit(60)
 			.sort(sort)
 			.then((books)=>{
@@ -212,10 +241,10 @@ app.get('/cat/:catname',(req,res)=>{
 					});
 				});
 			})
-		})
+})
 
 app.get('/book/:id',(req,res)=>{
-	let relatedTitles = Book.find({}).skip(8).limit(4);
+	let relatedTitles = Book.find({available:true}).skip(8).limit(4);
 		Book.findById(req.params.id).then(book=>{
 			Promise.all([relatedTitles]).then(values=>{
 				book.title = book.title.charAt(0).toUpperCase() + book.title.slice(1);
@@ -230,7 +259,7 @@ app.get('/book/:id',(req,res)=>{
 })
 
 app.get('/cart',authCheck,(req,res)=>{
-	let relatedTitles = Book.find({}).skip(10).limit(4);
+	let relatedTitles = Book.find({available:true}).skip(10).limit(4);
 		Book.find({
 			'_id': { $in: req.user.cart || null}
 		}).then(books=>{
