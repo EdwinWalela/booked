@@ -98,7 +98,12 @@
 				<span ><i class="fas fa-cart-plus"></i></span>
 				<span ><i class="fas fa-truck"></i></span>
 			</div>
-			<a href="/search"><p class="landing-desc text-center mb-4">Get Started</p></a>
+			<%if(user){%>
+				<a href="/search"><p class="landing-desc text-center mb-4">Get Started</p></a>
+			<%}else{%>
+				<a href="/auth/login"><p class="landing-desc text-center mb-4">Get Started</p></a>
+			<%}%>
+			
 		
 	<%- include('partials/landingQuoteSlider',{})%>
 	<!-- FOOTER-->	
