@@ -65,9 +65,7 @@ a, a:hover, a:focus{
     }
 }
 .fa-book-open{
-    color:rgba(0,0,0,0.2);
-    font-size: 4em;
-    margin: 0.7em 0;
+  
 }
 .search-bar{
     text-align: center;
@@ -175,8 +173,8 @@ a, a:hover, a:focus{
     letter-spacing: 1px;
     height: 2em;
     font-size: 1em;
-    width: 200px;
-    right:30px;
+    width: 205px;
+    right:27px;
     background: rgba(255,255,255,0.9);
     border:solid 2px rgba(0,0,0,0.2);
     border-radius: 20px;
@@ -636,6 +634,11 @@ margin: auto;
     margin: auto;
     max-width: 450px;
 }
+.cart-summary i{
+    color:rgba(0,0,0,0.2);
+    font-size: 4em;
+    margin: 1em 0;
+}
 .cart-summary h6{
     color:rgba(0,0,0,0.7);
     font-size: 0.9em;
@@ -901,10 +904,9 @@ blockquote {
     .order-head{
         padding:10px;
         background: rgba(0,0,0,0.05);
-        height: 50px;
+        height: 60px;
     }
     .pending-details {
-        margin:0;
         padding-left:10px;
         text-align: left;
         display: inline-block;

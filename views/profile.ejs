@@ -9,8 +9,31 @@
 		<%- include('partials/nav',{cartCount:user.cart.length,suggestions:searchSuggestions}); %>
 	  <%}else{%>
 		<%- include('partials/nav',{cartCount:0,suggestions:searchSuggestions}); %>
-	  <%}%>
+		<%}%>
+	<!------>
+	<!-- Calculate delivery date (6 days ahead)-->
+	<%let DAYS=['Sun','Mon','Tue','Wed','Thur','Fri','Sat','Sun']%>
+	<%let MONTHS=['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sept','Oct','Nov','Dec']%>
+	<%function dateString(orderDate){%>
+		<%let now = new Date(orderDate)%>
+		<%let day = DAYS[now.getDay()]%>
+		<%let date = now.getDate()%>
+		<%let month = MONTHS[now.getMonth()]%>
+		<%let year = now.getFullYear()%>
+		<%return ''+day+', '+date+'-'+month+'-'+year;%>
+	<%}%>
+
+	<!-- Calculate delivery date (6 days ahead)-->
+
 	<div id="tabs">
+		<%if(successOrder){%>
+			<div id="login-fail" class=" text-center alert alert-success" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				Your order has been placed.<br> You can view it under <strong><em>pending orders</em></strong>
+			</div>
+		<%}%>
     <ul class="nav nav-pills mb-3 prof-pills" id="pills-tab" role="tablist">
 			<li class="nav-item">
 					<a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-home" aria-selected="false">Pending Orders</a>
@@ -53,97 +76,87 @@
 			<div class="tab-pane fade" id="pills-history" role="tabpanel" aria-labelledby="pills-profile-tab">
 					<!-- order history -->
 					<div class="result-grid">
-							<div class="book-card-pending">
+							<%orderHistory.forEach(function(order){%>
+								<div class="book-card-pending">
 									<div class="order-head">
-											<span>2019-01-01</span>
-											<h6>301928391</h6>
+										<span><%=dateString(order.date)%></span>
+										<h6>#<%=order.orderNumb%></h6><br>
 									</div>
-									<div class='pending-details'>
-										<h4>title</h4>
-										<h6>author</h6>
-										<p class="text-capitalize">
-										fiction | mystery | crime |
-										</p>
-										<h3>Ksh.300</h3>
-										<hr >
-										<h4>title</h4>
-										<h6>author</h6>
-										<p class="text-capitalize">
-										fiction | mystery | crime |
-										</p>
-										<h3>Ksh.300</h3>
-										<hr>
-										<h4>title</h4>
-										<h6>author</h6>
-										<p class="text-capitalize">
-										fiction | mystery | crime |
-										</p>
-										<h3>Ksh.300</h3>
+									<div class='pending-details mt-2'>
+										<%order.items.forEach(function(book){%>
+											<h4><%=book.title%></h4>
+											<h6><%=book.author%></h6>
+											<p class="text-capitalize">
+												<%book.cat.forEach(function(cat){%>
+													<%=cat%> |
+												<%})%>
+											</p>
+											<h3>Ksh.<%=book.price%></h3>
+											<hr>
+											<%})%>
 									</div>
 									<div class="order-summary">
-											<h3>Total:<strong>Ksh.450</strong></h3>
-											<strong><p>Delivered on: Wed 3 Sept 2018</p></strong>
-											<p>Edwin Walela.<br>Kitengela Rd. Ngei 2 estate, Hse.37. Langata</p>
+										<h3>Total: Ksh.<strong><%=order.totalAmount%></strong></h3>
+										<p>Delivered :<br><strong><%=order.deliveredDate%></strong></p>									
+										<p>Deliver To:<br><strong><%=user.name%>.<br><%=order.address%></strong></p>
 									</div>
-							</div>
-							<div class="book-card-pending">
-									<div class="order-head">
-											<span>2019-01-01</span>
-											<h6>301928391</h6>
-									</div>
-									<div class='pending-details'>
-										<h4>title</h4>
-										<h6>author</h6>
-										<p class="text-capitalize">
-										fiction | mystery | crime |
-										</p>
-										<h3>Ksh.300</h3>
-									</div>
-									<div class="order-summary">
-											<h3>Total:<strong>Ksh.300</strong></h3>
-											<strong><p>Delivered on: Fri 13 Dec 2018</p></strong>
-											<p>Edwin Walela.<br>Kitengela Rd. Ngei 2 estate, Hse.37. Langata</p>
-									</div>
-							</div>
+								</div>
+							<%})%>
+							<%if(orderHistory.length==0){%>
+								<div class="cart-summary text-center mb-3">
+										<i class="fas fa-history"></i>
+										<p>No reading history.</p>		
+										<a href="/search"><button class="btn btn-block mt-3">Shop</button></a>
+								</div>
+							<%}%>
 					</div>
 			</div>
 			<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-home-tab">
 				<!-- pending orders -->
 				<div class="result-grid">
-					<div class="book-card-pending">
+					<%pendingOrders.forEach(function(order){%>
+						<div class="book-card-pending">
 							<div class="order-head">
-									<span>2019-01-01</span>
-									<h6>301928391</h6>
+								<span><%=dateString(order.date)%></span>
+								<h6>#<%=order.orderNumb%></h6><br>
+								<h6 class='mt-1' style="float:right">
+									<%if(order.status === -1){%>
+										[awaiting confirmation]
+									<%}else{%>
+										[confirmed]
+									<%}%>
+									
+								</h6>
 							</div>
-							<div class='pending-details'>
-								<h4>title</h4>
-								<h6>author</h6>
-								<p class="text-capitalize">
-								fiction | mystery | crime |
-								</p>
-								<h3>Ksh.300</h3>
-								<hr >
-								<h4>title</h4>
-								<h6>author</h6>
-								<p class="text-capitalize">
-								fiction | mystery | crime |
-								</p>
-								<h3>Ksh.300</h3>
-								<hr>
-								<h4>title</h4>
-								<h6>author</h6>
-								<p class="text-capitalize">
-								fiction | mystery | crime |
-								</p>
-								<h3>Ksh.300</h3>
+							<div class='pending-details mt-2'>
+								<%order.items.forEach(function(book){%>
+									<h4><%=book.title%></h4>
+									<h6><%=book.author%></h6>
+									<p class="text-capitalize">
+										<%book.cat.forEach(function(cat){%>
+											<%=cat%> |
+										<%})%>
+									</p>
+									<h3>Ksh.<%=book.price%></h3>
+									<hr>
+									<%})%>
 							</div>
 							<div class="order-summary">
-									<h3>Total:<strong>Ksh.450</strong></h3>
-									<strong><p>Est. Delivery Date: Wed 15 Jan</p></strong>
-									<p>Edwin Walela.<br>Kitengela Rd. Ngei 2 estate, Hse.37. Langata</p>
-									<p>Delivery contact: <a style="color:blue;" href="tel:0706496885"><em>0706496885</em></a> </p>
+								<h3>Total: Ksh.<strong><%=order.totalAmount%></strong></h3>
+								<p>Est. Delivery Date:<br><strong><%=dateString(order.date.setDate(order.date.getDate() + 6))%></strong></p>
+								
+								<p>Deliver To:<br><strong><%=user.name%>.<br><%=order.address%></strong></p>
+								<p>Delivery contact: <a style="color:blue;" href="tel:<%=order.contact%>"><em><%=order.contact%></em></a> </p>
 							</div>
-					</div>
+						</div>
+					<%})%>
+					<%if(pendingOrders.length==0){%>
+						<div class="cart-summary text-center mb-3">
+								<i class="fas fa-hourglass-start"></i>
+								<p>No pending orders.</p>		
+								<a href="/search"><button class="btn btn-block mt-">Shop</button></a>
+						</div>
+					<%}%>
 				</div>
 			</div>
 		</div>
