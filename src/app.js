@@ -123,11 +123,11 @@ app.get('/',(req,res)=>{
 		{available:true}
 	]}).count();
 	let religon =  Book.find({$and:[
-		{cat:'religon'},
+		{cat:'religion'},
 		{available:true}
 	]}).count();
 	let truestory =  Book.find({$and:[
-		{cat:'truestory'},
+		{cat:'true-story'},
 		{available:true}
 	]}).count();
 
