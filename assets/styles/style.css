@@ -408,6 +408,9 @@ a, a:hover, a:focus{
         font-size: 0.9em;
         display: inline-block;
     }
+    .fa-info-circle{
+        font-size:1em;
+    }
     .book-card-sug h6{
         text-overflow: ellipsis;
         white-space: nowrap;
