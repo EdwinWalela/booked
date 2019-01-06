@@ -106,7 +106,7 @@ Router.get('/checkout',(req,res)=>{
 			
 			Book.find({$and:[
 					{available:true},
-					{'_id': { $in: req.user.cart || null}}
+					{'_id': { $in: req.user.cart}}
 			]}).then(titles=>{
 					let price = 0;
 					let delivery = 0;
@@ -142,6 +142,30 @@ Router.get('/checkout',(req,res)=>{
 					});
 			})
 		}) 
+})
+
+//@CANCEL ORDER
+Router.get('/cancel/:id',(req,res)=>{
+	let order = Order.findById(req.params.id);
+	Promise.all([order]).then(values=>{
+		let books = [];
+
+		values[0].items.forEach(item=>{
+			books.push(item._id);
+		})
+		console.log(books)
+
+		let unFlagTitles = Book.updateMany(
+			{'_id': { $in: books}},
+			{available:true}
+		)
+
+		let deleteOrder = Order.findByIdAndDelete(req.params.id);
+		Promise.all([unFlagTitles,deleteOrder]).then(values=>{
+			res.redirect('/profile');
+		})
+	})
+
 })
 
 module.exports = Router;

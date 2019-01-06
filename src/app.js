@@ -288,7 +288,7 @@ app.post('/cart/:id',(req,res)=>{
 		})
 	}else{
 		console.log('redirecting')
-		res.redirect('/auth/login?redirect='+req.params.item)
+		res.redirect('/auth/login?bookredirect='+req.params.id)
 	}
 })
 
