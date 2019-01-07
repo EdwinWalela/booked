@@ -103,10 +103,10 @@
 					</h6>
 					<%let items = books.sum('price') ,service= items*0.1  %>
 					<h6 class="text-left">Service Fee (10%)</h6>
-					<h6 class="text-right">Ksh. <%=books.sum("price")*0.1%></h6>
+					<h6 class="text-right">Ksh. <%=Math.floor(books.sum("price")*0.1)%></h6>
 					<hr class="ml-3 mr-3">
 					<h6 class="text-left">Total</h6>
-					<h6 style="color:black;font-size: 1.2em" class="text-right"><strong>Ksh. <%=items+service+delivery%></strong></h6>
+					<h6 style="color:black;font-size: 1.2em" class="text-right"><strong>Ksh. <%=Math.floor(items+service+delivery)%></strong></h6>
 				 	<a href="/profile/checkout"><button id="place-order" class="btn btn-block mt-2" >Place Order</button></a> 
 					<small id="hse-help" class="ml-3 mr-3 form-text text-muted">Orders once placed can only be cancelled before they are confirmed by our staff.</small>
 				</div>

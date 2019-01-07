@@ -1,43 +1,22 @@
-<nav class="navbar sticky-top  navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-    </button>	
-    <a class="navbar-brand" href="/">bookworm</a>
-    <form id="nav-form" class="form d-none " method="GET" action="/search">
+<nav class="navbar sticky-top navbar-expand-lg">
+    <a class="ml-2 navbar-brand" href="/">bookworm</a>
+    <form id="nav-form" class="ml-2 d-none " method="GET" action="/search">
         <input id="searchbar" class="search-bar-input-nav" name="q" type="text" placeholder="Search"/>
     </form>
-    <div class="btn">
-        <div class="float-right nav-link" href="/cart">
-            <span id="cart-label">Cart</span> 
-            <a href="/profile">
-                <i class="fas fa-user-alt nav-icon"></i>
-            </a>
-            <a href="/cart">
-                <i class="fas fa-shopping-cart nav-icon"></i>
-            </a>
-        </div>
-            <%if(cartCount > 0){%>
-                <span id="cart-item-count"><%=cartCount%></span>
-            <%}%>
-           
-        </a>
+    <div>
+			<div class="nav-link" href="/cart"> 
+					<a class='mr-3' href="/profile">
+							<i class="fas fa-user-alt nav-icon"></i>
+					</a>
+					<a href="/cart">
+							<i class="fas fa-shopping-cart nav-icon"></i>
+					</a>
+			</div>
+			<%if(cartCount > 0){%>
+				<span id="cart-item-count"><%=cartCount%></span>
+			<%}%>         
+			</a>
     </div>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-1">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                    <a class="nav-link" href="/auth/login">Login <span class="sr-only">(current)</span></a>
-                </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/auth/login#new-account">Register <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/">About <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-</div>
 </nav>
 <div class="d-none" id="search-suggestion">
 		<p id="sug-tip" class="ml-3 mt-2"> Suggested titles:</p>

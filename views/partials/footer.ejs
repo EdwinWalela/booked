@@ -16,10 +16,13 @@
     <!-- Copyright -->
     <div class="footer-copyright text-center mt-3 py-3">
 			<%if(user){%>
-				<a id="sign-out" href="/auth/logout">Sign out</a>
+				
+				<a style="font-size: 0.9em;" class="sign-out" href="/profile"><%=user.name%></a>
+				<a class="sign-out" href="/auth/logout">Sign out</a>
 			<%}else{%>
-				<a id="sign-out" href="/auth/login">Sign in</a>
+				<a class="sign-out" href="/auth/login">Sign in</a>
 			<%}%>
+			<br/>
 			© 2018 Copyright:
       <a href="#"> Boooked</a>
     </div>

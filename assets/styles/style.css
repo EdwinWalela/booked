@@ -27,19 +27,23 @@ a, a:hover, a:focus{
    background: #3066BE !important;
 }
 
+.navbar{
+    background: #3066BE;
+    color:#fff !important;
+    padding:10px 3px;
+}
+
 .navbar-brand{
     font-style: italic;
-    margin: 0 28.6%;
     width:38%;
     max-width: 200px;
-    position: absolute;
+    position: relative;
     font-family: 'Cabin Sketch', cursive;
     display: inline-block;
-    font-size: 1.4em;
+    font-size: 1.5em;
     line-height: 1.5em;
     padding: 0 !important;
     height: 1.5em;;
-    border:double  2px;
     letter-spacing: 1.3px;
     text-align: center;
 }
@@ -64,9 +68,7 @@ a, a:hover, a:focus{
         display: none;
     }
 }
-.fa-book-open{
-  
-}
+
 .search-bar{
     text-align: center;
     width:100%;
@@ -82,12 +84,12 @@ a, a:hover, a:focus{
 .search-bar:hover{
     transition:all linear 1s; 
 }
+.nav-icons-container{
+    float: right;
+}
 .nav-icon{
-    color:rgba(0,0,0,0.5);
     position: relative;
-    left:35px;
-    margin-right: 8px;
-    font-size:1.2em;
+    font-size:1.4em;
 }
 
 @media screen and (max-width:650px){
@@ -97,20 +99,20 @@ a, a:hover, a:focus{
 }
 
 #cart-item-count{
-    left:92%;
-    top:13px;
+    left:91%;
+    top:9px;
     position: absolute;
     display: inline-block;
     font-size:0.5em;
     font-weight: 500;
     width:20px;
+    height: 20px;
     border:solid 1px;
-    padding: 2px;
+    padding: 3px 6px;
     border-radius: 10px;
-    background: #3066BE;
-    color:#fff;
+    background: tomato;
 }
-@media screen and (min-width:650px){
+@media screen and (min-width:800px){
     .search-bar-input-nav{
         display: none;
     }
@@ -138,7 +140,6 @@ a, a:hover, a:focus{
 .search-bar-input{
     position: relative;
     padding: 10px;
-    left:12px;
     text-align: center;
     letter-spacing: 1px;
     display: inline-block;
@@ -154,7 +155,6 @@ a, a:hover, a:focus{
 }
 
 
-
 #search-suggestion{
     position: fixed;
     background: #fff;
@@ -164,20 +164,17 @@ a, a:hover, a:focus{
     height: 800px;
 }
 
-.form{
-    width: 100px;
-}
+
 .search-bar-input-nav{
     position: relative;
     text-align: center;
     letter-spacing: 1px;
     height: 2em;
     font-size: 1em;
-    width: 205px;
-    right:27px;
+    width: 113%;
     background: rgba(255,255,255,0.9);
-    border:solid 2px rgba(0,0,0,0.2);
-    border-radius: 20px;
+    border:none;
+    border-radius: 15px;
 }
 .steps-landing{
     font-size: 1.3em;
@@ -971,7 +968,7 @@ blockquote {
     width:85%;
     margin:auto;
 }
-.mobile-auth li{
+.mobile-auth li{  
     display: inline-block;
     width:50% !important;
 
@@ -1041,14 +1038,14 @@ footer{
     display: inline-block;
     width:33.1%;
 }
-#sign-out{
+.sign-out{
     font-size: 1.2em;
     padding-bottom: 10px;
     display: block;
+    width: 50%;
     text-align: center;
     color:rgba(78, 77, 77, 0.5);
     font-weight: 600;
-    width: 50%;
     margin:auto;
 }
 

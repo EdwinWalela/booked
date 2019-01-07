@@ -36,7 +36,7 @@ app.use('/assets',express.static('assets'));
 app.use(express.urlencoded({extended:false}));
 app.use(cookieSession({
 	maxAge:240*60*60*1000,
-	keys:['123213ewrwer']
+	keys:['34*19/:"}{810_']
 }));
 app.use(passport.initialize());
 app.use(passport.session());
