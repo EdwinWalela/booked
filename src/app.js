@@ -131,7 +131,7 @@ app.get('/',(req,res)=>{
 		{available:true}
 	]}).count();
 
-	let latestArrivals = Book.find({available:true}).sort({'_id':-1});
+	let latestArrivals = Book.find({available:true}).limit(1).sort({'_id':-1});
 
 		Promise.all([relatedTitles,romance,fiction,motivational,crime,religon,truestory,latestArrivals]).then(values=>{
 			res.render('index',{

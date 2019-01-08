@@ -965,7 +965,7 @@ blockquote {
     margin:2rem auto;
 }
 .mobile-auth ul{
-    width:85%;
+    width:95%;
     margin:auto;
 }
 .mobile-auth li{  
@@ -987,7 +987,7 @@ blockquote {
 
 
 .login-form {
-    padding: 20px;
+    padding: 10px;
     border: solid 0px rgba(0,0,0,0.3);
     max-width: 350px;
     margin:auto;
@@ -1048,6 +1048,19 @@ footer{
     font-weight: 600;
     margin:auto;
 }
+
+.fb-strategy{
+    display: block;
+    border:solid 1px;
+    width: 95%;
+    max-width: 350px;
+    margin: auto;
+    background:#3B5998 !important;
+    border:none !important;
+    padding: 10px 0;
+    letter-spacing: .5px;
+}
+
 
 @media screen and (max-width:500px){
     #fa-search{
