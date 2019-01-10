@@ -2,6 +2,7 @@ const mongoose =require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserSchema = Schema({
+    fbID:String,
     email:String,
     name:String,
     cart:Array,

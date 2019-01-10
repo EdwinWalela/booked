@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose =require('mongoose');
+const FacebookStrategy = require('passport-facebook').Strategy;
 const flash = require('flash')
 const session = require('express-session');
 const passport = require('passport');
@@ -30,7 +31,6 @@ app.listen(process.env.PORT,()=>{
     console.log(`listening to requests on port ${process.env.PORT}`);
 })
 
-
 app.set('view engine', 'ejs');
 app.use('/assets',express.static('assets'));
 app.use(express.urlencoded({extended:false}));
@@ -59,8 +59,6 @@ app.use('/admin',adminRoutes);
 app.use('/auth',authRoutes);
 app.use('/profile',profileRoutes);
 
-
-
 passport.use(new LocalStrategy(
 	{usernameField:"email", passwordField:"password"},
 	function(email,password,done){
@@ -82,6 +80,32 @@ passport.use(new LocalStrategy(
 		}
 	))
 
+passport.use(new FacebookStrategy({
+	clientID: process.env.FB_APP_ID,
+	clientSecret: process.env.FB_APP_SECRET,
+	callbackURL: "http://boooked.herokuapp.com/auth/facebook/callback"
+	},
+	function(accessToken, refreshToken, profile, done) {
+		User.findOne({fbID:profile.id}).then(user=>{
+			if(!user){
+				User({
+					fbID:profile.id,
+					email:'',
+					name:profile.displayName,
+					cart:[],
+					mobile:'',
+					orders:[],
+					address:[]
+				}).save().then(newUser=>{
+					done(null,newUser);
+				})
+			}else{
+				done(null,user);
+			}
+		})
+	}
+));
+
 passport.serializeUser(function(user,done){
 	done(null,user.id)
 })
@@ -98,6 +122,12 @@ app.post('/auth/login',passport.authenticate('local',
 	failureRedirect:'/auth/login?fail=true',
 	failureFlash:false
 }))
+
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+	passport.authenticate
+	('facebook',{successRedirect:'/',failureRedirect:'auth/login?fail=true'}))
 
 app.get('/auth/logout',(req,res)=>{
 	req.logOut();
