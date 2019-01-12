@@ -9,7 +9,8 @@ const UserSchema = Schema({
     mobile:String,
     password:String,
     orders:Array,
-    address:[String]
+    address:[String],
+    role:Number
 })
 
 const User = mongoose.model('users',UserSchema);

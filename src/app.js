@@ -25,6 +25,16 @@ const authCheck = (req,res,next)=>{
     }
 }
 
+const roleCheck = (req,res,next)=>{
+	if(req.user.role == 2){
+		res.redirect('/search')
+	}else if(req.user.role === 1){
+		res.redirect('/delivery/dashboard')
+	}else if(req.user.role === 0){
+		res.redirect('/admin/dashboard')
+	}
+}
+
 mongoose.connect(process.env.DB_URI,{useNewUrlParser:true},()=>{
     console.log('connected to db')
 })
@@ -120,10 +130,9 @@ passport.deserializeUser(function(id,done){
 
 app.post('/auth/login',passport.authenticate('local',
 {
-	successRedirect:'/search',
 	failureRedirect:'/auth/login?fail=true',
 	failureFlash:false
-}))
+}),roleCheck);
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 
@@ -276,6 +285,7 @@ app.get('/cat/:catname',(req,res)=>{
 })
 
 app.get('/book/:id',(req,res)=>{
+	
 	let relatedTitles = Book.find({available:true}).skip(8).limit(4);
 		Book.findById(req.params.id).then(book=>{
 			Promise.all([relatedTitles]).then(values=>{

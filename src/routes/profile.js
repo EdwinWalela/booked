@@ -126,7 +126,7 @@ Router.get('/checkout',(req,res)=>{
 						address:req.user.address.toString(),
 						date:new Date(),
 						contact:'0706496885',
-						status:-1,
+						status:0,
 					}).save().then(newOrder=>{
 						let flagTitles = Book.updateMany(
 								{'_id': { $in: req.user.cart}},

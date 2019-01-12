@@ -13,6 +13,9 @@ a, a:hover, a:focus{
     text-decoration: none  !important;
     text-decoration-style: none  !important;
 }
+li{
+    list-style: none;
+}
 
 .button{
     background:#3066BE ;
@@ -1202,7 +1205,47 @@ footer{
     padding: 10px 0;
     letter-spacing: .5px;
 }
+/*---------ADMIN---------*/
+.order-list{
+    width:80%;
+    margin:auto;
+}
 
+.order-list li {
+    background: rgba(0,0,0,0.05);
+    border-bottom: solid 2px rgba(0,0,0,0.2);
+    padding:10px;
+    height: 3rem;
+}
+
+.order-list h3{
+    float: left;
+    font-size: 1em;
+}
+.order-list h4{
+    float: right;
+    font-size: 1em;
+}
+
+.order-container{
+    width:80%;
+    margin: 50px auto;
+}
+.order-container h2{
+    font-size: 1.3em;
+}
+.ordernumb{
+    padding:20px;
+    background: rgba(143, 130, 130, 0.1);
+}
+
+.ordernumb div{
+
+}
+.ordernumb h4 {
+    font-weight: 200;
+    font-size: 1em;
+}
 
 @media screen and (max-width:500px){
     #fa-search{

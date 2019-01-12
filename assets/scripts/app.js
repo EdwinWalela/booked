@@ -67,6 +67,7 @@ $('document').ready(function(){
             updateQueryStringParam('filter',this.value)
         }
     })
+
     formSearch.on('focus',function(){
         searchSuggestion.removeClass('d-none');
     })

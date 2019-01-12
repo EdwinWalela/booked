@@ -18,7 +18,8 @@ Router.post('/register',(req,res)=>{
                     email:req.body.email,
                     password:hash,
                     mobile:req.body.mobile,
-                    address:req.body.address
+                    address:req.body.address,
+                    role:2
                 }).save().then(newUser=>{
                     res.redirect('/auth/login?new=true#exampleInputEmail1');
                 })

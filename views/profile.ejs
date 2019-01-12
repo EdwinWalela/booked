@@ -120,8 +120,10 @@
 								<span><%=dateString(order.date)%></span>
 								<h6>#<%=order.orderNumb%></h6><br>
 								<h6 class='mt-1' style="float:right">
-									<%if(order.status === -1){%>
+									<%if(order.status === 0){%>
 										[awaiting confirmation]
+									<%}else if(order.status === 3){%>
+										[deliverd]
 									<%}else{%>
 										[confirmed]
 									<%}%>
