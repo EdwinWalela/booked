@@ -3,6 +3,11 @@
 <head>
     <%- include('partials/header',{pageTitle:'Search'}); %>
 </head>
+<style>
+body{
+  background: rgba(0,0,0,0.05);
+}
+</style>
 <body>
 
   <!-- NavBar -->
@@ -13,44 +18,42 @@
   <%}%>
 	
 
-<!-- Search Bar-->
-	<div class="text-center">
-		<form class="text-center" method="GET" action="/search">
-			<input class="search-bar-input" name="q" type="text" placeholder="Find a book"/>
-			<i id="fa-search" class="fas fa-search"></i>
-		</form>
-  </div>
-
-  <hr class="m-3">
-
-  <div class="cat-list text-center mb-4 mt-4">
-    <a href="/cat/fiction">
-    <span>Fiction</span>
-    </a>
-    <a href="/cat/true-story">
-    <span>True-Story</span>
-    </a>
-    <a href="/cat/mystery">
-    <span>Mystery</span>
-    </a>
-    <a href="/cat/motivation">
-    <span>Motivation</span>
-    </a>
-  </div>
-
-  <div class="filter-dropdown input-group mb-3">
-      <select class="custom-select" id="inputGroupSelect02">
-          <% let options=["sort","price (lowest)","price (highest)","condition"] %>
-          <% options.forEach(function(option,i){ %>
-            <% let selected = (filter == option ) ? "selected" : ""; %>
-            <option value="<%=option%>" <%=selected%> ><%=option%> </option>
-          <% }) %>
-      </select>
-  </div>
-
-  <p class="result-count text-center"><%=books.length%> results</p>
+  <!-- Search Bar-->
+	<div class="text-center mt-3">
+      <form class="text-center" method="GET" action="/search">
+        <input class="search-bar-input" name="q" type="text" placeholder="Find a book"/>
+        <i id="fa-search" class="fas fa-search"></i>
+      </form>
+    </div>
+  
 
   <div class="result-grid">
+    <div class="cat-list text-center mb-4 mt-4">
+      <a href="/cat/fiction">
+      <span>Fiction</span>
+      </a>
+      <a href="/cat/true-story">
+      <span>True-Story</span>
+      </a>
+      <a href="/cat/mystery">
+      <span>Mystery</span>
+      </a>
+      <a href="/cat/motivation">
+      <span>Motivation</span>
+      </a>
+    </div>
+  
+    <div class="filter-dropdown input-group mb-3">
+        <select class="custom-select" id="inputGroupSelect02">
+            <% let options=["sort","price (lowest)","price (highest)","condition"] %>
+            <% options.forEach(function(option,i){ %>
+              <% let selected = (filter == option ) ? "selected" : ""; %>
+              <option value="<%=option%>" <%=selected%> ><%=option%> </option>
+            <% }) %>
+        </select>
+    </div>
+  
+    <p class="result-count text-center"><%=books.length%> results</p>
     <%books.forEach(function(book,i){%>
       <div class="book-card">
           <a href="/book/<%=book._id%>">

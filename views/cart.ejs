@@ -32,7 +32,7 @@
 			<%return total%>
 			<%}%>
 	<!------>
-		<div class="text-center">
+	<div class="cart-container text-center">
 		<div class="cart-head text-center">
 		<h4>My Shopping Cart</h4>
 		</div>
@@ -48,8 +48,8 @@
 				<div id="item-removed-alert" class="alert alert-danger text-center" role="alert">
 					item removed from cart
 				</div>
-				<div class="result-grid">
-					<div class="book-card">
+				<div>
+					<div class="book-card" style="margin:0 !important">
 					<a href="/cart/<%=book._id%>"><i class="fas fa-times"></i></a>
 						<a href="/book/<%=book._id%>">
 							<img src="https://picsum.photos/300/500/?random"/>

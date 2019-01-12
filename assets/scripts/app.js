@@ -9,11 +9,13 @@ $('document').ready(function(){
     let formSearch = $('#searchbar');
     let searchSuggestion = $('#search-suggestion');
     let sugClose = $('#sug-close');
+    let searchQuery = $('.search-bar-input');
+    let searchIcon = $('.submit-search');
 
     $(window).scroll(function() {
         let height = $(window).scrollTop();
          
-        if(height  > 80 && $(window).width() < 760) {
+        if(height  > 20) {
             searchbar.removeClass('d-none');
             title.addClass('d-none');
         }else{
@@ -21,6 +23,13 @@ $('document').ready(function(){
             title.removeClass('d-none');
         }
     });
+    
+    searchIcon.on('click',function(){
+        let query = searchQuery.val();
+        let baseUrl = [location.protocol, '//', location.host, location.pathname].join('');
+        window.location.replace(baseUrl +'search?q='+query);
+    })
+
     cartRmbtn.on('click',function(){
         dangerAlert.removeClass('d-none');
         setTimeout(function(){

@@ -3,7 +3,6 @@
     <form id="nav-form" class="ml-2 d-none " method="GET" action="/search">
         <input id="searchbar" class="search-bar-input-nav" name="q" type="text" placeholder="Search"/>
     </form>
-    <div>
 			<div class="nav-link" href="/cart"> 
 					<a class='mr-3' href="/profile">
 							<i class="fas fa-user-alt nav-icon"></i>
@@ -16,11 +15,10 @@
 				<span id="cart-item-count"><%=cartCount%></span>
 			<%}%>         
 			</a>
-    </div>
 </nav>
 <div class="d-none" id="search-suggestion">
 		<p id="sug-tip" class="ml-3 mt-2"> Suggested titles:</p>
-		<p class="mr-4 mt-2" id="sug-close">close</p>
+		<a href="#"><p class="mr-4 mt-2" id="sug-close">close</p></a> 
 
 				<%suggestions.forEach(function(book){%>
 					<div class="book-card-sug">

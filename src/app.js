@@ -13,6 +13,7 @@ const User =require('./models/user');
 const adminRoutes =require('./routes/admin');
 const authRoutes =require('./routes/auth');
 const profileRoutes = require('./routes/profile');
+const secure = require('express-force-https');
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.listen(process.env.PORT,()=>{
     console.log(`listening to requests on port ${process.env.PORT}`);
 })
 
+app.use(secure);
 app.set('view engine', 'ejs');
 app.use('/assets',express.static('assets'));
 app.use(express.urlencoded({extended:false}));
@@ -83,7 +85,7 @@ passport.use(new LocalStrategy(
 passport.use(new FacebookStrategy({
 	clientID: process.env.FB_APP_ID,
 	clientSecret: process.env.FB_APP_SECRET,
-	callbackURL: "http://boooked.herokuapp.com/auth/facebook/callback"
+	callbackURL: "https://boooked.herokuapp.com/auth/facebook/callback"
 	},
 	function(accessToken, refreshToken, profile, done) {
 		User.findOne({fbID:profile.id}).then(user=>{
@@ -161,7 +163,7 @@ app.get('/',(req,res)=>{
 		{available:true}
 	]}).count();
 
-	let latestArrivals = Book.find({available:true}).limit(1).sort({'_id':-1});
+	let latestArrivals = Book.find({available:true}).limit(6).sort({'_id':-1});
 
 		Promise.all([relatedTitles,romance,fiction,motivational,crime,religon,truestory,latestArrivals]).then(values=>{
 			res.render('index',{

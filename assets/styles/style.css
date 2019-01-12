@@ -47,27 +47,7 @@ a, a:hover, a:focus{
     letter-spacing: 1.3px;
     text-align: center;
 }
-@media screen and (min-width:850px){
-    .navbar-brand{
-        font-style: italic;
-        margin: 0 40%;
-        width:40%;
-        max-width: 200px;
-        position: absolute;
-        font-family: 'Cabin Sketch', cursive;
-        display: inline-block;
-        font-size: 1.4em;
-        line-height: 1.5em;
-        padding: 0 !important;
-        height: 1.5em;;
-        border:double  2px;
-        letter-spacing: 1.3px;
-        text-align: center;
-    }
-    .fa-shopping-cart{
-        display: none;
-    }
-}
+
 
 .search-bar{
     text-align: center;
@@ -92,11 +72,6 @@ a, a:hover, a:focus{
     font-size:1.4em;
 }
 
-@media screen and (max-width:650px){
-    #cart-label{
-        display: none;
-    }
-}
 
 #cart-item-count{
     left:91%;
@@ -112,25 +87,7 @@ a, a:hover, a:focus{
     border-radius: 10px;
     background: tomato;
 }
-@media screen and (min-width:800px){
-    .search-bar-input-nav{
-        display: none;
-    }
-    #cart-item-count{
-        left:95%;
-        top:10px;
-        position: absolute;
-        display: inline-block;
-        font-size:0.7em;
-        font-weight: 500;
-        width:25px;
-        border:solid 1px;
-        padding: 2px;
-        border-radius: 10px;
-        background: #3066BE;
-        color:#fff;
-    }
-}
+
 #fa-search{
     font-size: 1.2em;
     position: relative;
@@ -164,7 +121,6 @@ a, a:hover, a:focus{
     height: 800px;
 }
 
-
 .search-bar-input-nav{
     position: relative;
     text-align: center;
@@ -189,6 +145,55 @@ a, a:hover, a:focus{
     color:#3066BE;
     font-size: 1.2em;
 }
+
+@media screen and (min-width:800px){
+    .navbar-brand{
+        font-style: italic;
+        margin: 0 0;
+        width:40%;
+        max-width: 200px;
+        font-family: 'Cabin Sketch', cursive;
+        display: inline-block;
+        font-size: 1.4em;
+        line-height: 1.5em;
+        padding: 0 !important;
+        height: 1.5em;
+        letter-spacing: 1.3px;
+        text-align: center;
+    }
+    .nav-link{
+        width:85%;
+        text-align: right;
+    }
+    #cart-item-count{
+        left:97.5%;
+        top:9px;
+        position: absolute;
+        display: inline-block;
+        font-size:0.5em;
+        font-weight: 500;
+        width:20px;
+        height: 20px;
+        border:solid 1px;
+        padding: 3px 6px;
+        border-radius: 10px;
+        background: tomato;
+    }
+    
+    .search-bar-input-nav{
+        position: relative;
+        text-align: left;
+        padding-left:20px;
+        letter-spacing: 1px;
+        height: 2em;
+        font-size: 1em;
+        width:500px;
+        background: rgba(255,255,255,0.9);
+        border:none;
+        border-radius: 15px;
+    }
+}
+
 .landing-desc{
     transition:all linear .4s;
     display: block;
@@ -295,13 +300,18 @@ a, a:hover, a:focus{
     font-size: 0.8em;
     color:rgba(0,0,0,0.5)
 }
+.result-grid{
+    width:95%;
+    margin: 0 2.5%;
+    background:#fff;
+    padding:5px 0;
+}
 
 .book-card{
     margin: auto;
     text-align: center;
     border-bottom:solid 1px rgba(0,0,0,0.1);
     width:100%;
-    max-width: 450px;
     height:8.5rem;
     overflow:hidden;
 }
@@ -311,6 +321,7 @@ a, a:hover, a:focus{
         position: relative;
         bottom:60px;
         width:25%;
+        max-width: 120px;
         height: 80%;
     }
     .book-card i{
@@ -365,6 +376,7 @@ a, a:hover, a:focus{
         height:5rem;
         overflow:hidden;
     }
+
 
     #sug-tip{
 			display: inline-block;
@@ -421,6 +433,84 @@ a, a:hover, a:focus{
         border-radius: 15px;
     }
 
+    
+    @media screen and (min-width:750px){
+        .result-grid{
+            padding:10px 30px;
+            width:80%;
+            margin: 50px 10%;
+            background:#fff;
+        }
+        .book-card{
+            text-align: left;
+            margin:40px 0 !important;
+            border-bottom:solid 1px rgba(0,0,0,0.1);
+            width:100%;
+            height:15rem;
+            overflow:hidden;
+        }
+        
+        
+            .book-card img{
+                position: relative;
+                width:60%;
+                max-width: 200px;
+                height: 100%;
+            }
+            .book-card i{
+                position: absolute;
+                left:84%;
+                color:red;
+                padding: 25px;   
+            }
+        
+            .book-card-div{
+                margin-top:1.2em;
+                padding:5px 0 5px 50px;
+                text-align: left;
+                display: inline-block;
+                width: 65%;
+            }
+        
+            .book-card h4{
+                text-transform: capitalize;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                font-size: 1.3em;
+                color:rgba(0,0,0,0.6);
+            }
+            .rating{
+                font-size: 1em;
+                display: inline-block;
+            }
+            .book-card h6{
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                text-transform: capitalize;
+                font-size: 1em;
+                color:grey;
+            }
+            .book-card p{
+                font-size: 0.9em;
+            }
+            .book-card h3{
+                position: relative;
+                font-size: 1.2em;
+                font-weight: 600;
+                bottom:10px;
+            }
+        
+            .book-card-sug{
+                padding: 5px 0 5px 35px;
+                border-bottom:solid 1px rgba(0,0,0,0.1);
+                width:100%;
+                max-width: 600px;
+                height:5rem;
+                overflow:hidden;
+            }
+    }
     
 .book-card-loading{
     background: rgba(0,0,0,0.02);
@@ -499,16 +589,19 @@ a, a:hover, a:focus{
 
 .book-detail-head{
     padding:0px 2.5px;
+    margin:1em 0 7em 0;
 }
+
+  
     .book-detail-head img{
        height: 200px;
        max-width: 200px;
        width: 50%; 
     }
 
-
 .book-price{
-width:90%;
+width:100%;
+max-width:500px;
 margin: auto;
 }
 
@@ -556,6 +649,8 @@ margin: auto;
 }
 .synopsis p{
     font-size: 0.9em;
+    hyphens: auto;
+    text-align: justify;
 }
 
 .related-titles{
@@ -567,6 +662,48 @@ margin: auto;
     overflow-y: hidden;
     height: 255px;
 }
+@media screen and (min-width:750px){
+    .book-detail-head h4{
+        font-size:2em;
+    }
+    .book-detail-head img{
+        height: 400px;
+        max-width: 320px;
+        width: 50%; 
+     }
+     .book-price h3{
+        text-transform: capitalize;
+        font-weight: 300;
+        padding: 5px;
+        float: left;
+    }
+    #add-to-cart{
+        background: #3066BE;
+        width: 100%;
+        position: relative;
+        height: 2.5em;
+        bottom: 0 !important;
+        left:60px;
+        float: left;
+    }
+    .view-in-cart{
+        left:60px;
+        color: #3066BE;
+        background: #fff;
+        width: 40%;
+        max-width: 150px;
+        position: relative;
+        height: 2.5em;
+        bottom: 0 !important;;
+        border:solid 1px;
+        display: inline-block;
+    }
+    
+    .synopsis p{
+        font-size: 1em;
+    }
+}
+
 
 @media screen and (min-width:700px){
     .related-titles{
@@ -622,6 +759,11 @@ margin: auto;
     bottom:0px;
 }
 
+.cart-container{
+    max-width:800px;
+    margin:auto;
+}
+
 .cart-head{
     margin:1.5em 0;
 }
@@ -631,7 +773,6 @@ margin: auto;
 .cart-summary{
     padding:10px 5px;
     margin: auto;
-    max-width: 450px;
 }
 .cart-summary i{
     color:rgba(0,0,0,0.2);
@@ -650,6 +791,8 @@ margin: auto;
     background: #3066BE;
     color: #fff;
     width: 90%;
+    max-width:300px;
+    
     padding:12px;
     margin: auto;
 }
@@ -834,7 +977,7 @@ blockquote {
 }
 
 .login-header{
-    margin: 3em 0 0 0;
+    margin: 1.5em 0 0 0;
 }
 .login-header p{
     font-size: 1.2em;
@@ -869,6 +1012,8 @@ blockquote {
 
 #tabs{
     width: 100%;
+    max-width: 700px;
+    margin: auto;
     padding:20px;
     text-align: center;
 }
@@ -956,10 +1101,6 @@ blockquote {
         font-size: 0.8em;
     }
 
-.auth-container{
-    border:solid 0px;
-}
-
 .mobile-auth{
     width:90%;
     margin:2rem auto;
@@ -1038,6 +1179,7 @@ footer{
     display: inline-block;
     width:33.1%;
 }
+
 .sign-out{
     font-size: 1.2em;
     padding-bottom: 10px;
