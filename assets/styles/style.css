@@ -1207,7 +1207,8 @@ footer{
 }
 /*---------ADMIN---------*/
 .order-list{
-    width:80%;
+    width:90%;
+    max-width:800px;
     margin:auto;
 }
 
@@ -1228,7 +1229,8 @@ footer{
 }
 
 .order-container{
-    width:80%;
+    width:90%;
+    max-width:800px;
     margin: 50px auto;
 }
 .order-container h2{
@@ -1239,9 +1241,6 @@ footer{
     background: rgba(143, 130, 130, 0.1);
 }
 
-.ordernumb div{
-
-}
 .ordernumb h4 {
     font-weight: 200;
     font-size: 1em;
