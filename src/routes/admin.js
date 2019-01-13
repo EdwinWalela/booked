@@ -10,6 +10,9 @@ Router.get('/dashboard',(req,res)=>{
     };
 
 	if(filter === 'pending'){
+        criteria = {
+            status:0
+        };
 	}else if(filter === 'confirmed'){
 		criteria = {
             status:1
@@ -21,6 +24,14 @@ Router.get('/dashboard',(req,res)=>{
 	}else if(filter === 'completed'){
 		criteria = {
             status:3
+		};
+    }else if(filter === 'revoked'){
+		criteria = {
+            status:4
+		};
+    }else if(filter === 'all'){
+		criteria = {
+            
 		};
     }
     let orders = Order.find(criteria);
@@ -72,6 +83,28 @@ Router.post('/book',(req,res)=>{
             })
         }
     })
+})
+
+Router.get('/order/revoke/:id',(req,res)=>{
+    let order = Order.findById(req.params.id);
+	Promise.all([order]).then(values=>{
+		let books = [];
+
+		values[0].items.forEach(item=>{
+			books.push(item._id);
+		})
+        console.log(books)
+		let unFlagTitles = Book.updateMany(
+			{'_id': { $in: books}},
+			{available:true}
+		)
+
+		let revokeOrder = Order.findByIdAndUpdate(req.params.id,{status:4});
+		Promise.all([unFlagTitles,revokeOrder]).then(values=>{
+			res.redirect('/admin/dashboard');
+		})
+	})
+
 })
 
 

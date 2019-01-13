@@ -55,16 +55,13 @@ Router.get('/',authCheck,(req,res)=>{
     let pendingOrders = Order.find({
 			$and:[
 				{user:req.user._id},
-				{$or:[
-					{status:-1},
-					{status:0}
-				]}
+				{status:{$lte:2}}
 			]}
 		);
     let orderHistory = Order.find({
 			$and:[
 				{user:req.user._id},
-				{status:1}
+				{status:3}
 			]}
 		); 
     Promise.all([relatedTitles,pendingOrders,orderHistory]).then(values=>{
@@ -72,9 +69,9 @@ Router.get('/',authCheck,(req,res)=>{
             areas:AREAS,
             user:req.user,
             relatedTitles:values[0],
-						searchSuggestions:res.locals,
-						pendingOrders:values[1],
-						orderHistory:values[2],
+			searchSuggestions:res.locals,
+			pendingOrders:values[1],
+			orderHistory:values[2],
             successOrder:req.query.successorder
         });
     });

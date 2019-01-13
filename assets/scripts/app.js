@@ -1,7 +1,7 @@
 let dangerAlert = $('.alert-danger').addClass('d-none');
 $('document').ready(function(){
     let searchbar = $('#nav-form');
-    let title = $('.navbar-brand');
+    let title = $('#navbar-brand');
     let cartRmbtn = $('.fa-times');
     let cartAdd = $('#add-to-cart');
     let bookId = $('#book-id');
