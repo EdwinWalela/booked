@@ -1206,6 +1206,9 @@ footer{
     letter-spacing: .5px;
 }
 /*---------ADMIN---------*/
+.admin-logo{
+    font-size:1em;
+}
 .order-list{
     width:90%;
     max-width:800px;
