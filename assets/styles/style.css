@@ -1216,7 +1216,6 @@ footer{
     background: rgba(0,0,0,0.05);
     border-bottom: solid 2px rgba(0,0,0,0.2);
     padding:10px;
-    height:6rem;
 }
 
 .order-list h3{
@@ -1227,7 +1226,9 @@ footer{
     float: right;
     font-size: 1em;
 }
-
+.order-list p {
+    text-transform: capitalize;
+}
 .order-container{
     width:90%;
     max-width:800px;
@@ -1244,6 +1245,19 @@ footer{
 .ordernumb h4 {
     font-weight: 200;
     font-size: 1em;
+}
+
+.bookedit-container{
+    padding:10px;
+    border:solid 2px rgba(0,0,0,0.05);
+    width:90%;
+    max-width: 700px;
+    margin: auto;
+}
+@media screen and (min-width:750px){
+    .bookedit-container{
+        padding:50px;
+    }
 }
 
 @media screen and (max-width:500px){

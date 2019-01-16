@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <%-include('../partials/adminHead',{pageTitle:'Books | Admin Dashboard'})%>
+</head>
+<body>
+	<%-include('../partials/adminNav')%>
+	<div class="filter-dropdown admin-order-filter input-group mt-4 mb-4">
+		<select class="custom-select" id="inputGroupSelect02">
+				<% let options=["available","sold","all"] %>
+				<% options.forEach(function(option,i){ %>
+					<% let selected = (filter == option ) ? "selected" : ""; %>
+					<option value="<%=option%>" <%=selected%> ><%=option%> </option>
+				<% }) %>
+		</select>
+	</div>
+	
+	<p class="text-center">Showing <strong><%=books.length%></strong> Books.</p>
+	
+	<ul class='order-list'>
+		<%books.forEach(function(book){%>
+			<a href="/admin/book/<%=book._id%>">
+			<li>	
+				<p> <strong> <%=book.title%> </strong> - <em> <%=book.author%></em></p>
+			</li>
+		</a>
+		<%})%>
+	</ul>
+	
+	<%-include('../partials/adminFooter')%>
+</body>
+</html>
+

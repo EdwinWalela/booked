@@ -2,6 +2,13 @@ const Router = require('express').Router();
 const Book = require('../models/book');
 const Order = require('../models/order');
 
+const roleCheck = (req,res,next)=>{
+    if(req.user.role !== 0){
+        res.redirect('/search')
+    }else{
+        next();
+    }
+}
 
 Router.get('/dashboard',(req,res)=>{
     let filter = req.query.filter;
@@ -41,7 +48,65 @@ Router.get('/dashboard',(req,res)=>{
             filter:req.query.filter,
         });
     })
+})
+
+Router.get('/books',(req,res)=>{
+    let filter = req.query.filter;
+	let criteria = {
+        available:true
+    };
+
+	if(filter === 'available'){
+        criteria = {
+            available:true
+        };
+	}else if(filter === 'sold'){
+		criteria = {
+            available:false
+        }; 
+    }
+
+    let books = Book.find(criteria).sort({_id:-1});
+    Promise.all([books]).then(values=>{
+        res.render('admin/books',{
+            books:values[0],
+            filter:req.query.filter,
+        });
+    })
     
+})
+
+Router.get('/book/:id',(req,res)=>{
+    let book = Book.findById(req.params.id);
+    Promise.all([book]).then(values=>{
+        res.render('admin/bookedit',{
+            book:values[0]
+        })
+    })
+})
+
+Router.get('/newbook',(req,res)=>{
+    res.render('admin/newbook')
+})
+
+Router.post('/bookedit/:id',(req,res)=>{
+    let book = req.body;
+    Book.findByIdAndUpdate(req.params.id,
+        {
+            title:book.title,
+            author:book.author,
+            isbn:book.isbn,
+            thumb:'',
+            synopsis:book.synopsis,
+            price:book.price,
+            condition:book.condition,
+            cat:book.cat.split(' '),
+            pages:book.pages,
+            available:true
+        }
+    ).then(doc=>{
+        res.redirect('/admin/book/'+req.params.id);
+    })
 })
 
 Router.get('/order/:id',(req,res)=>{
@@ -63,7 +128,7 @@ Router.post('/book',(req,res)=>{
     let book = req.body;
     Book.findOne({isbn:book.isbn}).then(docs=>{
         if(docs){
-					res.status(300).send({err:'duplicate'})
+			res.redirect('/admin/books')
         }else{
             new Book({
                 title:book.title,
@@ -77,7 +142,7 @@ Router.post('/book',(req,res)=>{
                 pages:book.pages,
                 available:true
             }).save().then(doc=>{
-                res.status(200).send('OK')
+               res.redirect('/admin/books')
             }).catch(err=>{
                 res.status(500).send({err:err});
             })
