@@ -168,6 +168,9 @@ li{
         width:85%;
         text-align: right;
     }
+    .nav-link span{
+        font-size:0.9em;
+    }
     #cart-item-count{
         left:97.5%;
         top:9px;
