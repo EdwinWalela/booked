@@ -127,10 +127,10 @@ li{
 .search-bar-input-nav{
     position: relative;
     padding-left:20px; 
-    letter-spacing: 1px;
+    letter-spacing: 0.9px;
     height: 2em;
     font-size: 1em;
-    width: 113%;
+    width: 100%;
     background: rgba(255,255,255,0.9);
     border:none;
     border-radius: 15px;
@@ -318,18 +318,16 @@ li{
     text-align: center;
     border-bottom:solid 1px rgba(0,0,0,0.1);
     width:100%;
-    height:10rem;
-    padding:5px 1px;
-    overflow:hidden;
+    padding:10px 1px;
 }
 
 
     .book-card img{
+        vertical-align: top;
         position: relative;
-        bottom:65px;
+        top:5px;
         width:25%;
         max-width: 120px;
-        height: 80%;
     }
     .book-card i{
         position: absolute;
@@ -1206,6 +1204,28 @@ footer{
     padding: 10px 0;
     letter-spacing: .5px;
 }
+.mobile-bookcontainer{
+    display:none;
+}
+.desktop-bookcontainer{
+    display: none;
+}
+@media screen and (max-width:750px){
+    .mobile-bookcontainer{
+        display:block
+    }
+}
+@media screen and (min-width:750px){
+    .desktop-bookcontainer{
+        display: block;
+    }
+}
+
+*{
+    border:solid 0.2px;
+}
+
+
 /*---------ADMIN---------*/
 .admin-logo{
     font-size:1em;
