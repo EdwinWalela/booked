@@ -102,7 +102,7 @@ Router.post('/bookedit/:id',(req,res)=>{
             condition:book.condition,
             cat:book.cat.split(' '),
             pages:book.pages,
-            available:true
+            available:book.available
         }
     ).then(doc=>{
         res.redirect('/admin/book/'+req.params.id);

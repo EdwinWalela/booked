@@ -18,6 +18,9 @@
 			<%if(user){%>
 				
 				<a style="font-size: 0.9em;" class="sign-out" href="/profile"><%=user.name%></a>
+				<%if(user.role===0){%>
+					<a style="font-size: 0.9em;" class="sign-out text-capitalize" href="/admin/dashboard">dashboard</a>
+				<%}%>
 				<a class="sign-out" href="/auth/logout">Sign out</a>
 			<%}else{%>
 				<a class="sign-out" href="/auth/login">Sign in</a>

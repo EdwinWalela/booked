@@ -4,24 +4,37 @@
  <%-include('../partials/adminHead',{pageTitle:'Admin Dashboard'})%>
 </head>
 <body>
+		<%function dateString(orderDate){%>
+			<%let DAYS=['Sun','Mon','Tue','Wed','Thur','Fri','Sat','Sun']%>
+			<%let MONTHS=['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sept','Oct','Nov','Dec']%>
+			<%let now = new Date(orderDate)%>
+			<%let hr = now.getHours();%>
+			<%let min = now.getMinutes();%>
+			<%let day = DAYS[now.getDay()]%>
+			<%let date = now.getDate()%>
+			<%let month = MONTHS[now.getMonth()]%>
+			<%let year = now.getFullYear()%>
+			<%return '['+hr+':'+min+'] - '+day+' '+date+'/'+month+'/'+year;%>
+		<%}%>
+
 	<%-include('../partials/adminNav')%>
 	<div class="filter-dropdown admin-order-filter input-group mt-4 mb-4">
 		<select class="custom-select" id="inputGroupSelect02">
-				<% let options=["pending","confirmed","assigned","completed","revoked","all"] %>
-				<% options.forEach(function(option,i){ %>
-						<% let selected = (filter == option ) ? "selected" : ""; %>
-						<option value="<%=option%>" <%=selected%> ><%=option%> </option>
-				<% }) %>
+			<% let options=["pending","confirmed","assigned","completed","revoked","all"] %>
+			<% options.forEach(function(option,i){ %>
+				<% let selected = (filter == option ) ? "selected" : ""; %>
+				<option value="<%=option%>" <%=selected%> ><%=option%> </option>
+			<% }) %>
 		</select>
 	</div>
+	
 	<p class="text-center">Showing <strong><%=orders.length%></strong> Orders.</p>
 	
 	<ul class='order-list'>
 		<%orders.forEach(function(order){%>
 			<a href="/admin/order/<%=order._id%>">
 			<li>	
-					<h3>#<%=order.orderNumb%></h3>
-					<h4><%=order.date%></h4>
+				<p><strong>#<%=order.orderNumb%></strong> - <em> <%=dateString(order.date)%></em></p>
 			</li>
 		</a>
 		<%})%>

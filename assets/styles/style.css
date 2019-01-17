@@ -126,7 +126,7 @@ li{
 
 .search-bar-input-nav{
     position: relative;
-    text-align: center;
+    padding-left:20px; 
     letter-spacing: 1px;
     height: 2em;
     font-size: 1em;
@@ -318,14 +318,15 @@ li{
     text-align: center;
     border-bottom:solid 1px rgba(0,0,0,0.1);
     width:100%;
-    height:8.5rem;
+    height:10rem;
+    padding:5px 1px;
     overflow:hidden;
 }
 
 
     .book-card img{
         position: relative;
-        bottom:60px;
+        bottom:65px;
         width:25%;
         max-width: 120px;
         height: 80%;
@@ -345,11 +346,10 @@ li{
     }
 
     .book-card h4{
+        text-decoration: underline;
         text-transform: capitalize;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        font-size: 1em;
+        word-wrap: break-word;
+        font-size: 0.95em;
         color:rgba(0,0,0,0.6);
     }
     .rating{
@@ -357,9 +357,7 @@ li{
         display: inline-block;
     }
     .book-card h6{
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
+        word-wrap: break-word;
         text-transform: capitalize;
         font-size: 0.8em;
         color:grey;
@@ -440,7 +438,7 @@ li{
     }
 
     
-    @media screen and (min-width:750px){
+    @media screen and (min-width:850px){
         .result-grid{
             padding:10px 30px;
             width:80%;
@@ -1224,14 +1222,6 @@ footer{
     padding:10px;
 }
 
-.order-list h3{
-    float: left;
-    font-size: 1em;
-}
-.order-list h4{
-    float: right;
-    font-size: 1em;
-}
 .order-list p {
     text-transform: capitalize;
 }
