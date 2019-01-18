@@ -1,37 +1,76 @@
-<footer class="page-footer font-small blue pt-4">
-    <p class="text-center">Featured titles</p>
-    <div class="related-titles">
-		<%titles.forEach(function(book,i){%>
-			<div class="related-card">
-				<a href='/book/<%=book._id%>'>
-					<img class="mb-2" src="https://picsum.photos/300/500/?image=<%=i*13%>"/>
-					<h6><%=book.title%></h6>
-					<h5 style="color:rgba(0,0,0,0.4);"><%=book.author%></h5>
-					<h4 class="mt-2">Ksh.<%=book.price%></h4>
-				</a>
+<footer class="footer2">
+	<div class="footer">
+			<div class="container">
+					<div class="row">
+						<nav class="col-md-3 col-sm-6 col-xs-12">
+								<h3>Browse <span>Categories</span></h3>
+								<ul>
+										<li>
+											<a href="/cat/romance">
+												Romance
+											</a>
+										</li>
+										<li>
+											<a href="/cat/fiction">
+												Fiction
+											</a>
+										</li>
+										<li>
+											<a href="/cat/mystery">
+												Mystery
+											</a>
+										</li>
+										<li>
+											<a href="/cat/motivation">
+												Motivation
+											</a>
+										</li>
+										<li>
+											<a href="/cat/personal-growth">
+												Personal-growth
+											</a>
+										</li>
+								</ul>
+						</nav>
+						<nav class="col-md-3 col-sm-6 col-xs-12">
+								<h3>Help <span>& Support</span></h3>
+								<ul>
+										<li>
+												<a href="#">Get in Touch</a>
+										</li>
+								</ul>
+						</nav>
+						<nav class="col-md-3 col-sm-6 col-xs-12">
+							<h3>My<span> Account</span></h3>
+							<ul>
+									<%if(user){%>
+										<li>
+												<a class="text-capitalize" href="/profile"><%=user.name%></a>
+										</li>
+										<%if(user.role === 0){%>
+											<li>
+													<a href="/admin/dashboard">Dashboard</a>
+											</li>
+										<%}%>
+										<li>
+												<a class="text-capitalize" href="/auth/logout">Sign out</a>
+										</li>
+									<%}else{%>
+										<li>
+												<a href="/auth/login">Sign up</a>
+										</li>
+									<%}%>
+							</ul>
+						</nav>
+					</div> <!--/.row--> 
+			</div> <!--/.container--> 
+	</div> <!--/.footer-->
+	<div class="footer-bottom">
+			<div class="container">
+				<div class="pull-left"> Copyright © Bookworm 2019 Used books online store. All right reserved.</div>
 			</div>
-		<%})%>
-	 </div>
-	 
-    <!-- Copyright -->
-    <div class="footer-copyright text-center mt-3 py-3">
-			<%if(user){%>
-				
-				<a style="font-size: 0.9em;" class="sign-out" href="/profile"><%=user.name%></a>
-				<%if(user.role===0){%>
-					<a style="font-size: 0.9em;" class="sign-out text-capitalize" href="/admin/dashboard">dashboard</a>
-				<%}%>
-				<a class="sign-out" href="/auth/logout">Sign out</a>
-			<%}else{%>
-				<a class="sign-out" href="/auth/login">Sign in</a>
-			<%}%>
-			<br/>
-			© 2018 Copyright:
-      <a href="#"> Boooked</a>
-    </div>
-    <!-- Copyright -->
-
-  </footer>
+	</div> <!--/.footer-bottom--> 
+</footer>
 	<!-- Footer -->
 	<script
   src="https://code.jquery.com/jquery-3.3.1.min.js"

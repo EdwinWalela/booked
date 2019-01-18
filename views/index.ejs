@@ -83,7 +83,6 @@
 							<p>true-story</p>
 						</div>
 					</a>
-			
 				</div>
 		  </div>
 		</div>
@@ -91,19 +90,19 @@
 	
 		<hr class="m-4">
 		<p class="text-center text-capitalize steps-landing">
-				3 simple steps
-			</p>
-			<div class="text-center mb-3 steps-icons">
-				<span ><i class="fas fa-search"></i></span>
-				<span ><i class="fas fa-cart-plus"></i></span>
-				<span ><i class="fas fa-truck"></i></span>
-			</div>
-			<%if(user){%>
-				<a href="/search"><p class="landing-desc text-center mb-4">Get Started</p></a>
-			<%}else{%>
-				<a href="/auth/login"><p class="landing-desc text-center mb-4">Get Started</p></a>
-			<%}%>
-			
+			3 simple steps
+		</p>
+		<div class="text-center mb-3 steps-icons">
+			<span ><i class="fas fa-search"></i></span>
+			<span ><i class="fas fa-cart-plus"></i></span>
+			<span ><i class="fas fa-truck"></i></span>
+		</div>
+		<%if(user){%>
+			<a href="/search"><p class="landing-desc text-center mb-4">Get Started</p></a>
+		<%}else{%>
+			<a href="/auth/login"><p class="landing-desc text-center mb-4">Get Started</p></a>
+		<%}%>
+		
 		
 	<%- include('partials/landingQuoteSlider',{})%>
 	<!-- FOOTER-->	
