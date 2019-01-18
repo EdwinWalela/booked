@@ -28,6 +28,13 @@ const AREAS = [
 "woodley"
 ]
 
+const COUPONS = [
+	{
+		name:'BOOKS4ALL',
+		value:0.2
+	},
+]
+
 const authCheck = (req,res,next)=>{
     if(req.user){
         next();
@@ -97,6 +104,15 @@ Router.post('/',(req,res)=>{
 Router.get('/checkout',(req,res)=>{
 		let orderCount = Order.find({}).count();
 		let orderNumb;
+		let orderCoupon = Number(req.query.coupon);
+		console.log(orderCoupon)
+		let discount = 1;
+		for(let i = 0; i < COUPONS.length;i++){
+			if(COUPONS[i].value === orderCoupon){
+				discount = COUPONS[i].value;
+			}
+		}
+		console.log(discount)
 		Promise.all([orderCount]).then(value=>{
 			orderNumb = Number(value[0]);
 			orderNumb+=1;
@@ -109,12 +125,17 @@ Router.get('/checkout',(req,res)=>{
 					let delivery = 0;
 					let serviceFee = 0;
 					titles.forEach(title=>{
-							price+=Number(title.price)
+						price+=Number(title.price)
 					})
 
 					serviceFee = price*0.1
 					if(req.user.address[2] !== 'cbd'){delivery = 100}
+
 					total = price + delivery + serviceFee;
+					if(discount !== 1){
+						total = total - (price * discount);
+					}
+
 					new Order({
 						orderNumb:orderNumb,
 						user:req.user._id,

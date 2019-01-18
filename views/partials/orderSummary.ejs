@@ -28,10 +28,8 @@
 					<p>Deliver To:<br><strong><%=user.name%>-<%=order.address%></strong></p>
 					<p>Delivery contact: <a style="color:blue;" href="tel:<%=order.contact%>"><em><%=order.contact%></em></a> </p>
 					<%if(order.status===0){%>
-						<button type="button" class="btn btn-block" data-toggle="modal" data-target="#cancel-order">
-							Cancel order
-						</button>
-						<%-include('../partials/cancelOrder',{order:order})%>
+						<a href="profile/cancel/<%=order._id%>"><button type="button" class="btn btn-danger">Cancel Order</button></a>
+					 	<small class="form-text text-muted">This action is not reversable</small>
 					<%}%>
 					
 				</div>

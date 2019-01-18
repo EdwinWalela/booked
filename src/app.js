@@ -17,6 +17,14 @@ const secure = require('express-force-https');
 
 const app = express();
 
+const COUPONS = [
+	{
+		name:'BOOKS4ALL',
+		value:0.2
+	},
+]
+
+
 const authCheck = (req,res,next)=>{
     if(req.user){
         next();
@@ -301,6 +309,13 @@ app.get('/book/:id',(req,res)=>{
 })
 
 app.get('/cart',authCheck,(req,res)=>{
+	let orderCoupon = req.query.coupon;
+	let discount = 1;
+	COUPONS.forEach(coupon=>{
+		if(coupon.name === orderCoupon){
+			discount = coupon.value;
+		}
+	})
 	let relatedTitles = Book.find({available:true}).skip(10).limit(4);
 		Book.find({
 			'_id': { $in: req.user.cart || null}
@@ -310,10 +325,17 @@ app.get('/cart',authCheck,(req,res)=>{
 					books:books,
 					user:req.user,
 					relatedTitles:values[0],
-					searchSuggestions:res.locals
+					searchSuggestions:res.locals,
+					discount:discount
 				})
 			});
 		})
+})
+
+
+app.post('/cart/verifycoupon',(req,res)=>{
+	let coupon = req.body.coupon.toUpperCase()
+	res.redirect('/cart?coupon='+coupon)
 })
 
 app.post('/cart/:id',(req,res)=>{
