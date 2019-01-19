@@ -134,6 +134,7 @@ li{
     height: 2em;
     font-size: 1em;
     width: 100%;
+    max-width:350px;
     background: rgba(255,255,255,0.9);
     border:none;
     border-radius: 15px;
@@ -464,7 +465,7 @@ li{
             }
             .book-card i{
                 position: absolute;
-                left:84%;
+                left:74%;
                 color:red;
                 padding: 25px;   
             }
@@ -766,6 +767,7 @@ margin: auto;
 
 .coupon-form input{
     width:80%;
+    max-width:300px;
     padding: 30px;
     font-size: 1.3em;
     letter-spacing: 1.3px;
@@ -774,8 +776,13 @@ margin: auto;
     margin:1em auto;
 }
 
+.coupon-form button{
+    color: #3066BE !important;
+    background: #fff !important;
+}
+
 .cart-container{
-    max-width:800px;
+    max-width:700px;
     margin:auto;
 }
 

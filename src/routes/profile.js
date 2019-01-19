@@ -1,7 +1,12 @@
+const sequential = require("sequential-ids");
 const Router = require('express').Router();
+
 const Book = require('../models/book');
 const User = require('../models/user');
 const Order = require('../models/order')
+
+const accessor = new sequential.Accessor();
+
 
 const AREAS = [
 "cbd",
@@ -42,6 +47,8 @@ const authCheck = (req,res,next)=>{
         res.redirect('/auth/login')
     }
 }
+
+
 
 Router.get('/price',(req,res)=>{
     Book.updateMany({},{$inc:{price:50}}).then(doc=>{
@@ -102,21 +109,16 @@ Router.post('/',(req,res)=>{
 
 //@PLACE ORDER
 Router.get('/checkout',(req,res)=>{
-		let orderCount = Order.find({}).count();
-		let orderNumb;
 		let orderCoupon = Number(req.query.coupon);
-		console.log(orderCoupon)
 		let discount = 1;
 		for(let i = 0; i < COUPONS.length;i++){
 			if(COUPONS[i].value === orderCoupon){
 				discount = COUPONS[i].value;
 			}
 		}
-		console.log(discount)
-		Promise.all([orderCount]).then(value=>{
-			orderNumb = Number(value[0]);
-			orderNumb+=1;
-			
+
+		Promise.all([orderId]).then(values=>{
+			console.log(values[0])
 			Book.find({$and:[
 					{available:true},
 					{'_id': { $in: req.user.cart}}
@@ -135,9 +137,8 @@ Router.get('/checkout',(req,res)=>{
 					if(discount !== 1){
 						total = total - (price * discount);
 					}
-
 					new Order({
-						orderNumb:orderNumb,
+						orderNumb:values[0],
 						user:req.user._id,
 						items:titles,
 						totalAmount:total,

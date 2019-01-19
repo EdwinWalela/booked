@@ -7,15 +7,22 @@ const passport = require('passport');
 const cookieSession = require('cookie-session');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
+const sequential = require("sequential-ids");
 
 const Book = require('./models/book');
 const User =require('./models/user');
+const order_IDS = require('./models/orderIds');
+
 const adminRoutes =require('./routes/admin');
 const authRoutes =require('./routes/auth');
 const profileRoutes = require('./routes/profile');
 const secure = require('express-force-https');
 
 const app = express();
+
+const db = mongoose.connect(process.env.DB_URI,{useNewUrlParser:true},()=>{
+    console.log('connected to db')
+})
 
 const COUPONS = [
 	{
@@ -24,6 +31,12 @@ const COUPONS = [
 	},
 ]
 
+var generator = new sequential.Generator({
+	digits: 6, letters: 3,
+	restore: "AAA - 000"
+  });
+
+generator.start();
 
 const authCheck = (req,res,next)=>{
     if(req.user){
@@ -43,9 +56,6 @@ const roleCheck = (req,res,next)=>{
 	}
 }
 
-mongoose.connect(process.env.DB_URI,{useNewUrlParser:true},()=>{
-    console.log('connected to db')
-})
 app.listen(process.env.PORT,()=>{
     console.log(`listening to requests on port ${process.env.PORT}`);
 })

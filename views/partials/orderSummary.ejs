@@ -26,10 +26,10 @@
 					<h3>Total: Ksh.<strong><%=order.totalAmount%></strong></h3>
 					<p>Est. Delivery Date:<br><strong><%=dateString(order.date.setDate(order.date.getDate() + 6))%></strong></p>
 					<p>Deliver To:<br><strong><%=user.name%>-<%=order.address%></strong></p>
-					<p>Delivery contact: <a style="color:blue;" href="tel:<%=order.contact%>"><em><%=order.contact%></em></a> </p>
 					<%if(order.status===0){%>
-						<a href="profile/cancel/<%=order._id%>"><button type="button" class="btn btn-danger">Cancel Order</button></a>
-					 	<small class="form-text text-muted">This action is not reversable</small>
+						<a href="profile/cancel/<%=order._id%>"> <p>[cancel order]<br> <small class="form-text text-muted">This action is not reversable</small></p></a>
+					<%}else if(order.status > 1){%>
+						<p>Delivery contact: <a style="color:blue;" href="tel:<%=order.contact%>"><em><%=order.contact%></em></a> </p>
 					<%}%>
 					
 				</div>
