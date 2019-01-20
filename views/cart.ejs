@@ -32,6 +32,10 @@
 			<%return total%>
 			<%}%>
 	<!------>
+	<%let discount = 0 %>
+	<%if(coupon){%>
+		<% discount = coupon.value %>
+	<%}%>
 	<div class="cart-container text-center">
 		<div class="cart-head text-center">
 		<h4>My Shopping Cart</h4>
@@ -105,19 +109,20 @@
 					<h6 class="text-left">Service Fee (10%)</h6>
 					<h6 class="text-right">Ksh. <%=Math.floor(books.sum("price")*0.1)%></h6>
 					
-					<%if(discount < 1){%>
+					<%let totalAmount = Math.floor((items+service+delivery)) %>
+					<%if(discount !== 0 ){%>
 						<h6 class="text-left">Discount (<%=(discount*100)%>%)</h6>
-						<h6 style="color:tomato" class="text-right"><strong>Ksh. - <%=Math.floor(books.sum("price")*discount)%></strong></h6>	
+						<h6 style="color:tomato" class="text-right"><strong>Ksh. - <%=(totalAmount*discount)%></strong></h6>	
 						<hr class="ml-3 mr-3">
 						<h6 class="text-left">Total</h6>
-						<h6 style="color:black;font-size: 1.2em" class="text-right"><strong>Ksh. <%=Math.floor((items+service+delivery)-(Math.floor(books.sum("price")*discount)))%></strong></h6>
+						<h6 style="color:black;font-size: 1.2em" class="text-right"><strong>Ksh. <%=totalAmount-(totalAmount*discount)%></strong></h6>
 						<%}else{%>
 						<hr class="ml-3 mr-3">
 						<h6 class="text-left">Total</h6>
-						<h6 style="color:black;font-size: 1.2em" class="text-right"><strong>Ksh. <%=Math.floor((items+service+delivery))%></strong></h6>
+						<h6 style="color:black;font-size: 1.2em" class="text-right"><strong>Ksh. <%=totalAmount%></strong></h6>
 				
 						<%}%>
-					<%if(discount == 1){%>
+					<%if(discount == 0){%>
 					<form method="POST" action="/cart/verifycoupon" class="coupon-form text-center">
 						<div class="form-group">
 							<input type="text" name="coupon" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Coupon" required>
@@ -126,7 +131,7 @@
 					</form>
 					<a href="/profile/checkout"><button id="place-order" class="btn btn-block mt-2 btn-primary" >Place Order</button></a>  
 					<%}else{%>
-						<a href="/profile/checkout?coupon=<%=discount%>"><button id="place-order" class="btn btn-block mt-2" >Place Order</button></a> 
+						<a href="/profile/checkout?coupon=<%=coupon.name%>"><button id="place-order" class="btn btn-block mt-2" >Place Order</button></a> 
 					<%}%>
 					
 					<small id="hse-help" class="ml-3 mr-3 form-text text-muted">Orders once placed can only be cancelled before they are confirmed by our staff.</small>

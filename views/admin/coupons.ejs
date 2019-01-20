@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <%-include('../partials/adminHead',{pageTitle:'Coupons | Admin'})%>
+</head>
+<body>
+		
+	<%-include('../partials/adminNav')%>
+	<div class="filter-dropdown admin-order-filter input-group mt-4 mb-4">
+		<select class="custom-select" id="inputGroupSelect02">
+			<% let options=["active","inactive","all"] %>
+			<% options.forEach(function(option,i){ %>
+				<% let selected = (filter == option ) ? "selected" : ""; %>
+				<option value="<%=option%>" <%=selected%> ><%=option%> </option>
+			<% }) %>
+		</select>
+	</div>
+	
+	<p class="text-center">Showing <strong><%=coupons.length%></strong> Coupons.</p>
+	
+	<ul class='order-list'>
+		<%coupons.forEach(function(coupon){%>
+			<a href="/admin/coupon/<%=coupon._id%>">
+			<li>	
+				<p><strong><%=coupon.name%></strong> - [<em><%=coupon.value*100%></em>]%</p>
+			</li>
+		</a>
+		<%})%>
+	</ul>
+	<%-include('../partials/adminFooter')%>
+</body>
+</html>
+

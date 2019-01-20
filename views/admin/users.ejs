@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <%-include('../partials/adminHead',{pageTitle:'Manage Users'})%>
+</head>
+<body>
+	<%-include('../partials/adminNav')%>
+	<div class="filter-dropdown admin-order-filter input-group mt-4 mb-4">
+		<select class="custom-select" id="inputGroupSelect02">
+			<% let options=["all","admin","delivery","basic"] %>
+			<% options.forEach(function(option,i){ %>
+				<% let selected = (filter == option ) ? "selected" : ""; %>
+				<option value="<%=option%>" <%=selected%> ><%=option%> </option>
+			<% }) %>
+		</select>
+	</div>
+	
+	<p class="text-center">Showing <strong><%=users.length%></strong> User(s).</p>
+	<table class="user-table">
+        <tr>
+          <th>username</th>
+          <th>email address</th> 
+          <th>address</th> 
+          <th>role</th>
+          <th> </th>
+        </tr>
+        <%users.forEach(function(user){%>          
+            <tr>             
+            <td class="text-capitalize"><%=user.name%></td>
+            <td><%=user.email%></td> 
+            <td class="text-capitalize"><%=user.address%></td>
+            <td>
+                <%if(user.role === 0){%>
+                    <a href="/admin/updaterole/admin/<%=user._id%>"><i class="fas fa-lock active-usertype"></i></a> 
+                    <a href="/admin/updaterole/delivery/<%=user._id%>"><i class="fas fa-truck"></i></a>
+                    <a href="/admin/updaterole/basic/<%=user._id%>"><i class="fas fa-user-alt"></i></a>
+                <%}else if(user.role === 1){%>
+                    <a href="/admin/updaterole/admin/<%=user._id%>"><i class="fas fa-lock"></i></a>
+                    <a href="/admin/updaterole/delivery/<%=user._id%>"><i class="fas fa-truck active-usertype"></i></a>
+                    <a href="/admin/updaterole/basic/<%=user._id%>"><i class="fas fa-user-alt"></i></a>
+                <%}else if(user.role === 2){%>
+                    <a href="/admin/updaterole/admin/<%=user._id%>"><i class="fas fa-lock"></i></a>
+                    <a href="/admin/updaterole/delivery/<%=user._id%>"><i class="fas fa-truck"></i></a>
+                    <a href="/admin/updaterole/basic/<%=user._id%>"><i class="fas fa-user-alt active-usertype"></i></a>
+                <%}%>
+            </td>
+            <td> <a href="/admin/user/<%=user._id%>">View</a></td> 
+            </tr>
+        <%})%>
+    </table>
+	
+	<%-include('../partials/adminFooter')%>
+</body>
+</html>
+

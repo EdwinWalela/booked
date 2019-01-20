@@ -1,6 +1,8 @@
 const Router = require('express').Router();
 const Book = require('../models/book');
 const Order = require('../models/order');
+const Coupon = require('../models/coupon');
+const User = require('../models/user')
 
 const roleCheck = (req,res,next)=>{
     if(req.user.role !== 0){
@@ -41,7 +43,7 @@ Router.get('/dashboard',(req,res)=>{
             
 		};
     }
-    let orders = Order.find(criteria);
+    let orders = Order.find(criteria).sort({_id:-1});
     Promise.all([orders]).then(values=>{
         res.render('admin/dashboard',{
             orders:values[0],
@@ -170,6 +172,121 @@ Router.get('/order/revoke/:id',(req,res)=>{
 		})
 	})
 
+})
+
+Router.get('/coupons',(req,res)=>{
+    let filter = req.query.filter;
+	let criteria = {
+        status:1
+    };
+
+	if(filter === 'active'){
+        criteria = {
+            status:1
+        };
+	}else if(filter === 'inactive'){
+		criteria = {
+            status:0
+		}; 
+    }else if(filter === 'all'){
+		criteria = {
+            
+		};
+    }
+    let coupons = Coupon.find(criteria).sort({_id:-1});
+    Promise.all([coupons]).then(values=>{
+        res.render('admin/coupons',{
+            coupons:values[0],
+            filter:req.query.filter,
+        });
+    })
+})
+
+Router.get('/coupon/:id',(req,res)=>{
+    let coupon = Coupon.findById(req.params.id);
+    Promise.all([coupon]).then(values=>{
+        res.render('admin/couponedit',{
+            coupon:values[0]
+        })
+    })
+})
+
+Router.get('/newcoupon',(req,res)=>{
+    res.render('admin/newcoupon')
+})
+
+Router.post('/newcoupon',(req,res)=>{
+    let coupon = req.body;
+    new Coupon({
+        name:coupon.name.toUpperCase(),
+        value:coupon.value,
+        status:1
+    }).save().then(doc=>{
+        res.redirect('/admin/coupons')
+    }).catch(err=>{
+        res.status(500).send({err:err});
+    })
+})
+
+Router.post('/couponedit/:id',(req,res)=>{
+    let coupon = req.body;
+    Coupon.findByIdAndUpdate(req.params.id,
+        {
+            name:coupon.name,
+            value:coupon.value,
+            status:coupon.status
+        }
+    ).then(doc=>{
+        res.redirect('/admin/coupon/'+req.params.id);
+    })
+})
+
+Router.get('/users',(req,res)=>{
+    let filter = req.query.filter;
+	let criteria = {
+        
+    };
+
+	if(filter === 'admin'){
+        criteria = {
+            role:0
+        };
+	}else if(filter === 'delivery'){
+		criteria = {
+            role:1
+		}; 
+    }else if(filter === 'basic'){
+		criteria = {
+            role:2
+		};
+    }else if(filter === 'all'){
+		criteria = {};
+    }
+    let users = User.find(criteria).sort({_id:-1});
+    Promise.all([users]).then(values=>{
+        res.render('admin/users',{
+            users:values[0],
+            filter:req.query.filter,
+        });
+    })
+})
+
+Router.get('/updaterole/:role/:id',(req,res)=>{
+    let role = 2;
+    if(req.params.role == 'admin'){
+        role = 0;
+    }else if(req.params.role == 'delivery'){
+        role = 1;
+    }else if(req.params.role == 'basic'){
+        role = 2;
+    }
+    let updateRole = User.findByIdAndUpdate(req.params.id,
+    {
+        role:role
+    });
+    Promise.all([updateRole]).then(value=>{
+        res.redirect('/admin/users');
+    })
 })
 
 

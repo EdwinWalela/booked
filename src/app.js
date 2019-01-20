@@ -11,7 +11,7 @@ const sequential = require("sequential-ids");
 
 const Book = require('./models/book');
 const User =require('./models/user');
-const order_IDS = require('./models/orderIds');
+const Coupon = require('./models/coupon')
 
 const adminRoutes =require('./routes/admin');
 const authRoutes =require('./routes/auth');
@@ -120,7 +120,7 @@ passport.use(new FacebookStrategy({
 			if(!user){
 				User({
 					fbID:profile.id,
-					email:'',
+					email: '-',
 					name:profile.displayName,
 					cart:[],
 					mobile:'',
@@ -319,24 +319,21 @@ app.get('/book/:id',(req,res)=>{
 })
 
 app.get('/cart',authCheck,(req,res)=>{
-	let orderCoupon = req.query.coupon;
-	let discount = 1;
-	COUPONS.forEach(coupon=>{
-		if(coupon.name === orderCoupon){
-			discount = coupon.value;
-		}
-	})
+	let orderCoupon = req.query.coupon
+	let coupon = Coupon.findOne({$and:[{name:orderCoupon},{status:1}]});
 	let relatedTitles = Book.find({available:true}).skip(10).limit(4);
+	
 		Book.find({
 			'_id': { $in: req.user.cart || null}
 		}).then(books=>{
-			Promise.all([relatedTitles]).then(values=>{
+			Promise.all([relatedTitles,coupon]).then(values=>{
+				console.log(values[1])
 				res.render('cart',{
 					books:books,
 					user:req.user,
 					relatedTitles:values[0],
 					searchSuggestions:res.locals,
-					discount:discount
+					coupon:values[1]
 				})
 			});
 		})

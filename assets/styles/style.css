@@ -1170,121 +1170,6 @@ blockquote {
 
 /*------------- FOOTER-------------------*/
 
-
-.btn, .form-control {
-    border-radius: 2px;
-    box-shadow: none !important;
-}
-
-/*FOOTER 1*/
-.footer1 a {
-    color: #DDD;
-}
-
-.footer1 a:hover,
-.footer1 a:focus,
-.footer1 a:active {
-    color: #FFF;
-}
-
-.footer1 .footer {
-    background-color: #2E3436;
-    padding: 35px 0;
-    margin-top: 5em;
-}
-
-.footer1 .footer .footer-desc p {
-    color: #DDD;
-	margin: 15px 0 8px;
-}
-
-.footer1 .footer .social {
-    margin: 0 auto;
-    display: table;
-}
-
-.footer1 .footer .social li {
-    float: left;
-}
-
-.footer1 .footer .social li a {
-	display: block;
-    font-size: 1em;
-    color: #DDD;
-    width: 30px;
-    height: 30px;
-    line-height: 32px;
-    text-align: center;
-    background-color: #222728;
-    border-radius: 2px;
-    margin: 15px 4px
-}
-
-.footer1 .footer .social li a:hover {
-    background-color: #3A4144;
-}
-
-.footer1 .footer .input-group {
-    margin: 15px 0;
-}
-
-.footer1 .footer .form-control {
-    border-radius: 2px 0 0 2px;
-    background-color: #585C5D;
-    border-color: #585C5D;
-    color: #DDD;
-    font-size: 15px;
-}
-
-.footer1 .footer .form-control:hover,
-.footer1 .footer .form-control:focus {
-    border: 1px solid #222728;
-    background-color: #222728;
-}
-
-.footer1 .footer .input-group-addon {
-    border-radius: 0 2px 2px 0;
-    background-color: #F7931D;
-    color: #FFF;
-    border-color: #F7931D;
-    font-size: 15px;
-}
-
-.footer1 .footer-bottom {
-    background-color: #222728;
-    padding: 15px 0;
-    color: #DDD;
-    font-size: 13px;
-}
-
-.footer1 .footer-bottom ul li {
-    display: inline-block;
-}
-
-.footer1 .footer-bottom ul li a {
-    display: block;
-    padding-left: 8px;
-}
-
-.footer1 .footer-bottom ul li a:after {
-    content: "-";
-    padding-left: 8px;
-}
-
-.footer1 .footer-bottom ul li:last-child a:after {
-    content: "";
-}
-
-@media (max-width: 550px) {
-	.footer1 .footer-bottom .pull-left,
-	.footer1 .footer-bottom .pull-right {
-		float: none !important;
-		width: 100%;
-		padding: 10px;
-		text-align: center;
-	}
-}
-/*FOOTER 2*/
 .footer2 a {
     color: #DDD;
 }
@@ -1459,9 +1344,6 @@ blockquote {
     }
 }
 
-*{
-}
-
 
 /*---------ADMIN---------*/
 .admin-logo{
@@ -1470,6 +1352,7 @@ blockquote {
 .order-list{
     width:90%;
     max-width:800px;
+    min-height: 55vh;   
     margin:auto;
 }
 
@@ -1507,6 +1390,34 @@ blockquote {
     max-width: 700px;
     margin: auto;
 }
+
+
+
+.table, th, td {
+    border: 1px solid black;
+    text-align: center;
+  }
+
+  .user-table th{
+      background: #3066BE;
+      color:#fff;
+      font-weight: 300;
+  }
+ .user-table i {
+     color:rgba(0,0,0,0.3);
+ }
+
+ .active-usertype {
+     color:#3066BE !important;
+ }
+
+.user-table{
+    width:80%;
+    margin:2em auto 5em auto;
+    max-width: 750px;
+}
+
+
 @media screen and (min-width:750px){
     .bookedit-container{
         padding:50px;

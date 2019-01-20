@@ -4,6 +4,7 @@ const Router = require('express').Router();
 const Book = require('../models/book');
 const User = require('../models/user');
 const Order = require('../models/order')
+const Coupon = require('../models/coupon');
 
 const accessor = new sequential.Accessor();
 
@@ -49,13 +50,11 @@ const authCheck = (req,res,next)=>{
 }
 
 
-
 Router.get('/price',(req,res)=>{
     Book.updateMany({},{$inc:{price:50}}).then(doc=>{
         res.redirect('/search')
     })
 })
-
 
 Router.get('/reset',(req,res)=>{
     Book.updateMany({},{available:true}).then(doc=>{
@@ -109,58 +108,54 @@ Router.post('/',(req,res)=>{
 
 //@PLACE ORDER
 Router.get('/checkout',(req,res)=>{
-		let orderCoupon = Number(req.query.coupon);
-		let discount = 1;
-		for(let i = 0; i < COUPONS.length;i++){
-			if(COUPONS[i].value === orderCoupon){
-				discount = COUPONS[i].value;
-			}
-		}
+	let orderCoupon = req.query.coupon
+	let coupon = Coupon.findOne({$and:[{name:orderCoupon},{status:1}]});
 
-		Promise.all([orderId]).then(values=>{
-			console.log(values[0])
-			Book.find({$and:[
-					{available:true},
-					{'_id': { $in: req.user.cart}}
-			]}).then(titles=>{
-					let price = 0;
-					let delivery = 0;
-					let serviceFee = 0;
-					titles.forEach(title=>{
-						price+=Number(title.price)
-					})
-
-					serviceFee = price*0.1
-					if(req.user.address[2] !== 'cbd'){delivery = 100}
-
-					total = price + delivery + serviceFee;
-					if(discount !== 1){
-						total = total - (price * discount);
-					}
-					new Order({
-						orderNumb:values[0],
-						user:req.user._id,
-						items:titles,
-						totalAmount:total,
-						address:req.user.address.toString(),
-						date:new Date(),
-						contact:'0706496885',
-						status:0,
-					}).save().then(newOrder=>{
-						let flagTitles = Book.updateMany(
-								{'_id': { $in: req.user.cart}},
-								{available:false}
-						)
-						let emptyCart = User.update(
-							{ _id: req.user._id }, 
-							{ $set: { cart: [] }}
-						)
-						Promise.all([flagTitles,emptyCart]).then(values=>{
-							res.redirect('/profile?successorder=true')
-						})
-					});
+	Promise.all([coupon]).then(values=>{
+		console.log(values[0])
+	Book.find({$and:[
+			{available:true},
+			{'_id': { $in: req.user.cart}}
+	]}).then(titles=>{
+			let price = 0;
+			let delivery = 0;
+			let serviceFee = 0;
+			let discount = values[0].value || 0;
+			console.log(discount);
+			titles.forEach(title=>{
+				price+=Number(title.price)
 			})
-		}) 
+			serviceFee = price*0.1
+			if(req.user.address[2] !== 'cbd'){delivery = 100}
+
+			total = price + delivery + serviceFee;
+			if(discount !== 0){
+				total = total - (total * discount);
+			}
+			new Order({
+				orderNumb:1,
+				user:req.user._id,
+				items:titles,
+				totalAmount:total,
+				address:req.user.address.toString(),
+				date:new Date(),
+				contact:'0706496885',
+				status:0,
+			}).save().then(newOrder=>{
+				let flagTitles = Book.updateMany(
+						{'_id': { $in: req.user.cart}},
+						{available:false}
+				)
+				let emptyCart = User.update(
+					{ _id: req.user._id }, 
+					{ $set: { cart: [] }}
+				)
+				Promise.all([flagTitles,emptyCart]).then(values=>{
+					res.redirect('/profile?successorder=true')
+				})
+			});
+		})
+	}) 
 })
 
 //@CANCEL ORDER
