@@ -48,7 +48,11 @@ const authCheck = (req,res,next)=>{
 
 const roleCheck = (req,res,next)=>{
 	if(req.user.role == 2){
-		res.redirect('/search')
+		if(req.body.redirect){
+			res.redirect('/book/'+req.body.redirect);
+		}else{
+			res.redirect('/search')
+		}
 	}else if(req.user.role === 1){
 		res.redirect('/delivery/dashboard')
 	}else if(req.user.role === 0){
@@ -156,7 +160,7 @@ app.get('/auth/facebook', passport.authenticate('facebook'));
 
 app.get('/auth/facebook/callback',
 	passport.authenticate
-	('facebook',{successRedirect:'/',failureRedirect:'auth/login?fail=true'}))
+	('facebook',{failureRedirect:'auth/login?fail=true'}),roleCheck)
 
 app.get('/auth/logout',(req,res)=>{
 	req.logOut();

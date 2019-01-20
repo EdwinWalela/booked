@@ -6,7 +6,7 @@ const saltRounds = 10;
 
 
 Router.get('/login',(req,res)=>{
-    res.render('auth/login',{fail:req.query.fail,newAcc:req.query.new});
+    res.render('auth/login',{fail:req.query.fail,newAcc:req.query.new,bookredirect:req.query.bookredirect});
 })
 
 Router.post('/register',(req,res)=>{
@@ -21,7 +21,7 @@ Router.post('/register',(req,res)=>{
                     address:req.body.address,
                     role:2
                 }).save().then(newUser=>{
-                    res.redirect('/auth/login?new=true#exampleInputEmail1');
+                    res.redirect('/auth/login?new=true#exampleInputEmail1&bookredirect='+(req.query.bookredirect ));
                 })
             });
         }

@@ -262,7 +262,7 @@ Router.get('/users',(req,res)=>{
     }else if(filter === 'all'){
 		criteria = {};
     }
-    let users = User.find(criteria).sort({_id:-1});
+    let users = User.find(criteria).sort({role:1});
     Promise.all([users]).then(values=>{
         res.render('admin/users',{
             users:values[0],
