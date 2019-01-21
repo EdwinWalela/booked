@@ -55,7 +55,7 @@ Router.get('/order/:id/start',(req,res)=>{
 })
 
 Router.post('/order/:id/complete',(req,res)=>{
-    let order = Order.findByIdAndUpdate(req.params.id,{status:3});
+    let order = Order.findByIdAndUpdate(req.params.id,{status:3,deliveredDate:new Date()});
     Promise.all([order]).then(values=>{
         res.redirect('/deliveries')
     })

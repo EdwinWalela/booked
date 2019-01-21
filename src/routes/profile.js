@@ -68,7 +68,8 @@ Router.get('/',authCheck,(req,res)=>{
     let pendingOrders = Order.find({
 			$and:[
 				{user:req.user._id},
-				{status:{$lte:2}}
+				{$or:[{status:{$lte:2}},{status:10}]
+				}
 			]}
 		);
     let orderHistory = Order.find({

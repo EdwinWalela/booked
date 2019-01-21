@@ -97,7 +97,7 @@
 									<div class="order-summary">
 										<h3>Total: Ksh.<strong><%=order.totalAmount%></strong></h3>
 										<p>Delivered :<br><strong><%=order.deliveredDate%></strong></p>									
-										<p>Deliver To:<br><strong><%=user.name%>.<br><%=order.address%></strong></p>
+										<p>Delivered To:<br><strong><%=user.name%>.<br><%=order.address%></strong></p>
 									</div>
 								</div>
 							<%})%>
@@ -121,12 +121,11 @@
 								<h6 class='mt-1' style="float:right">
 									<%if(order.status === 0){%>
 										[awaiting confirmation]
-									<%}else if(order.status === 3){%>
-										[deliverd]
-									<%}else{%>
+									<%}else if(order.status === 1 || order.status === 2){%>
 										[confirmed]
+									<%}else if(order.status === 10){%>
+										[Out for delivery]
 									<%}%>
-									
 								</h6>
 							</div>
 							<%-include('partials/orderSummary',{order:order,dateString:dateString})%>
