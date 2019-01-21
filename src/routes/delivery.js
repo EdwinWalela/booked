@@ -50,7 +50,7 @@ Router.get('/order/:id',(req,res)=>{
 Router.get('/order/:id/start',(req,res)=>{
     let order = Order.findByIdAndUpdate(req.params.id,{status:10});
     Promise.all([order]).then(values=>{
-        res.redirect('/delivery')
+        res.redirect('/deliveries')
     })
 })
 
