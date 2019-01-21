@@ -168,7 +168,7 @@ Router.get('/order/:orderId/assign/:userId',(req,res)=>{
             let delivererDetails = {
                 id:deliveryPerson._id,
                 name:deliveryPerson.name,
-                contact:deliveryPerson.contact
+                contact:deliveryPerson.mobile
             };
             Order.findByIdAndUpdate(req.params.orderId,{
                 deliverer:delivererDetails,
