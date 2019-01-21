@@ -12,6 +12,10 @@ const roleCheck = (req,res,next)=>{
     }
 }
 
+Router.get('/',(req,res)=>{
+    res.redirect('/admin/dashboard');
+})
+
 Router.get('/dashboard',(req,res)=>{
     let filter = req.query.filter;
 	let criteria = {
@@ -113,9 +117,11 @@ Router.post('/bookedit/:id',(req,res)=>{
 
 Router.get('/order/:id',(req,res)=>{
     let order = Order.findById(req.params.id);
-    Promise.all([order]).then(values=>{
+    let deliverers = User.find({role:{$lte:1}});
+    Promise.all([order,deliverers]).then(values=>{
         res.render('admin/ordersummary',{
-            order:values[0]
+            order:values[0],
+            deliverers:values[1]
         })
     })
 })
@@ -148,6 +154,30 @@ Router.post('/book',(req,res)=>{
             }).catch(err=>{
                 res.status(500).send({err:err});
             })
+        }
+    })
+})
+
+Router.get('/order/:orderId/assign/:userId',(req,res)=>{
+    let deliverer = User.findById(req.params.userId);
+
+    Promise.all([deliverer]).then(values=>{
+        let deliveryPerson = values[0];
+
+        if(deliveryPerson.role !== 2){
+            let delivererDetails = {
+                id:deliveryPerson._id,
+                name:deliveryPerson.name,
+                contact:deliveryPerson.contact
+            };
+            Order.findByIdAndUpdate(req.params.orderId,{
+                deliverer:delivererDetails,
+                status:2
+            }).then(result=>{
+                res.redirect('/admin/order/'+req.params.orderId)
+            })
+        }else{
+            res.redirect('/admin/order/'+req.params.orderId)
         }
     })
 })

@@ -16,20 +16,16 @@ const Coupon = require('./models/coupon')
 const adminRoutes =require('./routes/admin');
 const authRoutes =require('./routes/auth');
 const profileRoutes = require('./routes/profile');
+const deliveryRoutes = require('./routes/delivery');
+
 const secure = require('express-force-https');
 
 const app = express();
 
-const db = mongoose.connect(process.env.DB_URI,{useNewUrlParser:true},()=>{
+mongoose.connect(process.env.DB_URI,{useNewUrlParser:true},()=>{
     console.log('connected to db')
 })
 
-const COUPONS = [
-	{
-		name:'BOOKS4ALL',
-		value:0.2
-	},
-]
 
 var generator = new sequential.Generator({
 	digits: 6, letters: 3,
@@ -92,6 +88,7 @@ app.use((req,res,next)=>{
 app.use('/admin',adminRoutes);
 app.use('/auth',authRoutes);
 app.use('/profile',profileRoutes);
+app.use('/deliveries',deliveryRoutes);
 
 passport.use(new LocalStrategy(
 	{usernameField:"email", passwordField:"password"},
@@ -346,7 +343,7 @@ app.get('/cart',authCheck,(req,res)=>{
 
 app.post('/cart/verifycoupon',(req,res)=>{
 	let coupon = req.body.coupon.toUpperCase()
-	res.redirect('/cart?coupon='+coupon)
+	res.redirect('/cart?coupon='+coupon+"#place-order")
 })
 
 app.post('/cart/:id',(req,res)=>{

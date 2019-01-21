@@ -139,7 +139,12 @@ Router.get('/checkout',(req,res)=>{
 				totalAmount:total,
 				address:req.user.address.toString(),
 				date:new Date(),
-				contact:'0706496885',
+				userContact:req.user.mobile,
+				deliverer:{
+					name:'',
+					contact:''
+				},
+				coupon:values[0],
 				status:0,
 			}).save().then(newOrder=>{
 				let flagTitles = Book.updateMany(

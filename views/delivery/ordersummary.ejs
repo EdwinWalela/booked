@@ -9,33 +9,26 @@
 	<div class="order-container">
 		<div class="ordernumb">
 			<div>
-					<a href="/admin/order/revoke/<%=order._id%>">
-						<button class='float-right btn mb-2 btn-danger'>
-							REVOKE
+                    <%if(order.status === 2){%>
+					<a href="/deliveries/order/<%=order._id%>/start">
+						<button class='float-right btn mb-2 button'>
+							START
 						</button>
-					</a>
+                    </a>
+                    <%}%>
 				<h4>Order Number: <strong>#<%=order.orderNumb%></strong></h4>
 				<h4>Date: <strong><%=order.date%></strong> </h4>
 				<h4>Age: <strong><%=Math.floor((new Date() - order.date)/60000/1440)%> Day(s)</strong> </h4>
 				<h4>Address: <strong><%=order.address%></strong> </h4>
-				<h4>User Contact: <strong><%=order.userContact%></strong> </h4>
-				<%if(order.status > 1 && order.status <= 3){%>
-					<h4>Deliverer: <strong class="text-capitalize"><%=order.deliverer.name%></strong> (tel: <%=order.deliverer.contact%>) </h4>
-				<%}%>
+				<%if(order.status === 2){%>
+					<h4>Status: <strong class="text-capitalize">Pending</strong> </h4>
+				<%}else if(order.status === 10){%>
+                    <h4>Status: <strong class="text-capitalize">In-Progress</strong> </h4>
+				<%}else{%>
+                    <h4>Status: <strong class="text-capitalize">Completed</strong> </h4>
+                <%}%>
 			</div>
 			<div>
-				<%if(order.status === 0){%>
-					<a href="/admin/order/confirm/<%=order._id%>">
-						<button class='btn btn-block button mb-2'>
-							CONFIRM
-						</button>
-					</a>
-				<%}else if(order.status === 1){%>
-					<button type="button" class="btn btn-block button mb-2" data-toggle="modal" data-target="#assignOrder">
-						ASSIGN
-					</button>
-					<%-include('../partials/assignOrder',{deliverers:deliverers,order:order})%>
-				<%}%>	
 			</div>
 		</div>
 		<div class='pending-details mt-4'>
@@ -52,7 +45,15 @@
 				<%}%>
 				<h6 class="text-left">Total ( <%=order.items.length%> items )</h6>
 				<h6 class="text-right">Ksh. <%=order.totalAmount%></h6>
-			</div>
+            </div>
+            <%if(order.status === 10){%>
+                <form method="POST" action="/deliveries/order/<%=order._id%>/complete" class=" text-center">
+                    <div class="form-group">
+                        <input type="text" name="coupon" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="MPESA CODE">
+                    </div>
+                    <button type="submit" class="btn button btn-block btn-success">Complete Order</button>
+                </form>
+                <%}%>
 		</div>
 	</div>
 

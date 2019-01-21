@@ -8,9 +8,19 @@ const OrderSchema = Schema({
   totalAmount:Number,
   address:String,
   date:Date,
-  contact:String,
+  deliverer: {
+    id:{ type: String},
+    name: { type: String, trim: true },
+    contact: { type: String, trim: true }
+  },
+  userContact:String,
   status:Number,
-  deliveredDate:Date
+  deliveredDate:Date,
+  coupon:{
+    name: { type: String, trim: true },
+    value: { type: Number, trim: true },
+    status:{type: Number, trim: true }
+  }
 })
 
 const Order = mongoose.model('orders',OrderSchema);
