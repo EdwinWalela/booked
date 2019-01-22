@@ -6,7 +6,7 @@ const User = require('../models/user')
 
 const roleCheck = (req,res,next)=>{
     if(req.user.role !== 0){
-        res.redirect('/search')
+        res.redirect('/')
     }else{
         next();
     }
@@ -52,6 +52,7 @@ Router.get('/dashboard',(req,res)=>{
         res.render('admin/dashboard',{
             orders:values[0],
             filter:req.query.filter,
+            user:req.user
         });
     })
 })
@@ -77,6 +78,7 @@ Router.get('/books',(req,res)=>{
         res.render('admin/books',{
             books:values[0],
             filter:req.query.filter,
+            user:req.user
         });
     })
     
@@ -86,13 +88,16 @@ Router.get('/book/:id',(req,res)=>{
     let book = Book.findById(req.params.id);
     Promise.all([book]).then(values=>{
         res.render('admin/bookedit',{
-            book:values[0]
+            book:values[0],
+            user:req.user
         })
     })
 })
 
 Router.get('/newbook',(req,res)=>{
-    res.render('admin/newbook')
+    res.render('admin/newbook',{
+        user:req.user
+    })
 })
 
 Router.post('/bookedit/:id',(req,res)=>{
@@ -121,7 +126,8 @@ Router.get('/order/:id',(req,res)=>{
     Promise.all([order,deliverers]).then(values=>{
         res.render('admin/ordersummary',{
             order:values[0],
-            deliverers:values[1]
+            deliverers:values[1],
+            user:req.user
         })
     })
 })
@@ -228,6 +234,7 @@ Router.get('/coupons',(req,res)=>{
         res.render('admin/coupons',{
             coupons:values[0],
             filter:req.query.filter,
+            user:req.user
         });
     })
 })
@@ -236,13 +243,16 @@ Router.get('/coupon/:id',(req,res)=>{
     let coupon = Coupon.findById(req.params.id);
     Promise.all([coupon]).then(values=>{
         res.render('admin/couponedit',{
-            coupon:values[0]
+            coupon:values[0],
+            user:req.user
         })
     })
 })
 
 Router.get('/newcoupon',(req,res)=>{
-    res.render('admin/newcoupon')
+    res.render('admin/newcoupon',{
+        user:req.user
+    })
 })
 
 Router.post('/newcoupon',(req,res)=>{
@@ -297,6 +307,7 @@ Router.get('/users',(req,res)=>{
         res.render('admin/users',{
             users:values[0],
             filter:req.query.filter,
+            user:req.user
         });
     })
 })

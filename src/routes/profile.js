@@ -64,6 +64,7 @@ Router.get('/reset',(req,res)=>{
 
 //@RENDER PROFILE
 Router.get('/',authCheck,(req,res)=>{
+	let target = req.query.target;
     let relatedTitles = Book.find({available:true}).skip(15).limit(4);
     let pendingOrders = Order.find({
 			$and:[
@@ -86,7 +87,8 @@ Router.get('/',authCheck,(req,res)=>{
 			searchSuggestions:res.locals,
 			pendingOrders:values[1],
 			orderHistory:values[2],
-            successOrder:req.query.successorder
+			successOrder:req.query.successorder,
+			target:target
         });
     });
 })

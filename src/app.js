@@ -26,7 +26,6 @@ mongoose.connect(process.env.DB_URI,{useNewUrlParser:true},()=>{
     console.log('connected to db')
 })
 
-
 var generator = new sequential.Generator({
 	digits: 6, letters: 3,
 	restore: "AAA - 000"
@@ -47,10 +46,10 @@ const roleCheck = (req,res,next)=>{
 		if(req.body.redirect){
 			res.redirect('/book/'+req.body.redirect);
 		}else{
-			res.redirect('/search')
+			res.redirect('/')
 		}
 	}else if(req.user.role === 1){
-		res.redirect('/delivery/dashboard')
+		res.redirect('/deliveries/dashboard')
 	}else if(req.user.role === 0){
 		res.redirect('/admin/dashboard')
 	}

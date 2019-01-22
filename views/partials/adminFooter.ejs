@@ -2,6 +2,7 @@
 	<div class="footer">
 			<div class="container">
 					<div class="row">
+						<%if(user.role === 0){%>
 						<nav class="col-md-3 col-sm-6 col-xs-12">
 							<h3>Orders</h3>
 							<ul>
@@ -42,6 +43,7 @@
 								</li>
 							</ul>
 						</nav>
+					<%}%>
 						<nav class="col-md-3 col-sm-6 col-xs-12">
 							<h3>Deliveries</h3>
 							<ul>

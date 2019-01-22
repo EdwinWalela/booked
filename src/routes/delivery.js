@@ -27,13 +27,20 @@ Router.get('/dashboard',(req,res)=>{
 	}else if(filter === 'completed'){
 		status=3;
 	}else if(filter === 'all'){
-		status={}
+		status='all';
     }
-    let orders = Order.find({$and:[{"status":status},{"deliverer.id":req.user._id}]}).sort({_id:-1});
+    let orders;
+    if(status === 'all'){
+        orders = Order.find({"deliverer.id":req.user._id}).sort({_id:-1});
+    }else{
+        orders = Order.find({$and:[{"status":status},{"deliverer.id":req.user._id}]}).sort({_id:-1});
+    }
+   
     Promise.all([orders]).then(values=>{
         res.render('delivery/dashboard',{
             orders:values[0],
             filter:req.query.filter,
+            user:req.user
         });
     })
 })
@@ -43,6 +50,7 @@ Router.get('/order/:id',(req,res)=>{
     Promise.all([order]).then(values=>{
         res.render('delivery/ordersummary',{
             order:values[0],
+            user:req.user
         })
     })
 })

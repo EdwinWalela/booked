@@ -10,7 +10,7 @@ const UserSchema = Schema({
     password:String,
     orders:Array,
     address:[String],
-    role:Number,
+    role:Number,                                                                                                                                                                                                                                                                                               
 })
 
 const User = mongoose.model('users',UserSchema);
