@@ -18,10 +18,15 @@
 		<%if(user.role === 0){%>
 		 <a href="/admin/book/<%=book._id%>"><button class="btn btn-danger ">Edit</button></a>
 		<%}%> 	   
-	<div class="row desktop-bookcontainer">
+	<div class="container desktop-bookcontainer">
 		<div class="row">
 		<div class="col-sm">
-			<img class="mt-3 mb-3" src="https://picsum.photos/300/500/?random"/>		
+			<%if(book.gallery.length !== 0){%>
+				<%- include('partials/bkCoverSlider',{gallery:book.gallery})%>
+			<%}else{%>
+
+			<%}%>
+				
 		</div>
 		<div class="col-sm">
 			<h4 class="text-capitalize"><%=book.title%></h4>
@@ -52,33 +57,39 @@
 		</div>
 	</div>
 	</div>
-	<div class="mobile-bookcontainer">
-		<img class="mt-3 mb-3" src="https://picsum.photos/300/500/?random"/>			
-	<h4 class="text-capitalize"><%=book.title%></h4>
-	<p class="text-capitalize"><%=book.author%></p>	
-	<div class="book-price">
-		<h3>Ksh.<%=book.price%></h3>
-		<%if(user.cart.includes(book._id.toString())){%>
-			<a href="/cart"><button  class="btn view-in-cart">View in Cart</button></a>
-		<%}else{%>
-			<form id="add-cart-form" method="POST" action="/cart/<%=book._id%>">
-				<button id="add-to-cart" class="btn btn-primary">Add to Cart</button>
-			</form>
-		<%}%>  
-	</div>
-	<div class="synopsis mt-4">
-		<%book.cat.forEach(function(cat){%>
-			<span class="text-capitalize"><%=cat%> |</span>
-		<%})%>
-		<br>
-		<span>Page Count: <%=book.pages%></span>
-		<br>
-		<div class="rating" data-rate-value="<%=book.condition%>"></div>
-		<i  data-toggle="modal" data-target="#exampleModalCenter" class="fas fa-info-circle"></i>
-		<%-include('partials/modal')%>
-		<h6 class="mt-3">Synopsis</h6>
-		<p><%=book.synopsis%></p>
-	</div>
+	<div class="mobile-bookcontainer">	
+			<%if(book.gallery.length !== 0){%>
+				<%- include('partials/bkCoverSlider',{gallery:book.gallery})%>
+			<%}else{%>
+
+			<%}%>
+				
+				
+		<h4 class="text-capitalize"><%=book.title%></h4>
+		<p class="text-capitalize"><%=book.author%></p>	
+		<div class="book-price">
+			<h3>Ksh.<%=book.price%></h3>
+			<%if(user.cart.includes(book._id.toString())){%>
+				<a href="/cart"><button  class="btn view-in-cart">View in Cart</button></a>
+			<%}else{%>
+				<form id="add-cart-form" method="POST" action="/cart/<%=book._id%>">
+					<button id="add-to-cart" class="btn btn-primary">Add to Cart</button>
+				</form>
+			<%}%>  
+		</div>
+		<div class="synopsis mt-4">
+			<%book.cat.forEach(function(cat){%>
+				<span class="text-capitalize"><%=cat%> |</span>
+			<%})%>
+			<br>
+			<span>Page Count: <%=book.pages%></span>
+			<br>
+			<div class="rating" data-rate-value="<%=book.condition%>"></div>
+			<i  data-toggle="modal" data-target="#exampleModalCenter" class="fas fa-info-circle"></i>
+			<%-include('partials/modal')%>
+			<h6 class="mt-3">Synopsis</h6>
+			<p><%=book.synopsis%></p>
+		</div>
 	</div>
  </div>
 	<!-- FOOTER-->	

@@ -598,11 +598,11 @@ li{
     margin:1em 0 7em 0;
 }
 
-  
     .book-detail-head img{
-       height: 200px;
-       max-width: 200px;
-       width: 50%; 
+       height: 320px;
+       max-width: 400px;
+       margin:1em auto 3em;
+       width: 75%; 
     }
 
 .book-price{
@@ -673,9 +673,9 @@ margin: auto;
         font-size:2em;
     }
     .book-detail-head img{
-        height: 400px;
-        max-width: 320px;
-        width: 50%; 
+        height: 420px;
+        max-width: 380px;
+        width: 100%; 
      }
      .book-price h3{
         text-transform: capitalize;

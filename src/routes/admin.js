@@ -100,23 +100,9 @@ Router.get('/newbook',(req,res)=>{
     })
 })
 
-Router.post('/bookedit/:id',(req,res)=>{
-    let book = req.body;
-    Book.findByIdAndUpdate(req.params.id,
-        {
-            title:book.title,
-            author:book.author,
-            isbn:book.isbn,
-            thumb:'',
-            synopsis:book.synopsis,
-            price:book.price,
-            condition:book.condition,
-            cat:book.cat.split(' '),
-            pages:book.pages,
-            available:book.available
-        }
-    ).then(doc=>{
-        res.redirect('/admin/book/'+req.params.id);
+Router.get('/book/:id/delete',(req,res)=>{
+    Book.findByIdAndDelete(req.params.id).then(()=>{
+        res.redirect('/admin/books');
     })
 })
 
@@ -135,32 +121,6 @@ Router.get('/order/:id',(req,res)=>{
 Router.get('/order/confirm/:id',(req,res)=>{
     Order.findByIdAndUpdate(req.params.id,{status:1}).then(doc=>{
         res.redirect('/admin/dashboard');
-    })
-})
-
-Router.post('/book',(req,res)=>{
-    let book = req.body;
-    Book.findOne({isbn:book.isbn}).then(docs=>{
-        if(docs){
-			res.redirect('/admin/books')
-        }else{
-            new Book({
-                title:book.title,
-                author:book.author,
-                isbn:book.isbn,
-                thumb:'',
-                synopsis:book.synopsis,
-                price:book.price,
-                condition:book.condition,
-                cat:book.cat.split(' '),
-                pages:book.pages,
-                available:true
-            }).save().then(doc=>{
-               res.redirect('/admin/books')
-            }).catch(err=>{
-                res.status(500).send({err:err});
-            })
-        }
     })
 })
 

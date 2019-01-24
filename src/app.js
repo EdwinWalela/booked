@@ -8,6 +8,10 @@ const cookieSession = require('cookie-session');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const sequential = require("sequential-ids");
+const path = require("path");
+const multer = require("multer");
+const GridFsStorage = require("multer-gridfs-storage");
+const Grid = require("gridfs-stream");
 
 const Book = require('./models/book');
 const User =require('./models/user');
@@ -22,16 +26,34 @@ const secure = require('express-force-https');
 
 const app = express();
 
-mongoose.connect(process.env.DB_URI,{useNewUrlParser:true},()=>{
+// GRID-FS Config
+mongoose.connect(process.env.DB_URI,{ useNewUrlParser: true });
+
+// initialize gridfs
+let gfs
+mongoose.connection.once('open',()=>{
+    gfs = Grid(mongoose.connection.db,mongoose.mongo);
+    gfs.collection('bookcovers');
     console.log('connected to db')
 })
 
-var generator = new sequential.Generator({
-	digits: 6, letters: 3,
-	restore: "AAA - 000"
-  });
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, __dirname+'/public/bookcovers')
+    },
+    filename: function (req, file, cb) {
+      cb(null, req.body.isbn+'-'+Date.now()+path.extname(file.originalname))
+    }
+  })
 
-generator.start();
+const upload = multer({storage});
+
+// // var generator = new sequential.Generator({
+// // 	digits: 6, letters: 3,
+// // 	restore: "AAA - 000"
+// //   });
+
+// generator.start();
 
 const authCheck = (req,res,next)=>{
     if(req.user){
@@ -59,9 +81,10 @@ app.listen(process.env.PORT,()=>{
     console.log(`listening to requests on port ${process.env.PORT}`);
 })
 
-app.use(secure);
+//app.use(secure);
 app.set('view engine', 'ejs');
 app.use('/assets',express.static('assets'));
+app.use('/public',express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended:false}));
 app.use(cookieSession({
 	maxAge:240*60*60*1000,
@@ -161,6 +184,63 @@ app.get('/auth/facebook/callback',
 app.get('/auth/logout',(req,res)=>{
 	req.logOut();
 	res.redirect('/')
+})
+
+
+app.post('/admin/book',upload.array('gallery',3),(req,res)=>{
+	let book = req.body;
+	let bookGallery = [];
+	for(let i = 0; i < req.files.length;i++){
+		console.log(req.files[i].filename);
+		bookGallery.push(req.files[i].filename);
+	}
+    Book.findOne({isbn:book.isbn}).then(docs=>{
+        if(docs){
+			res.redirect('/admin/books')
+        }else{
+            new Book({
+                title:book.title,
+                author:book.author,
+                isbn:book.isbn,
+                synopsis:book.synopsis,
+                price:book.price,
+                condition:book.condition,
+                cat:book.cat.split(' '),
+				pages:book.pages,
+				gallery:bookGallery,
+                available:true
+            }).save().then(doc=>{
+               res.redirect('/admin/books')
+            }).catch(err=>{
+                res.status(500).send({err:err});
+            })
+        }
+    })
+})
+
+app.post('/admin/bookedit/:id',upload.array('gallery',3),(req,res)=>{
+	let book = req.body;
+	let bookGallery = [];
+	for(let i = 0; i < req.files.length;i++){
+		console.log(req.files[i].filename);
+		bookGallery.push(req.files[i].filename);
+	}
+    Book.findByIdAndUpdate(req.params.id,
+        {
+            title:book.title,
+            author:book.author,
+            isbn:book.isbn,
+            synopsis:book.synopsis,
+            price:book.price,
+            condition:book.condition,
+			cat:book.cat.split(' '),
+			gallery:bookGallery,
+            pages:book.pages,
+            available:book.available
+        }
+    ).then(doc=>{
+        res.redirect('/admin/book/'+req.params.id);
+    })
 })
 
 app.get('/',(req,res)=>{
@@ -303,7 +383,6 @@ app.get('/cat/:catname',(req,res)=>{
 })
 
 app.get('/book/:id',(req,res)=>{
-	
 	let relatedTitles = Book.find({available:true}).skip(8).limit(4);
 		Book.findById(req.params.id).then(book=>{
 			Promise.all([relatedTitles]).then(values=>{

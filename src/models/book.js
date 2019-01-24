@@ -5,7 +5,7 @@ const BookSchema = Schema({
     title:String,
     author:String,
     isbn:Number,
-    thumb:String,
+    gallery:[String],
     synopsis:String,
     price:Number,
     condition:Number,
