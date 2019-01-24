@@ -1076,6 +1076,7 @@ blockquote {
     .book-card-pending span{
         position: relative;
         float:right;
+        font-size: 0.7em;
         
     }
     .order-head h6{
@@ -1319,13 +1320,17 @@ blockquote {
 
 
 .nav-pills{
-
+    margin: 1em 0;
    text-align: center;
 }
 .nav-pills li{
-    border-right:solid 2px  rgba(0,0,0,0.2);
+    background:  rgba(0,0,0,0.1);
+    border-radius: 10px;
+    margin:auto;
+    text-align: center !important;
+    font-size: 0.9em;
     display: inline-block;
-    width:33.1%;
+    width:30%;
 }
 
 .sign-out{

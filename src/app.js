@@ -81,7 +81,7 @@ app.listen(process.env.PORT,()=>{
     console.log(`listening to requests on port ${process.env.PORT}`);
 })
 
-//app.use(secure);
+app.use(secure);
 app.set('view engine', 'ejs');
 app.use('/assets',express.static('assets'));
 app.use('/public',express.static(path.join(__dirname, 'public')));

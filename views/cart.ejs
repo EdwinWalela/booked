@@ -56,7 +56,9 @@
 					<div class="book-card" style="margin:0 !important">
 					<a href="/cart/<%=book._id%>"><i class="fas fa-times"></i></a>
 						<a href="/book/<%=book._id%>">
-							<img src="https://picsum.photos/300/500/?random"/>
+							<%if(book.gallery){%>
+								<img src="/public/bookcovers/<%=book.gallery[0]%>" alt="">
+							  <%}%>
 							<div class="book-card-div">
 								<h4><%=book.title%></h4>
 								<h6><%=book.author%></h6>
@@ -88,7 +90,7 @@
 							<%let flag = (i == 1 && part.length > 0) ? "No." : ""%>
 							<%=flag%><%=part%>
 						<%})%>.<br>
-						<a href="/profile"><span style="text-decoration: underline; color:#3066BE">Change address</span></a> 
+						<a href="/profile?target=address"><span style="text-decoration: underline; color:#3066BE">Change address</span></a> 
 					</strong>
 					</p>
 					<p style='color:rgba(0,0,0,0.5)'> <em> Delivered before:</em><br><strong><%=day%> <%=date%> <%=month%> <%=year%></strong></p>

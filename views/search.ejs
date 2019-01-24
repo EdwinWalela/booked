@@ -56,7 +56,9 @@ body{
     <%books.forEach(function(book,i){%>
       <div class="book-card">
           <a href="/book/<%=book._id%>">
-            <img src="https://picsum.photos/300/500/?image=<%=i*11%>"/>
+            <%if(book.gallery){%>
+              <img src="/public/bookcovers/<%=book.gallery[0]%>" alt="">
+            <%}%>
             <div class='book-card-div'>
               <h4><%=book.title%></h4>
               <h6><%=book.author%></h6>

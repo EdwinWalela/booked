@@ -7,7 +7,9 @@
           <div class="carousel-item">
         <%}%>
             <div class="latest-title">
-                <img src="https://picsum.photos/300/500/?image=<%=i*15%>" alt="">
+                <%if(book.gallery){%>
+                  <img src="/public/bookcovers/<%=book.gallery[0]%>" alt="">
+                <%}%>
                 <div>
                   <h4><%=book.title%></h4>
                   <h6><%=book.author%></h6>
