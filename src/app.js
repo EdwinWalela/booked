@@ -82,7 +82,7 @@ app.listen(config.PORT,()=>{
     console.log(`listening to requests on port ${config.PORT}`);
 })
 
-app.use(secure);
+// /app.use(secure);
 app.set('view engine', 'ejs');
 app.use('/assets',express.static('assets'));
 app.use('/public',express.static(path.join(__dirname, 'public')));
