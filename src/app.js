@@ -12,6 +12,7 @@ const path = require("path");
 const multer = require("multer");
 const GridFsStorage = require("multer-gridfs-storage");
 const Grid = require("gridfs-stream");
+const config = require("./config");
 
 const Book = require('./models/book');
 const User =require('./models/user');
@@ -27,7 +28,7 @@ const secure = require('express-force-https');
 const app = express();
 
 // GRID-FS Config
-mongoose.connect(process.env.DB_URI,{ useNewUrlParser: true });
+mongoose.connect(config.DB_URI,{ useNewUrlParser: true });
 
 // initialize gridfs
 let gfs
@@ -77,8 +78,8 @@ const roleCheck = (req,res,next)=>{
 	}
 }
 
-app.listen(process.env.PORT,()=>{
-    console.log(`listening to requests on port ${process.env.PORT}`);
+app.listen(config.PORT,()=>{
+    console.log(`listening to requests on port ${config.PORT}`);
 })
 
 app.use(secure);
@@ -134,8 +135,8 @@ passport.use(new LocalStrategy(
 	))
 
 passport.use(new FacebookStrategy({
-	clientID: process.env.FB_APP_ID,
-	clientSecret: process.env.FB_APP_SECRET,
+	clientID: config.FB_APP_ID,
+	clientSecret: config.FB_APP_SECRET,
 	callbackURL: "https://boooked.herokuapp.com/auth/facebook/callback"
 	},
 	function(accessToken, refreshToken, profile, done) {
