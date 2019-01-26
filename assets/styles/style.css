@@ -58,8 +58,8 @@ li{
 .search-bar{
     text-align: center;
     width:100%;
-    height: 200px;
-    line-height: 170px;
+    height: 100px;
+    line-height: 100px;
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
@@ -213,8 +213,8 @@ li{
     border-radius: 20px;
     padding:8px;
     border:solid 2px;
-    background:#3066BE;
-    color:#fff;
+    color:#3066BE;
+    background:#fff;
     font-size:1.2em;
     letter-spacing: 1.5px;
 }
@@ -227,8 +227,8 @@ li{
     border-radius: 20px;
     padding:8px;
     border:solid 2px;
-    color:#3066BE;
-    background:#fff;
+    background:#3066BE;
+    color:#fff;
     font-size:1.18em;
     letter-spacing: 1.5px;
 }
@@ -835,14 +835,14 @@ margin: auto;
     padding:5px;
     height: 15rem;
     width: 90%;
-    margin: 1em 5%;
+    margin: 0em 5%;
 }
 @media screen and (min-width:700px){
     .quote-slide{
         padding:5px;
         height: 15rem;
         width: 60%;
-        margin: 1em 20%;
+        margin: 0em 20%;
     }
 }
 
@@ -851,7 +851,7 @@ blockquote {
     height: 100%;
     text-align: center;
     width:100%;
-    padding: 2em 0;
+    padding: 1em 0;
     position: relative;
     font-size: 1.1em;
     border-bottom: 0;
@@ -922,7 +922,7 @@ blockquote {
 }
 
 .latest-title{
-    margin-top: 3rem;
+    margin-top:2rem;
     height:10rem;
 }
 .latest-title div{
@@ -978,6 +978,7 @@ blockquote {
 
 
 .latest-title span{
+    transition: all ease-out .4s;
     display: block;
     text-transform: capitalize;
     text-align: center;
@@ -986,11 +987,19 @@ blockquote {
     max-width: 250px;
     font-size: 1em;
     padding:10px 10px;
+    border:solid 2px;
     border-radius: 20px;
     transition: all linear .2s;
     background: #3066BE;
     color:#fff;
+    
 }
+
+.latest-title span:hover{
+    color: #3066BE;
+    background:#fff;
+}
+
 
 .login-header{
     margin: 1.5em 0 0 0;
@@ -1372,6 +1381,34 @@ blockquote {
     }
 }
 
+.landing-slider{
+    background: #2E3436;
+    color:#fff;
+    margin: 1em 0;
+    height: 150px;
+    line-height: 200px;
+    overflow: hidden;
+}
+
+.landing-seg{
+    height: 100%;
+    padding-top:20px;
+}
+
+.landing-seg h1{
+    font-family: 'Cabin Sketch', cursive;
+}
+
+@media screen and (max-width:700px){
+    .landing-seg h1{
+        font-size: 1.4em;
+    }
+}
+
+.author-list-border{
+    width: 30%;
+    border-top:solid #3066BE 3px !important;
+}
 
 /*---------ADMIN---------*/
 .admin-logo{

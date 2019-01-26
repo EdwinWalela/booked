@@ -12,7 +12,9 @@ const path = require("path");
 const multer = require("multer");
 const GridFsStorage = require("multer-gridfs-storage");
 const Grid = require("gridfs-stream");
+const tinify = require("tinify");
 const config = require("./config");
+tinify.key = config.TINIFYKEY;
 
 const Book = require('./models/book');
 const User =require('./models/user');
@@ -49,12 +51,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage});
 
-// // var generator = new sequential.Generator({
-// // 	digits: 6, letters: 3,
-// // 	restore: "AAA - 000"
-// //   });
-
+{
+// var generator = new sequential.Generator({
+// 	digits: 6, letters: 3,
+// 	restore: "AAA - 000"
+//   });
 // generator.start();
+}
 
 const authCheck = (req,res,next)=>{
     if(req.user){
@@ -89,7 +92,7 @@ app.use('/public',express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended:false}));
 app.use(cookieSession({
 	maxAge:240*60*60*1000,
-	keys:['34*19/:"}{810_']
+	keys:['34*1 9/:" }{ 810_']
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -170,6 +173,7 @@ passport.deserializeUser(function(id,done){
 	})
 })
 
+//---- PASSPORT AUTH ROUTES -----//
 app.post('/auth/login',passport.authenticate('local',
 {
 	failureRedirect:'/auth/login?fail=true',
@@ -187,7 +191,9 @@ app.get('/auth/logout',(req,res)=>{
 	res.redirect('/')
 })
 
+//-------  --------//
 
+//@ADMIN NEWBOOK
 app.post('/admin/book',upload.array('gallery',3),(req,res)=>{
 	let book = req.body;
 	let bookGallery = [];
@@ -219,13 +225,14 @@ app.post('/admin/book',upload.array('gallery',3),(req,res)=>{
     })
 })
 
+//@ADMIN EDITBOOK
 app.post('/admin/bookedit/:id',upload.array('gallery',3),(req,res)=>{
 	let book = req.body;
 	let bookGallery = [];
 	for(let i = 0; i < req.files.length;i++){
-		console.log(req.files[i].filename);
 		bookGallery.push(req.files[i].filename);
 	}
+
     Book.findByIdAndUpdate(req.params.id,
         {
             title:book.title,
@@ -240,9 +247,19 @@ app.post('/admin/bookedit/:id',upload.array('gallery',3),(req,res)=>{
             available:book.available
         }
     ).then(doc=>{
-        res.redirect('/admin/book/'+req.params.id);
+		res.redirect('/admin/book/'+req.params.id);
+		req.files.forEach(file=>{
+			const source = tinify.fromFile("./src/public/bookcovers/"+file.filename)
+			.toFile("./src/public/bookcovers/"+file.filename,(err=>{
+				if(err){console.log(err)};search
+				console.log(file.filename+" - compressed")
+				
+			}))
+		})
     })
 })
+
+// ----- INDEX ROUTES  -------//
 
 app.get('/',(req,res)=>{
 	let relatedTitles = Book.find({available:true}).skip(13).limit(4);
