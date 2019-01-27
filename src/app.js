@@ -194,7 +194,7 @@ app.get('/auth/logout',(req,res)=>{
 //-------  --------//
 
 //@ADMIN NEWBOOK
-app.post('/admin/book',upload.array('gallery',3),(req,res)=>{
+app.post('/admin/book',upload.array('gallery',4),(req,res)=>{
 	let book = req.body;
 	let bookGallery = [];
 	for(let i = 0; i < req.files.length;i++){
@@ -251,9 +251,8 @@ app.post('/admin/bookedit/:id',upload.array('gallery',3),(req,res)=>{
 		req.files.forEach(file=>{
 			const source = tinify.fromFile("./src/public/bookcovers/"+file.filename)
 			.toFile("./src/public/bookcovers/"+file.filename,(err=>{
-				if(err){console.log(err)};search
+				if(err){console.log(err)};
 				console.log(file.filename+" - compressed")
-				
 			}))
 		})
     })
@@ -309,7 +308,7 @@ app.get('/',(req,res)=>{
 app.get('/search',(req,res)=>{
 	let relatedTitles = Book.find({available:true}).skip(7).limit(4);
 	let filter = req.query.filter;
-	let sort = {};
+	let sort = {_id:-1};
 
 	if(filter === 'price (lowest)'){
 		sort = {
