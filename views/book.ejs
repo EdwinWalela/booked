@@ -31,6 +31,7 @@
 		<div class="col-sm">
 			<h4 class="text-capitalize"><%=book.title%></h4>
 			<p class="text-capitalize"><%=book.author%></p>	
+			<hr class="ml-4 mr-4">
 			<div class="book-price">
 				<h3>Ksh.<%=book.price%></h3>
 				<%if(user.cart.includes(book._id.toString())){%>
@@ -51,7 +52,9 @@
 				<div class="rating" data-rate-value="<%=book.condition%>"></div>
 				<i  data-toggle="modal" data-target="#exampleModalCenter" class="fas fa-info-circle"></i>
 				<%-include('partials/modal')%>
+				<hr class="">
 				<h6 class="mt-3">Synopsis</h6>
+				
 				<p><%=book.synopsis%></p>
 			</div>
 		</div>
