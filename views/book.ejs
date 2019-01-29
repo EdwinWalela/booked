@@ -22,7 +22,7 @@
 		<div class="row">
 		<div class="col-sm">
 			<%if(book.gallery.length !== 0){%>
-				<%- include('partials/bkCoverSlider',{gallery:book.gallery})%>
+				<%- include('partials/bkCoverSlider',{gallery:book.gallery,id:0})%>
 			<%}else{%>
 
 			<%}%>
@@ -54,7 +54,7 @@
 				<%-include('partials/modal')%>
 				<hr class="">
 				<h6 class="mt-3">Synopsis</h6>
-				
+
 				<p><%=book.synopsis%></p>
 			</div>
 		</div>
@@ -62,7 +62,7 @@
 	</div>
 	<div class="mobile-bookcontainer">	
 			<%if(book.gallery.length !== 0){%>
-				<%- include('partials/bkCoverSlider',{gallery:book.gallery})%>
+				<%- include('partials/bkCoverSlider',{gallery:book.gallery,id:1})%>
 			<%}else{%>
 
 			<%}%>
@@ -82,7 +82,7 @@
 		</div>
 		<div class="synopsis mt-4">
 			<%book.cat.forEach(function(cat){%>
-				<span class="text-capitalize"><%=cat%> |</span>
+				<span class="text-capitalize"><%=cat%> </span>
 			<%})%>
 			<br>
 			<span>Page Count: <%=book.pages%></span>
@@ -91,6 +91,7 @@
 			<i  data-toggle="modal" data-target="#exampleModalCenter" class="fas fa-info-circle"></i>
 			<%-include('partials/modal')%>
 			<h6 class="mt-3">Synopsis</h6>
+			<hr class="mr-5">
 			<p><%=book.synopsis%></p>
 		</div>
 	</div>

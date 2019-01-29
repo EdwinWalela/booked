@@ -1,5 +1,5 @@
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner latest-slider">
+<div id="carouselExampleIndicator" class="carousel slide" data-ride="carousel"> 
+  <div class="carousel-inner latest-slider">
       <%titles.forEach(function(book,i){%>
         <%if(i == 0){%>
           <div class="carousel-item active">
@@ -14,13 +14,30 @@
                   <h4><%=book.title%></h4>
                   <h6><%=book.author%></h6>
                   <p><%book.cat.forEach(function(category){%>
-                    <%=category%> |
+                    <%=category%>|
                   <%})%>
                   </p>
-                  <a href="/book/<%=book._id%>"><span>view</span></a> 
+                  <a class="mt-1" href="/book/<%=book._id%>"><span>view</span></a> 
                 </div>
             </div>
-      </div>
+          </div>
       <%})%>
     </div>
+    <br><br>
+    <ol class="carousel-indicators landingSlide-indicators">
+      <li data-target="#carouselExampleIndicator" data-slide-to="0" class="active"></li>
+      <%titles.forEach(function(book,i){%>
+        <%if(i !== 0){%>
+        <li data-target="#carouselExampleIndicator" data-slide-to="<%=i%>"></li>
+          <%}%>
+      <%})%>
+    </ol> 
+    <a class="carousel-control-prev" href="#carouselExampleIndicator" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicator" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
   </div>
