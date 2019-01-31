@@ -5,13 +5,13 @@
 </head>
 <body>
 	<div class="text-center login-header">
-		<%let hour = new Date().getHours()%>
+		<%let hour = null%>
 		<%if(hour > 3 && hour < 12){%>
 			<h1>Good Morning.</h1>
 		<%} else if(hour > 12 && hour < 16){%>
 			<h1>Good Afternoon.</h1>
 		<%}else{%>
-			<h1>Good Evening.</h1>
+			<h1>Hello.</h1>
 		<%}%>
 		<p>Please login to continue using <strong><a href="/"><em>book<span style="color:#FFC857; border-bottom:solid 2px">tap</span></em></strong></a>.</p>
 	</div>
