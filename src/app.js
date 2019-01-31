@@ -85,7 +85,7 @@ app.listen(config.PORT,()=>{
     console.log(`listening to requests on port ${config.PORT}`);
 })
 
-// /app.use(secure);
+app.use(secure);
 app.set('view engine', 'ejs');
 app.use('/assets',express.static('assets'));
 app.use('/public',express.static(path.join(__dirname, 'public')));
@@ -140,7 +140,7 @@ passport.use(new LocalStrategy(
 passport.use(new FacebookStrategy({
 	clientID: config.FB_APP_ID,
 	clientSecret: config.FB_APP_SECRET,
-	callbackURL: "https://boooked.herokuapp.com/auth/facebook/callback"
+	callbackURL: "https://booktap.co.ke/auth/facebook/callback"
 	},
 	function(accessToken, refreshToken, profile, done) {
 		User.findOne({fbID:profile.id}).then(user=>{
