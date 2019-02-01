@@ -89,7 +89,7 @@ app.listen(config.PORT,()=>{
 app.set('view engine', 'ejs');
 
 app.use('/assets',express.static('assets'));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public',express.static(path.join(__dirname, 'public')));
 
 app.use(express.urlencoded({extended:false}));
 app.use(cookieSession({
