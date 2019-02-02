@@ -183,7 +183,7 @@ app.post('/auth/login',passport.authenticate('local',
 app.get('/auth/facebook',passport.authenticate('facebook'));
 
 app.get('/auth/facebook/callback',
-	passport.authenticate('facebook',{failureRedirect:'auth/login?fail=true'}),roleCheck)
+	passport.authenticate('facebook',{failureRedirect:'/auth/login?fail=true'}),roleCheck)
 
 app.get('/auth/logout',(req,res)=>{
 	req.logOut();
@@ -259,13 +259,7 @@ app.post('/admin/bookedit/:id',upload.array('gallery',3),(req,res)=>{
 
 // ----- INDEX ROUTES  -------//
 
-const noCache = function noCache(req, res, next) {
-	res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-	res.header('Expires', '-1');
-	res.header('Pragma', 'no-cache');
-	next();
-  }
-app.get('/',noCache,(req,res)=>{
+app.get('/',(req,res)=>{
 	let relatedTitles = Book.find({available:true}).skip(13).limit(4);
 	let romance = Book.find({$and:[
 		{cat:'romance'},
