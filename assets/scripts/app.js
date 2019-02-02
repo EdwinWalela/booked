@@ -1,3 +1,4 @@
+
 let dangerAlert = $('.alert-danger').addClass('d-none');
 $('document').ready(function(){
     let searchbar = $('#nav-form');
