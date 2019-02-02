@@ -259,7 +259,13 @@ app.post('/admin/bookedit/:id',upload.array('gallery',3),(req,res)=>{
 
 // ----- INDEX ROUTES  -------//
 
-app.get('/',(req,res)=>{
+const noCache = function noCache(req, res, next) {
+	res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+	res.header('Expires', '-1');
+	res.header('Pragma', 'no-cache');
+	next();
+  }
+app.get('/',noCache,(req,res)=>{
 	let relatedTitles = Book.find({available:true}).skip(13).limit(4);
 	let romance = Book.find({$and:[
 		{cat:'romance'},
