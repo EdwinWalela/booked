@@ -10,7 +10,6 @@ const noCache = function noCache(req, res, next) {
 	next();
   }
 
-
 Router.get('/login',noCache,(req,res)=>{
     res.render('auth/login',{fail:req.query.fail,newAcc:req.query.new,bookredirect:req.query.bookredirect});
 })
