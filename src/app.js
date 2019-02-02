@@ -108,7 +108,7 @@ app.use((req,res,next)=>{
 	}
 	Book.find({
 		available:true
-	}).limit(6).sort({condition:sort}).then(titles=>{
+	}).limit(4).sort({condition:sort}).then(titles=>{
 		res.locals = titles;
 		next();
 	})

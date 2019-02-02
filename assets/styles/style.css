@@ -1496,9 +1496,8 @@ blockquote {
     margin: auto;
 }
 
-
-
 .table, th, td {
+    font-size: 0.85em;
     border: 1px solid black;
     text-align: center;
   }

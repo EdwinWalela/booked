@@ -150,15 +150,15 @@ Router.get('/checkout',(req,res)=>{
 				coupon:values[0],
 				status:0,
 			}).save().then(newOrder=>{
-				let flagTitles = Book.updateMany(
-						{'_id': { $in: req.user.cart}},
-						{available:false}
-				)
+				// let flagTitles = Book.updateMany(
+				// 		{'_id': { $in: req.user.cart}},
+				// 		{available:false}
+				// )
 				let emptyCart = User.update(
 					{ _id: req.user._id }, 
 					{ $set: { cart: [] }}
 				)
-				Promise.all([flagTitles,emptyCart]).then(values=>{
+				Promise.all([emptyCart]).then(values=>{
 					res.redirect('/profile?successorder=true')
 				})
 			});
