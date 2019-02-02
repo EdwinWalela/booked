@@ -14,9 +14,6 @@
 					<h4 id='new-reader'>Welcome back!</h4>
 					<div id="form-desc"></div>		
 					<form  method='POST' action='/auth/login' class="login-form">
-					<%if(bookredirect){%>
-						<input type="text" name="redirect" value="<%=bookredirect%>" style="display:none;">
-					<%}%>
 						<%if(fail){%>
 							<div id="login-fail" class=" text-center alert alert-danger" role="alert">
 								Incorrect login details
@@ -81,9 +78,7 @@
 		<div class="tab-content" id="pills-tabContent">
 			<div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="pills-home-tab">
 				<form  method='POST' action='/auth/login' class="login-form">
-					<%if(bookredirect){%>
-						<input type="text" name="redirect" value="<%=bookredirect%>" style="display:none;">
-					<%}%>
+
 					<%if(fail){%>
 						<div id="login-fail" class=" text-center alert alert-danger" role="alert">
 							Incorrect login details

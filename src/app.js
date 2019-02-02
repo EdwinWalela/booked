@@ -69,11 +69,11 @@ const authCheck = (req,res,next)=>{
 
 const roleCheck = (req,res,next)=>{
 	if(req.user.role == 2){
-		if(req.body.redirect){
-			res.redirect('/book/'+req.body.redirect);
-		}else{
+		// if(res.locals.bookredirect){
+		// 	res.redirect('/book/'+req.body.redirect);
+		// }else{
 			res.redirect('/')
-		}
+		// }
 	}else if(req.user.role === 1){
 		res.redirect('/deliveries/dashboard')
 	}else if(req.user.role === 0){
@@ -453,8 +453,7 @@ app.post('/cart/:id',(req,res)=>{
 			}
 		})
 	}else{
-		console.log('redirecting')
-		res.redirect('/auth/login?bookredirect='+req.params.id)
+		res.redirect('/auth/login')
 	}
 })
 
