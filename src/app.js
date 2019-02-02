@@ -179,13 +179,8 @@ app.post('/auth/login',passport.authenticate('local',
 	failureFlash:false
 }),roleCheck);
 
-const noCache = function noCache(req, res, next) {
-	res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-	res.header('Expires', '-1');
-	res.header('Pragma', 'no-cache');
-	next();
-  }
-app.get('/auth/facebook',noCache,passport.authenticate('facebook'));
+
+app.get('/auth/facebook',passport.authenticate('facebook'));
 
 app.get('/auth/facebook/callback',
 	passport.authenticate('facebook',{failureRedirect:'auth/login?fail=true'}),roleCheck)
