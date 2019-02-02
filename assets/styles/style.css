@@ -1373,13 +1373,13 @@ blockquote {
    text-align: center;
 }
 .nav-pills li{
-    background: rgba(0,0,0,0.04);
     margin:auto;
     text-align: center !important;
     font-size: 0.9em;
     display: inline-block;
     width:30%;
 }
+
 
 .sign-out{
     font-size: 1.2em;
