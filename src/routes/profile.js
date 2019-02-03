@@ -123,7 +123,9 @@ Router.get('/checkout',(req,res)=>{
 			let price = 0;
 			let delivery = 0;
 			let serviceFee = 0;
-			let discount = values[0].value || 0;
+			let discount;
+			if(values[0]){discount = values[0].value;}else{discount = 0}
+			
 			console.log(discount);
 			titles.forEach(title=>{
 				price+=Number(title.price)
