@@ -63,6 +63,7 @@ const authCheck = (req,res,next)=>{
     if(req.user){
         next();
     }else{
+		req.session.returnTo = req.params.id; 
         res.redirect('/auth/login')
     }
 }
@@ -124,7 +125,6 @@ passport.use(new LocalStrategy(
 				return done(null,false,{message:'Unknown User'})
 			}else{
 				bcrypt.compare(password,user.password).then(function(res){
-					console.log(res)
 						if(res){
 							return done(null,user)
 						}else{
@@ -177,7 +177,14 @@ app.post('/auth/login',passport.authenticate('local',
 {
 	failureRedirect:'/auth/login?fail=true',
 	failureFlash:false
-}),roleCheck);
+}),authCheck,(req,res)=>{
+	if(req.session.returnTo){
+		res.redirect('/book/'+req.session.returnTo);
+	}else{
+		res.redirect('/')
+	}
+    delete req.session.returnTo;
+});
 
 
 app.get('/auth/facebook',passport.authenticate('facebook'));
@@ -197,7 +204,6 @@ app.post('/admin/book',upload.array('gallery',4),(req,res)=>{
 	let book = req.body;
 	let bookGallery = [];
 	for(let i = 0; i < req.files.length;i++){
-		console.log(req.files[i].filename);
 		bookGallery.push(req.files[i].filename);
 	}
     Book.findOne({isbn:book.isbn}).then(docs=>{
@@ -422,7 +428,6 @@ app.get('/cart',authCheck,(req,res)=>{
 			'_id': { $in: req.user.cart || null}
 		}).then(books=>{
 			Promise.all([relatedTitles,coupon]).then(values=>{
-				console.log(values[1])
 				res.render('cart',{
 					books:books,
 					user:req.user,
@@ -440,7 +445,7 @@ app.post('/cart/verifycoupon',(req,res)=>{
 	res.redirect('/cart?coupon='+coupon+"#place-order")
 })
 
-app.post('/cart/:id',(req,res)=>{
+app.post('/cart/:id',(req,res,next)=>{
 	if(typeof req.user !== "undefined"){
 		User.findById(req.user._id).then(user=>{
 			if(!user.cart.includes(req.params.id)){
@@ -453,7 +458,7 @@ app.post('/cart/:id',(req,res)=>{
 			}
 		})
 	}else{
-		res.redirect('/auth/login')
+		authCheck(req,res,next);
 	}
 })
 
