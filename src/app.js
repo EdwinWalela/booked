@@ -276,7 +276,7 @@ app.get('/',(req,res)=>{
 		{available:true}
 	]}).count();
 	let motivational =  Book.find({$and:[
-		{cat:'motivational'},
+		{cat:'motivation'},
 		{available:true}
 	]}).count();
 	let crime =  Book.find({$and:[
