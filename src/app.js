@@ -217,7 +217,7 @@ app.post('/admin/book',upload.array('gallery',4),(req,res)=>{
                 synopsis:book.synopsis,
                 price:book.price,
                 condition:book.condition,
-                cat:book.cat.split(' '),
+                cat:book.cat.split(','),
 				pages:book.pages,
 				gallery:bookGallery,
                 available:true
