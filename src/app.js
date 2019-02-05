@@ -15,6 +15,8 @@ const Grid = require("gridfs-stream");
 const tinify = require("tinify");
 const config = require("./config");
 tinify.key = config.TINIFYKEY;
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(config.MAILERKEY);
 
 const Book = require('./models/book');
 const User =require('./models/user');
@@ -25,7 +27,6 @@ const authRoutes =require('./routes/auth');
 const profileRoutes = require('./routes/profile');
 const deliveryRoutes = require('./routes/delivery');
 
-const secure = require('express-force-https');
 
 const app = express();
 
@@ -116,6 +117,9 @@ app.use('/auth',authRoutes);
 app.use('/profile',profileRoutes);
 app.use('/deliveries',deliveryRoutes);
 
+
+  
+
 passport.use(new LocalStrategy(
 	{usernameField:"email", passwordField:"password"},
 	function(email,password,done){
@@ -186,7 +190,6 @@ app.post('/auth/login',passport.authenticate('local',
     delete req.session.returnTo;
 });
 
-
 app.get('/auth/facebook',passport.authenticate('facebook'));
 
 app.get('/auth/facebook/callback',
@@ -195,6 +198,16 @@ app.get('/auth/facebook/callback',
 app.get('/auth/logout',(req,res)=>{
 	req.logOut();
 	res.redirect('/')
+})
+
+app.post('/auth/resetpassword',(req,res)=>{
+	User.findById(req.body.id).then(user=>{
+		bcrypt.hash(req.body.password, 10).then(function(hash) {
+			User.findByIdAndUpdate(req.body.id,{password:hash}).then(doc=>{
+				res.redirect('/auth/login?reset=true');
+			})
+		});
+    })
 })
 
 //-------  --------//
@@ -222,7 +235,14 @@ app.post('/admin/book',upload.array('gallery',4),(req,res)=>{
 				gallery:bookGallery,
                 available:true
             }).save().then(doc=>{
-               res.redirect('/admin/books')
+			   res.redirect('/admin/books');
+			   req.files.forEach(file=>{
+				const source = tinify.fromFile("./src/public/bookcovers/"+file.filename)
+				.toFile("./src/public/bookcovers/"+file.filename,(err=>{
+					if(err){console.log(err)};
+					console.log(file.filename+" - compressed")
+				}))
+			})
             }).catch(err=>{
                 res.status(500).send({err:err});
             })
@@ -261,6 +281,44 @@ app.post('/admin/bookedit/:id',upload.array('gallery',3),(req,res)=>{
 			}))
 		})
     })
+})
+
+//@PASS-RESET
+app.post('/auth/verifyaccount',(req,res)=>{
+	const msg = {
+		to: '',
+		from: 'booktapinfo@gmail.com',
+		subject: 'Password Reset',
+		text: '',
+		html: '',
+	  };
+	  let findUser = User.findOne({email:req.body.email});
+	  Promise.all([findUser]).then(user=>{
+		  if(user){
+			let msg = {
+				to: user[0].email,
+				from: 'booktapinfo@gmail.com',
+				subject: 'Password Reset',
+				html: `
+					<div style="margin:4em auto;font-family:sans-serif;text-align: center;">
+						<h1>Password Reset</h1>
+						<p>Did you request a password reset?</p>
+						<a href="https://booktap.co.ke/auth/resetpassword?token=2bZASs910SLK21KAp3Ss91ZA2bZASs910SLK21KAp3Ss910SLK21KAp3&userID=${user[0]._id}"><button style="border:none; font-size:1.2em;padding:10px;background:#3066BE;color:#ffffff">Reset Password</button></a>
+						<p>If you did not request for a password reset, just ignore this email.</p>
+					</div>
+				`,
+			  };
+			  sgMail.send(msg).then(mail=>{
+				  console.log('email sent successfuly;')
+			  }).catch(err=>{
+				  console.log('email not sent',err);
+			  });
+			res.redirect('/auth/verifyaccount?account=true');
+		  }else{
+			  res.redirect('/auth/verifyaccount?account=false');
+		  }
+	  })
+	
 })
 
 // ----- INDEX ROUTES  -------//

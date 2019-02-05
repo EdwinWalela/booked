@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 Router.get('/login',(req,res)=>{
-    res.render('auth/login',{fail:req.query.fail,newAcc:req.query.new});
+    res.render('auth/login',{fail:req.query.fail,newAcc:req.query.new,reset:req.query.reset});
 })
 
 Router.post('/register',(req,res)=>{
@@ -26,6 +26,13 @@ Router.post('/register',(req,res)=>{
     })
 })
 
+Router.get('/verifyaccount',(req,res)=>{
+    res.render('auth/verifyaccount',{account:req.query.account});
+})
+Router.get('/resetpassword',(req,res)=>{
+    res.render('auth/resetpassword',{userID:req.query.userID});
+    console.log(req.query.userID)
+})
 
 
 module.exports = Router;

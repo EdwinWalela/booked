@@ -590,6 +590,20 @@ li{
         bottom:10px;
     }
 
+.password-reset{
+    width: 90%;
+    max-width: 400px;
+    margin:6em auto 1em auto;
+}
+
+.password-reset input{
+    display: block;
+    letter-spacing: 1px;
+    width: 100%;
+    font-size: 1.2em;
+    padding:10px;
+    text-align: center;
+}
 
 .load-more{
     margin: 2em auto;
