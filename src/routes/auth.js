@@ -16,7 +16,7 @@ Router.post('/register',(req,res)=>{
                     name:req.body.name,
                     email:req.body.email,
                     password:hash,
-                    mobile:req.body.mobile,
+                    mobile:'',
                     address:req.body.address,
                     role:2
                 }).save().then(newUser=>{
