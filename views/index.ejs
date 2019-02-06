@@ -43,7 +43,16 @@
 	</div>
 	
 	<%- include('partials/landingSlider',{})%>
-
+	<div class="text-center mb-3 steps-icons">
+		<span ><i class="fas fa-search"></i></span>
+		<span ><i class="fas fa-cart-plus"></i></span>
+		<span ><i class="fas fa-truck"></i></span>
+	</div>
+	<%if(user){%>
+		<a href="/search"><p class="landing-desc text-center mb-2">Get Started</p></a>
+	<%}else{%>
+		<a href="/auth/login"><p class="landing-desc text-center mb-2">Get Started</p></a>
+	<%}%>
 	<!-- Category Grid -->
 	<div class="container quote-grid">
 		<div class="row">
@@ -98,22 +107,6 @@
 		  </div>
 		</div>
 	</div>
-	
-		<p class="mt-4 text-center text-capitalize steps-landing">
-			3 simple steps
-		</p>
-		<div class="text-center mb-3 steps-icons">
-			<span ><i class="fas fa-search"></i></span>
-			<span ><i class="fas fa-cart-plus"></i></span>
-			<span ><i class="fas fa-truck"></i></span>
-		</div>
-		<%if(user){%>
-			<a href="/search"><p class="landing-desc text-center mb-4">Get Started</p></a>
-		<%}else{%>
-			<a href="/auth/login"><p class="landing-desc text-center mb-4">Get Started</p></a>
-		<%}%>
-		
-		
 	<%- include('partials/landingQuoteSlider',{})%>
 	<!-- FOOTER-->	
 	<%- include('partials/footer',{titles:relatedTitles});%>

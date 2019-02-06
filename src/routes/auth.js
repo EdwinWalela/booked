@@ -8,6 +8,7 @@ Router.get('/login',(req,res)=>{
 })
 
 Router.post('/register',(req,res)=>{
+    
     User.findOne({email:req.body.email}).then(user=>{
         if(!user){
             bcrypt.hash(req.body.password, saltRounds).then(function(hash) {
