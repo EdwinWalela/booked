@@ -975,6 +975,95 @@ blockquote {
     max-width: 180px;
     width:95%;
 }
+
+.loginCTA{
+    background: #3066BE;
+    color: #fff;
+    border: none;
+}
+
+.loginCTA img{
+}
+
+.loginCTA button{
+    font-size: 1.2em;
+}
+.loginCTA-footer{
+    background: #fff;
+}
+.loginCTA-footer a{
+    width:100%;
+}
+
+.loginCTA-header{
+    border: none;
+    text-align: center;
+    color: #2E3436;
+    background: #FFC857;
+}
+.loginCTA-header h3{
+    width: 100%;
+}
+.coupon-name{
+    margin: 0.5em auto;
+    width: 60%;
+    padding: 10px;
+    background: #fff;
+    color:#F7931D;
+}
+#clockdiv{
+	font-family: sans-serif;
+	color: #fff;
+	display: inline-block;
+	text-align: center;
+    font-size: 1.2em;
+    width: 100%;
+}
+
+#clockdiv > div{
+	padding: 10px;
+    border-radius: 3px;
+    color:#222728;
+	background: #fff;
+	display: inline-block;
+}
+
+#clockdiv div > span{
+	padding: 10px;
+	border-radius: 3px;
+	color:#222728;
+	background: #fff;
+	display: inline-block;
+}
+
+.smalltext{
+	padding-top: 5px;
+}
+
+@media screen and (max-width:850px){
+    #clockdiv > div{
+        width:20%;
+        padding: 10px;
+        border-radius: 3px;
+        color:#222728;
+        background: #fff;
+        display: inline-block;
+    }
+    
+    .smalltext{
+        padding-top: 5px;
+        font-size: 0.7em;
+    }
+    .coupon-name{
+        margin: 0.5em auto;
+        width: 60%;
+        padding: 10px;
+        font-size: 1.2em;
+        background: #fff;
+        color:#F7931D;
+    }
+    
+}
 @media screen and (min-width:800px){
     .arr-titles{
         border-right: solid 3px #3066BE;
