@@ -88,7 +88,7 @@ $('document').ready(function(){
 
     setTimeout(function(){
         $('#loginCTA').modal();
-    },9000)
+    },11000)
 
 
     function getTimeRemaining(endtime) {
@@ -131,4 +131,8 @@ $('document').ready(function(){
       var deadline = new Date(Date.parse(new Date(1549564958000)) + 6 * 24 * 60 * 60 * 1000);
 
       initializeClock('clockdiv', deadline);
-})
+      
+      //top picks slider
+    })
+
+

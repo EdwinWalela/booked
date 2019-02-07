@@ -227,11 +227,11 @@ li{
     max-width: 300px;
     border-radius: 20px;
     padding:8px;
-    border:solid 2px;
-    color:#3066BE;
-    background:#fff;
+    background:#3066BE;
+    color:#fff;
     font-size:1.2em;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.5px; 
+    animation: landingCTAshake .5s linear 4s forwards;
 }
 
 .landing-desc:hover{
@@ -242,11 +242,23 @@ li{
     border-radius: 20px;
     padding:8px;
     border:solid 2px;
-    background:#3066BE;
-    color:#fff;
+    color:#3066BE;
+    background:#fff;
     font-size:1.18em;
     letter-spacing: 1.5px;
     transform: scale(1.1);
+}
+
+@keyframes landingCTAshake{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.04);
+    }
+    100%{
+        transform: scale(1);
+    }
 }
 
 .collection-count-grid{
@@ -1528,18 +1540,18 @@ blockquote {
 .landing-slider{
     background: #2E3436;
     color:#fff;
-    margin-top: 1em;
     margin-bottom: 1.5em;
-    height: 155px;
+    height: 200px;
+    
     overflow: hidden;
 }
 
 .landing-seg{
     height: 100%;
-    padding-top:20px;
 }
 
 .landing-seg h1{
+    padding-top: 50px;
     font-family: 'Cabin Sketch', cursive;
 }
 

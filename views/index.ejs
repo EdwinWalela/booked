@@ -22,12 +22,13 @@
 
 	<%- include('partials/loginCTA',{titles:searchSuggestions});%>
 	<!-- Search BAr-->
-	<div class="search-bar">
+	<!-- <div class="search-bar">
 		<form method="GET" action="/search">
 			<input class="search-bar-input" name="q" type="text" placeholder="Find a book"/>
 			<i id='fa-search' class="fas fa-search submit-search"></i>
 		</form>
-	</div>
+	</div> -->
+	<%- include('partials/landingSlider',{})%>
 	<!-- Category Grid -->
 	<div class="cat-list text-center mb-4 mt-4">
 		<a href="/cat/romance">
@@ -43,22 +44,20 @@
 			<span>Motivation</span>
 		</a>
 	</div>
-	
-	<%- include('partials/landingSlider',{})%>
-	<div class="text-center mb-3 steps-icons">
+	<!-- <div class="text-center mb-3 steps-icons">
 		<span ><i class="fas fa-search"></i></span>
 		<span ><i class="fas fa-cart-plus"></i></span>
 		<span ><i class="fas fa-truck"></i></span>
-	</div>
+	</div> -->
 	<%if(user){%>
-		<a href="/search"><p class="landing-desc text-center mb-2">Get Started</p></a>
+		<a href="/search"><p class="landing-desc text-center mb-2">Get Started Today</p></a>
 	<%}else{%>
-		<a href="/auth/login"><p class="landing-desc text-center mb-2">Get Started</p></a>
+		<a href="/auth/login"><p class="landing-desc text-center mb-2">Get Started Today</p></a>
 	<%}%>
 	<!-- Category Grid -->
 	<div class="container quote-grid">
 		<div class="row">
-		<div class="col-sm arr-titles">
+		<div class="col-sm mt-1 arr-titles">
 				<p class="text-center mt-4 text-capitalize steps-landing">
 					Latest Arrivals
 				</p>
@@ -109,7 +108,7 @@
 		  </div>
 		</div>
 	</div>
-	<%- include('partials/landingQuoteSlider',{})%>
+	<%- include('partials/topPicks',{})%>
 	<!-- FOOTER-->	
 	<%- include('partials/footer',{titles:relatedTitles});%>
 	<script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
