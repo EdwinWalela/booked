@@ -49,11 +49,7 @@
 		<span ><i class="fas fa-cart-plus"></i></span>
 		<span ><i class="fas fa-truck"></i></span>
 	</div> -->
-	<%if(user){%>
-		<a href="/search"><p class="landing-desc text-center mb-2">Get Started Today</p></a>
-	<%}else{%>
-		<a href="/auth/login"><p class="landing-desc text-center mb-2">Get Started Today</p></a>
-	<%}%>
+	<a href="/search"><p class="landing-desc text-center mb-2">Get Started Today</p></a>
 	<!-- Category Grid -->
 	<div class="container mb-5 quote-grid">
 		<div class="row">
@@ -114,11 +110,7 @@
 	<h5 class="text-center mb-5">
 		We have recommendations for <span style="text-decoration: underline;color:#F7931D;">you.</span>
 	</h5>
-	<%if(user){%>
-		<a href="/search"><p class="landing-desc text-center mb-2">Get Started Today</p></a>
-	<%}else{%>
-		<a href="/auth/login"><p class="landing-desc text-center mb-2">Get Started Today</p></a>
-	<%}%>
+	<a href="/search"><p class="landing-desc text-center mb-2">Get Started Today</p></a>
 	<!-- FOOTER-->	
 	<%- include('partials/footer',{titles:relatedTitles});%>
 	<script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>

@@ -88,7 +88,7 @@ $('document').ready(function(){
 
     setTimeout(function(){
         $('#loginCTA').modal();
-    },11000)
+    },12000)
 
 
     function getTimeRemaining(endtime) {
