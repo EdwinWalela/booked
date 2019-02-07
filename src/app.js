@@ -100,14 +100,16 @@ app.use(passport.session());
 app.use(flash());
 app.use((req,res,next)=>{
 	let sort;
-	if(Math.random() == 1){
+	let random = Math.floor(Math.random() * 3) + 1; 
+	let skip = Math.floor(Math.random() * 10) + 4; 
+	if(random === 3){
 		sort = 1;
 	}else{
 		sort = -1;
 	}
 	Book.find({
 		available:true
-	}).limit(4).sort({condition:sort}).then(titles=>{
+	}).skip(skip).limit(4).sort({_id:sort}).then(titles=>{
 		res.locals = titles;
 		next();
 	})

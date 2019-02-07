@@ -133,6 +133,32 @@ $('document').ready(function(){
       initializeClock('clockdiv', deadline);
       
       //top picks slider
+      $('.top-picks').slick({
+        centerMode: true,
+        centerPadding: '60px',
+        slidesToShow: 4,
+        responsive: [
+          {
+            breakpoint: 768,
+            settings: {
+              arrows: false,
+              centerMode: true,
+              centerPadding: '60px',
+              slidesToShow: 3
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              arrows: false,
+              centerMode: true,
+              centerPadding: '60px',
+              slidesToShow: 1
+            }
+          }
+        ]
+      });
+				
     })
 
 

@@ -1,0 +1,17 @@
+
+<h3 class="mt-6 ml-4 mr-4 mb-4 ">
+    Top Picks
+</h3>
+<div class="your-class top-picks mt-3">
+    <%books.forEach(function(book){%>
+        <a href="/book/<%=book._id%>">
+        <div class="book-item">
+            <img src="/public/bookcovers/<%=book.gallery[0]%>" alt=""/>
+            <div class="toppick-price">
+                KES <%=book.price%>
+            </div>
+        </div>
+    </a>
+    <%})%>
+
+</div>

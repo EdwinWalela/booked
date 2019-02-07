@@ -55,7 +55,7 @@
 		<a href="/auth/login"><p class="landing-desc text-center mb-2">Get Started Today</p></a>
 	<%}%>
 	<!-- Category Grid -->
-	<div class="container quote-grid">
+	<div class="container mb-5 quote-grid">
 		<div class="row">
 		<div class="col-sm mt-1 arr-titles">
 				<p class="text-center mt-4 text-capitalize steps-landing">
@@ -108,7 +108,17 @@
 		  </div>
 		</div>
 	</div>
-	<%- include('partials/topPicks',{})%>
+	<hr class="m-3">
+	<%- include('partials/topPicks',{books:searchSuggestions})%>
+	<hr class="m-5">
+	<h5 class="text-center mb-5">
+		We have recommendations for <span style="text-decoration: underline;color:#F7931D;">you.</span>
+	</h5>
+	<%if(user){%>
+		<a href="/search"><p class="landing-desc text-center mb-2">Get Started Today</p></a>
+	<%}else{%>
+		<a href="/auth/login"><p class="landing-desc text-center mb-2">Get Started Today</p></a>
+	<%}%>
 	<!-- FOOTER-->	
 	<%- include('partials/footer',{titles:relatedTitles});%>
 	<script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
