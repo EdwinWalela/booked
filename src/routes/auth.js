@@ -7,8 +7,7 @@ Router.get('/login',(req,res)=>{
     res.render('auth/login',{fail:req.query.fail,newAcc:req.query.new,reset:req.query.reset});
 })
 
-Router.post('/register',(req,res)=>{
-    
+Router.post('/register',(req,res)=>{ 
     User.findOne({email:req.body.email}).then(user=>{
         if(!user){
             bcrypt.hash(req.body.password, saltRounds).then(function(hash) {
@@ -17,7 +16,9 @@ Router.post('/register',(req,res)=>{
                     email:req.body.email,
                     password:hash,
                     mobile:'',
-                    address:req.body.address,
+                    orders:[],
+                    cart:[],
+                    address:[],
                     role:2
                 }).save().then(newUser=>{
                     res.redirect('/auth/login?new=true#exampleInputEmail1');

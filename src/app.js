@@ -157,7 +157,8 @@ passport.use(new FacebookStrategy({
 					cart:[],
 					mobile:'',
 					orders:[],
-					address:[]
+					address:[],
+					role:2
 				}).save().then(newUser=>{
 					done(null,newUser);
 				})
