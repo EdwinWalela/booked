@@ -195,7 +195,14 @@ app.post('/auth/login',passport.authenticate('local',
 app.get('/auth/facebook',passport.authenticate('facebook'));
 
 app.get('/auth/facebook/callback',
-	passport.authenticate('facebook',{failureRedirect:'/auth/login?fail=true'}),roleCheck)
+	passport.authenticate('facebook',{failureRedirect:'/auth/login?fail=true'}),authCheck,(req,res)=>{
+		if(req.session.returnTo){
+			res.redirect('/book/'+req.session.returnTo);
+		}else{
+			res.redirect('/')
+		}
+		delete req.session.returnTo;
+	})
 
 app.get('/auth/logout',(req,res)=>{
 	req.logOut();
