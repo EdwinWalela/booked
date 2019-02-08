@@ -101,7 +101,7 @@ app.use(flash());
 app.use((req,res,next)=>{
 	let sort;
 	let random = Math.floor(Math.random() * 3) + 1; 
-	let skip = Math.floor(Math.random() * 10) + 4; 
+	let skip = Math.floor(Math.random() * 20) + 1; 
 	if(random === 3){
 		sort = 1;
 	}else{
@@ -109,7 +109,7 @@ app.use((req,res,next)=>{
 	}
 	Book.find({
 		available:true
-	}).skip(skip).limit(4).sort({_id:sort}).then(titles=>{
+	}).skip(skip).limit(6).sort({_id:sort}).then(titles=>{
 		res.locals = titles;
 		next();
 	})
