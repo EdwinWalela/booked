@@ -73,12 +73,15 @@
 							</div>
 							<div class="input-group mb-3">
 									<div class="input-group-prepend">
-										<span class="input-group-text" id="inputGroup-sizing-default">No.</span>
+										<span class="input-group-text" id="inputGroup-sizing-default">Hse.</span>
 									</div>
-									<input name="numb" id="numb" value="<%=user.address[1]%>" type="text" class="form-control" placeholder="Hse.No (optional)">
+									<input name="numb" id="numb" value="<%=user.address[1]%>" type="text" class="form-control" placeholder="House/Apartment number (optional)">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="inputGroup-sizing-default">+254</span>
 								</div>
-							<div class="form-group">
-									<input name="mobile" type="text" value="<%=user.mobile%>" class="form-control" id="mobile"placeholder="0700000001" required>
+								<input name="mobile" id="mobile" value="<%=user.mobile%>" type="text" class="form-control" placeholder="Mobile number">
 							</div>
 							<button type="submit" class="button btn btn-primary auth-submit-btn btn-block">Update</button>
 						</form>
@@ -138,13 +141,16 @@
 								<input name="estate" type="text" value="<%=user.address[0]%>" class="form-control" id="estate"placeholder="Estate or building" required>
 							</div>
 							<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<span class="input-group-text" id="inputGroup-sizing-default">No.</span>
-									</div>
-									<input name="numb" id="numb" value="<%=user.address[1]%>" type="text" class="form-control" placeholder="Hse.No (optional)">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="inputGroup-sizing-default">Hse.</span>
 								</div>
-							<div class="form-group">
-									<input name="mobile" type="text" value="<%=user.mobile%>" class="form-control" id="mobile"placeholder="0700000001" required>
+								<input name="numb" id="numb" value="<%=user.address[1]%>" type="text" class="form-control" placeholder="House/Apartment Number (optional)">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="inputGroup-sizing-default">+254</span>
+								</div>
+								<input name="mobile" id="mobile" value="<%=user.mobile%>" type="text" class="form-control" placeholder="Mobile number">
 							</div>
 							<button type="submit" class="button btn btn-primary auth-submit-btn btn-block">Update</button>
 						</form>
