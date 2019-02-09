@@ -1643,6 +1643,7 @@ blockquote {
 
 .book-item{
     height: 260px;
+    width: 200px;
 }
 .book-item img{
     width: 100%;
