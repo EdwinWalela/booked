@@ -86,10 +86,12 @@ $('document').ready(function(){
     }
     $(".rating").rate(options);
 
-    setTimeout(function(){
-        $('#loginCTA').modal();
-    },12000)
-
+    let random = Math.floor(Math.random() * 4) + 1; 
+    if(random === 3){
+        setTimeout(function(){
+            $('#loginCTA').modal();
+        },12000)
+    }
 
     function getTimeRemaining(endtime) {
         var t = Date.parse(endtime) - Date.parse(new Date());
