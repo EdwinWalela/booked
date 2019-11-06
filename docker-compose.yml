@@ -1,0 +1,8 @@
+version: "3"
+services:
+  main:
+    container_name: main-app
+    restart: always
+    build: ./
+    ports:
+      - '80:3000'
